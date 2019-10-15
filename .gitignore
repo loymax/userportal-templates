@@ -1,9 +1,8 @@
 #exclude everything
 *
 
-#but userportal html ang .gitignore
+#but userportal html
 !*.html
-!.gitignore
 
 #even if they in subdirectories
 !*/
