@@ -1,0 +1,9 @@
+<div class="locale-switcher">
+    <div
+        ng-repeat="locale in ::availableLanguages track by $index"
+        ng-class="{'active': isCurrentLocale(locale)}"
+        ng-click="!isCurrentLocale(locale) && switchLocale(locale)"
+    >
+        <span>{{:: locale}}</span>
+    </div>
+</div>

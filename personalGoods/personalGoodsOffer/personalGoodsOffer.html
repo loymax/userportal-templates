@@ -1,0 +1,70 @@
+﻿<div class="container personal-goods-offer" loader="inProgress">
+    <div class="margin-bottom" ng-show="!inProgress">
+        <div class="margin-bottom">
+            <a href="#personal-goods">&larr; {{'buttons.backToList' | translate}}</a>
+        </div>
+
+        <personal-goods-offer-info offer="offer" class="margin-bottom"></personal-goods-offer-info>
+
+        <div class="personal-goods-offer__goods-list card" ng-class="{'unselectable': !selectableGoodsCount, 'readonly': !offer.canSelectGoods}" loader="offerDetailsInProgress">
+            <div class="approve card-action">
+                <div class="available-amount-hint">
+                    {{selectableGoodsCount
+                    ? ('personalGoods.availableGoodsCount' | translate: {availableCount: selectableGoodsCount || 0, maxGoodsCount: offer.attribute.maxGoodsCount})
+                    : ('personalGoods.maxGoodsCount' | translate)}}
+                </div>
+                <button type="button"
+                        ng-if="availableGoodsCount"
+                        ng-click="approveSelectedGoods()"
+                        ng-disabled="!selectedGoods.length">{{'buttons.approve' | translate}}</button>
+            </div>
+            <div class="card-content">
+                <div ng-repeat="goods in offerGoods track by goods.id"
+                     ng-click="changeSelectedGoods(goods)"
+                     ng-class="{'approved': goods.selected, 'selected': selectedGoods.contains(goods)}"
+                     class="goods"
+                >
+                    <div class="img-wrapper">
+                        <img ng-src="{{:: goods.imgUrl}}"
+                             fallback-image
+                             fallback-title="{{'imageNotFound' | translate}}"
+                             alt="">
+                    </div>
+                    <div class="goods__title" title="{{:: goods.title}}">{{:: goods.title}}</div>
+                    <div ng-if="goods.typeRewardThumbnail" ng-switch="goods.typeRewardThumbnail">
+                        <div  ng-switch-when="oldNewPrice" class="old-new-price">
+                            <span class="new-price">{{:: goods.rewardThumbnail.newPrice}}</span>
+                            <span class="old-price">{{:: goods.rewardThumbnail.oldPrice}}</span>
+                        </div>
+                        <div  ng-switch-when="imageWithText" class="image-with-text">
+                            <div title="{{::goods.rewardThumbnail.header}}">{{::goods.rewardThumbnail.header}}</div>
+                            <div class="reward-image">
+                                <img ng-src="{{::goods.rewardThumbnail.imgUrl}}"
+                                     fallback-image
+                                     fallback-title="{{'imageNotFound' | translate}}"
+                                     alt="">
+                            </div>
+                            <div title="{{::goods.rewardThumbnail.footer}}">{{::goods.rewardThumbnail.footer}}</div>
+                        </div>
+                        <div  ng-switch-when="twoLineText" class="two-line-text">
+                            <div title="{{:: goods.rewardThumbnail.firstLine}}" class="first-line">{{:: goods.rewardThumbnail.firstLine}}</div>
+                            <div title="{{:: goods.rewardThumbnail.secondLine}}" class="second-line">{{:: goods.rewardThumbnail.secondLine}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="availableGoodsCount" class="approve card-action clearfix">
+                <button type="button"
+                        ng-show="offerGoods.length > 9"
+                        ng-click="approveSelectedGoods()"
+                        ng-disabled="!selectedGoods.length"
+                        class="right">{{'buttons.approve' | translate}}</button>
+            </div>
+            <div class="goods-list-overlayer">
+                <p
+                    ng-bind-html="('personalGoods.editingNotAvailable' | translate) + ': ' + ((offer.attribute.startFillDate | toUTC | dateRange: (offer.attribute.endFillDate | toUTC)) | nbspSpaces)">
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

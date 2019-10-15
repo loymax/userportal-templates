@@ -1,0 +1,11 @@
+<div class="birthday-picker">
+    <div class="birthday-picker-wrapper day">
+        <div lmx-custom-select ng-model="date" repeat="dates" placeholder="{{'datePicker.day' | translate}}" options="d for d in dates track by d" is-disabled="disabled"></div>
+    </div>
+    <div class="birthday-picker-wrapper month">
+        <div lmx-custom-select ng-model="month" repeat="months" placeholder="{{'datePicker.month' | translate}}" options="m.value as m.name for m in months" is-disabled="disabled"></div>
+    </div>
+    <div class="birthday-picker-wrapper year">
+        <div lmx-custom-select ng-model="year" repeat="years" placeholder="{{'datePicker.year' | translate}}" options="y for y in years" is-disabled="disabled"></div>
+    </div>
+</div>

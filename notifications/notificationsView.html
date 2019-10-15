@@ -1,0 +1,8 @@
+<div class="notifications">
+    <div ng-repeat="(text, type) in notifications.value">
+        <div class="alert" ng-class=":: {'alert-info': type == notificationTypes.message, 'alert-warning': type == notificationTypes.error, 'alert-danger': type == notificationTypes.critical}">
+            <span class="close-btn" ng-click="clearNotifications(area)" ng-if="!notificationsAreEmpty()">&times;</span>
+            <span ng-bind-html=":: text"></span>
+        </div>
+    </div>
+</div>

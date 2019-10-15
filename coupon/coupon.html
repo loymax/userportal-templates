@@ -1,0 +1,28 @@
+<div class="card" style="width: 400px; height: 400px;">
+    <div class="card-image">
+        <img ng-src="{{::coupon.imageUri || 'undefined'}}"
+             fallback-image
+             fallback-title="{{'coupons.imageNotFound' | translate}}"
+             alt=""
+             style="height: 250px; padding: 10px">
+    </div>
+    <div class="card-content">
+        <span class="card-title">{{coupon.name}}</span>
+        <span><b>{{'coupons.price' | translate}}:</b> {{coupon.price}} RUB</span>
+    </div>
+    <div class="card-reveal">
+        <span class="card-title"><span class="glyphicon glyphicon-remove"></span>{{coupon.name}}</span>
+        <p>
+            <span><b>{{'coupons.description' | translate}}:</b>{{:: couponInfo.description || ('coupons.noDescription' | translate)}}</span>
+        </p>
+        <button ng-if=":: loggedIn" type="button" ng-click="openBuyCouponModal(coupon)">
+            <div>
+                {{'coupons.buy' | translate}}
+                <span class="price">{{ coupon.price | zeroFill: 2 }}</span>
+            </div>
+        </button>
+        <button ng-if=":: !loggedIn" type="button" ng-click="goToLogin()">
+            <div>{{'coupons.login' | translate}}</div>
+        </button>
+    </div>
+</div>

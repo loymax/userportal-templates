@@ -1,0 +1,22 @@
+﻿<div loader="inProgress" class="modal-favorite-goods-container">
+    <div ng-if="!inProgress" class="modal-favorite-goods-content">
+        <div class="modal-header">
+            <h2>{{:: 'favoriteGoods.modal.selectGood' | translate}}</h2>
+        </div>
+        <div class="content select-new-favorite-good">
+            <div class="categories-list">
+               <goods-or-category
+                       goods-group-id="goodsGroupId"
+                       goods-or-category="goodsOrCategory"
+                       ng-repeat="goodsOrCategory in categories track by goodsOrCategory.id"
+               ></goods-or-category>
+            </div>
+            <button
+                    class="btn close-modal-btn"
+                    ng-click="close()"
+                    type="button">
+                {{:: 'favoriteGoods.modal.close' | translate}}
+            </button>
+        </div>
+    </div>
+</div>

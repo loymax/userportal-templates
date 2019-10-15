@@ -1,0 +1,6 @@
+<div>
+    <h3>{{::group.name}}</h3>
+    <div ng-repeat="question in group.questions | orderBy: 'order' track by question.id">
+        <questionnaire-item question="question"></questionnaire-item>
+    </div>
+</div>

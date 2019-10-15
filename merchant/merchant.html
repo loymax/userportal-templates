@@ -1,0 +1,76 @@
+<div class="container merchants">
+    <section>
+        <h2>{{'merchants.title' | translate}}</h2>
+
+        <div loader="loaders.inProgress">
+            <div ng-if="!loaders.inProgress" ng-switch="!!merchants.length">
+                <div ng-if=":: filterByRegion" class="row">
+                    <div class="merchant-filter" ng-if=":: regions.length">
+                        <div
+                            lmx-custom-select
+                            ng-model="region.id"
+                            repeat="regions"
+                            placeholder="{{'merchants.chooseRegion' | translate}}"
+                            options="r.id as r.name for r in regions"
+                        ></div>
+                        <div
+                            lmx-custom-select
+                            ng-model="city.id"
+                            repeat="cities"
+                            placeholder="{{'merchants.chooseCity' | translate}}"
+                            options="c.id as c.name for c in cities"
+                            loader="loaders.cities"
+                        ></div>
+                    </div>
+                    <div ng-if="!regions.length">{{'merchants.noRegionInfo' | translate}}</div>
+                </div>
+
+                <div ng-switch-when="true" class="merchants-map-row" loader="loaders.brands || loaders.ymaps || loaders.merchantsList">
+                    <div class="merchant-list">
+                        <lmx-scroller ng-hide="loaders.merchantsList">
+                            <ul>
+                                <li
+                                        ng-repeat="merchant in merchants | limitTo: merchantsLimit track by merchant.id"
+                                        ng-init="isUnclickable = !merchant.location"
+                                    ng-class=":: {'unclickable': isUnclickable}"
+                                    ng-click="!isUnclickable && showMerchantOnMap($index)"
+                                >
+                                    <p>{{:: merchant.title}}{{:: merchant.location ? (', ' + merchant.location.description) : ''}}</p>
+                                </li>
+                            </ul>
+
+                            <a
+                                class="pseudolink"
+                                ng-if="merchants.length > merchantsLimit"
+                                ng-click="changeListExpansionState(true)"
+                            >
+                                <span ng-if="merchantsCountText">{{'merchants.showAll' | translate}} <span ng-bind-html="merchantsCountText"></span></span>
+                            </a>
+                            <a
+                                class="pseudolink"
+                                ng-if="merchantsLimit === merchants.length"
+                                ng-click="changeListExpansionState()"
+                            >
+                                {{'merchants.hide' | translate}}
+                            </a>
+                        </lmx-scroller>
+                    </div>
+
+                    <lmx-map
+                        class="map"
+                        data="merchants"
+                        ng-if="merchants.length && !loaders.brands"
+                    ></lmx-map>
+                </div>
+                <div ng-if="!merchants.length && !loaders.merchantsList">
+                    {{'merchants.' + (filterByRegion ? 'filteredNotFound' : 'notFound') | translate}}
+                </div>
+
+                <div class="offers row" ng-if="offers.length" loader="loaders.offers">
+                    <h3>{{'merchants.offers' | translate}} &laquo;{{titleOfMerchantOffers}}&raquo;</h3>
+                    <offers-list offers="offers"></offers-list>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

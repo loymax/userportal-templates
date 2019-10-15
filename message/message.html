@@ -1,0 +1,23 @@
+<div class="container message">
+    <section>
+        <h2>{{'messages.title' | translate}}</h2>
+
+        <div ng-if="messages.length || state.isProgress" loader="isProgress" class="messages-container">
+            <article ng-repeat="message in messages">
+                <div class="date">{{:: message.creationDate | shortDate }}</div>
+
+                <div class="remove" ng-click="remove(message);">{{'buttons.delete' | translate | lowercase}}</div>
+
+                <h4 class="title" ng-class="{'notRead': !message.isReaded}">
+                    <span ng-click="toggleView(message);">{{:: message.title }}</span>
+                </h4>
+
+                <div class="text" ng-if="message._isShowText">
+                    <p>{{:: message.body }}</p>
+                </div>
+            </article>
+        </div>
+
+        <p ng-if="!messages.length && !isProgress">{{'messages.notFound' | translate}}</p>
+    </section>
+</div>

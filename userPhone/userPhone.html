@@ -1,0 +1,76 @@
+﻿<div class="user-phone row">
+    <div ng-if=":: registration">
+        <h2 ng-show=":: isChangeProcessStarted">
+            {{'registration.phoneStep.' + (step === 1 ? 'numberTitle' : 'codeTitle') | translate}}
+        </h2>
+        <notifications area="registration"></notifications>
+    </div>
+    <div loader="isChangeProcessStarted === undefined">
+        <div ng-if="isChangeProcessStarted === false" class="settings-line">
+            <h3>{{(registration ? 'registration.phoneStep' : 'contacts.userPhone') + '.phone'|translate}}</h3>
+            <notifications area="userPhone"></notifications>
+            <div class="current-value-container">
+                <div class="current-value">{{currentPhoneNumber}}</div>
+                <div>
+                    <a ng-click="openForm()" class="pseudolink">{{'buttons.change'|translate}}</a>
+                </div>
+            </div>
+        </div>
+        <div ng-if="isChangeProcessStarted" class="user-phone-changing">
+            <div ng-if=":: !registration">
+                <h3>{{'contacts.userPhone.title' | translate}}</h3>
+                <notifications area="userPhone"></notifications>
+            </div>
+            <form novalidate name="form" ng-submit="form.$valid && next(form)">
+                <div ng-if="step === 1">
+                    <div class="hint">
+                        <p ng-bind-html="(registration ? 'registration.phoneStep' : 'contacts.userPhone') + '.numberHint' | translate"></p>
+                    </div>
+                    <form-group>
+                        <phone-input
+                            ng-model="model.newPhone"
+                            name="newPhone" id="newPhone"
+                            ng-disabled="loader.inProgress"
+                            required></phone-input>
+                    </form-group>
+                </div>
+
+                <div ng-if="step === 2">
+                    <div class="hint">
+                        <p ng-bind-html="((registration ? 'registration.phoneStep' : 'contacts.userPhone') + '.codeHint' | translate) + ' <b>' + newPhone + '</b>'"></p>
+                    </div>
+                    <form-group label-text="{{(registration ? 'registration.phoneStep' : 'contacts.userPhone') + '.confirmationCode' | translate}}">
+                        <input
+                            type="text"
+                            ng-model="model.confirmationCode"
+                            name="confirmationCode"
+                            id="confirmationCode"
+                            ng-disabled="loader.inProgress"
+                            autofocus
+                            required>
+                    </form-group>
+                    <div class="margin-bottom" ng-hide="loader.inProgress">
+                        <div>
+                            <a ng-click="reSendCode()" id="changePhone-resendCode">
+                                {{(registration ? 'registration.phoneStep' : 'contacts.userPhone') + '.sendConfirmCode' | translate}}
+                            </a>
+                        </div>
+                        <div>
+                            <a ng-click="reEnterPhone(form)" id="changePhone-reenterPhone">
+                                {{(registration ? 'registration.phoneStep' : 'contacts.userPhone') + '.resetPhone' | translate}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-container">
+                    <inline-loader line>loader.inProgress</inline-loader>
+                    <div ng-hide="loader.inProgress">
+                        <button type="button" ng-click="closeForm()" class="btn-cancel" id="changePhone-cancel">{{'buttons.cancel' | translate}}</button>
+                        <button type="submit" id="changePhone-submit">{{'buttons.next' | translate}}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

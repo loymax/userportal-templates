@@ -1,0 +1,11 @@
+<div class="discount-view" ng-switch=":: discountEnums[type]">
+    <span ng-switch-default>{{:: discountView}}</span>
+    <div ng-switch-when="pricePerUnit">
+        <span>{{::discountView}}</span>
+        <span
+            class="tooltip glyphicon glyphicon-question-sign"
+            uib-tooltip="{{'personalOffers.pricePerUnitDiscountHint.' + (discountType | lowerCamelCase) | translate }}"
+            tooltip-placement="right"
+        ></span>
+    </div>
+</div>

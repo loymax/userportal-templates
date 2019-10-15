@@ -1,0 +1,23 @@
+﻿<div class="favorite-goods-item">
+    <div class="favorite-goods-item__image">
+        <img ng-src="{{:: favoriteGoodsImagesUrl}}{{:: favoriteGood.good ? favoriteGood.good.id : 'undefined'}}.png"
+             fallback-image
+             fallback-title="Изображение отсутствует"
+             alt="">
+    </div>
+    <p ng-if=":: !favoriteGood.good || favoriteGood.good.id === 0">{{:: 'favoriteGoods.noFavoriteGood' | translate}}</p>
+    <p ng-if=":: favoriteGood.good && favoriteGood.good.id !== 0">{{:: favoriteGood.good.name}}</p>
+    <button
+            class="btn change-favorite-good-btn"
+            ng-click="changeGood(favoriteGood)"
+            ng-if=":: favoriteGood.allowChange"
+            type="button">
+        {{:: 'favoriteGoods.actions.edit' | translate}}
+    </button>
+    <small>
+        <p class="favorite-goods-already-changed" ng-if=":: !favoriteGood.allowChange">
+            {{:: 'favoriteGoods.alreadyChanged' | translate}}
+        </p>
+    </small>
+
+</div>

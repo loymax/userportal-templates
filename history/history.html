@@ -1,0 +1,172 @@
+﻿<div class="container history">
+    <section>
+        <h2 ng-if=":: !isPreview">{{'history.title' | translate}}</h2>
+        <div loader="history === undefined">
+            <div ng-show=":: history">
+                <div ng-show=":: !isPreview" class="history-filters clearfix margin-bottom">
+                    <div class="since-date-filter">
+                        <span class="pretext">{{'history.fromDate' | translate}}</span>
+                        <date-picker
+                            ng-model="fromDate"
+                            ng-change="reloadHistory()">
+                        </date-picker>
+                    </div>
+                    <div class="to-date-filter">
+                        <span class="pretext">{{'history.toDate' | translate}}</span>
+                        <date-picker
+                            ng-model="toDate"
+                            ng-change="reloadHistory()">
+                        </date-picker>
+                    </div>
+                    <div class="card-filter">
+                        <inline-loader>cardsInProgress</inline-loader>
+                        <div ng-hide="cardsInProgress">
+                            <select ng-model="selectedCard"
+                                    ng-change="reloadHistory()"
+                                    id="cardFilter" name="cardFilter"
+                            >
+                                <option ng-value="0">{{'history.allCards' | translate}}</option>
+                                <option ng-repeat="card in cards" ng-value="card.id">{{:: card.number | charsDivide: 4}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="reset-filters">
+                        <a ng-click="resetFilters()" class="pseudolink">{{'history.resetFilters' | translate}}</a>
+                    </div>
+                </div>
+                <div class="history-table" ng-show="history.allCount || inProgress">
+                    <div class="operations-list margin-bottom" loader="inProgress && (isPaginated || isReload)">
+                        <div ng-class="{'loading': inProgress}" ng-hide="inProgress && isReload">
+                            <table ng-if="history.rows.length">
+                                <thead>
+                                <tr>
+                                    <th>{{'history.date' | translate}}</th>
+                                    <th>{{'history.cardNumber' | translate}}</th>
+                                    <th>{{'history.description' | translate}}</th>
+                                    <th>{{'history.operation' | translate}}</th>
+                                    <th>{{'history.amount' | translate}}</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody ng-repeat="item in history.rows track by item.id" class-toggle-click="cheque-opened" ng-class=":: {'empty-cheque': !item.data.chequeItems.length}">
+                                <tr>
+                                    <td class="date-time" ng-attr-title="{{:: item.dateTime | toUTC | shortDateTime}}">
+                                        {{:: item.dateTime | toUTC | shortDateTime}}
+                                    </td>
+                                    <td class="identity" ng-attr-title="{{:: item.identity ? ('**** ' + (item.identity | lastCount: 4)) : undefined}}">
+                                        <span ng-if="::item.identity">**** <b>{{:: item.identity | lastCount: 4 }}</b></span>
+                                    </td>
+                                    <td class="description" ng-attr-title="{{:: item.description}}">
+                                        <img ng-if=":: item.logoSquareUrl"
+                                             ng-src="{{:: item.logoSquareUrl}}"
+                                             class="logo-square"
+                                             fallback-image
+                                             fallback-title="{{'imageNotFound' | translate}}"
+                                             alt="">
+                                        <span class="description-text">{{:: item.description}}</span>
+                                    </td>
+                                    <td class="withdraws text">
+                                        <div
+                                            ng-if=":: item.data.withdraws.length"
+                                            ng-repeat="wdrw in item.data.withdraws"
+                                            ng-attr-title="{{'history.gift' + (item.data.isRefund ? 'Refund' : '' ) + '.withdraw' | translate}}"
+                                            class="text-overflow-ellipsis"
+                                        >
+                                            {{'history.gift' + (item.data.isRefund ? 'Refund' : '' ) + '.withdraw' | translate}}
+                                        </div>
+                                        <div ng-if=":: item.data.rewards.length" ng-repeat="(type, values) in item.rewardsResult">
+                                            <div
+                                                ng-repeat="(currency, value) in values"
+                                                ng-attr-title="{{'history.gift' + (item.data.isRefund ? 'Refund.' : '.') + (type | lowerCamelCase) | translate}}"
+                                                class="text-overflow-ellipsis"
+                                            >
+                                                {{'history.gift' + (item.data.isRefund ? 'Refund.' : '.') + (type | lowerCamelCase) | translate}}
+                                            </div>
+                                        </div>
+                                        <div
+                                            ng-if=":: item.type == 'RewardData' || item.type == 'WithdrawData'"
+                                            ng-attr-title="{{'history.gift' + (item.data.isRefund ? 'Refund.' : '.') + (item.type | lowerCamelCase) | translate}}"
+                                            class="text-overflow-ellipsis"
+                                        >
+                                            {{'history.gift' + (item.data.isRefund ? 'Refund.' : '.') + (item.type | lowerCamelCase) | translate}}
+                                        </div>
+                                    </td>
+                                    <td class="withdraws amount">
+                                        <div
+                                            ng-if=":: item.data.withdraws.length"
+                                            ng-repeat="wdrw in item.data.withdraws"
+                                            ng-attr-title="{{:: (item.data.isRefund ? wdrw.amount.amount * -1 : wdrw.amount.amount) | number: 2}} {{:: wdrw.amount.currency }}"
+                                            class="text-overflow-ellipsis"
+                                        >
+                                            {{:: (item.data.isRefund ? wdrw.amount.amount * -1 : wdrw.amount.amount) | number: 2}}
+                                            {{:: wdrw.amount.currency }}
+                                        </div>
+                                        <div ng-if=":: item.data.rewards.length" ng-repeat="(type, values) in item.rewardsResult">
+                                            <div
+                                                ng-repeat="(currency, value) in values"
+                                                ng-attr-title="{{:: (item.data.isRefund ? value * -1 : value) | number: 2}} {{:: currency }}"
+                                                class="text-overflow-ellipsis"
+                                            >
+                                                {{:: (item.data.isRefund ? value * -1 : value) | number: 2}}
+                                                {{:: currency }}
+                                            </div>
+                                        </div>
+                                        <div
+                                            ng-if=":: item.type == 'RewardData' || item.type == 'WithdrawData'"
+                                            ng-attr-title="{{:: (item.data.isRefund ? item.data.amount.amount * -1 : item.data.amount.amount) | number: 2}} {{:: item.data.amount.currency }}"
+                                            class="text-overflow-ellipsis"
+                                        >
+                                            {{:: (item.data.isRefund ? item.data.amount.amount * -1 : item.data.amount.amount) | number: 2}}
+                                            {{:: item.data.amount.currency }}
+                                        </div>
+                                    </td>
+                                    <td class="cheque-expander"></td>
+                                </tr>
+                                <tr class="cheque-info" ng-if="item.data.chequeItems.length">
+                                    <td colspan="6">
+                                        <div class="cheque-content">
+                                            <div class="cheque-line" ng-repeat="chequeItem in item.data.chequeItems">
+                                                <span class="cheque-item">{{::chequeItem.description | nbspSpaces}}</span>
+                                                <span class="cheque-count">{{::chequeItem.count}}</span>
+                                            </div>
+                                            <div class="cheque-total">
+                                                {{::item.data.amount.amount | number: 2}} {{:: item.data.amount.currency }}
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div ng-show=":: !isPreview" ng-switch=":: !!isPaginated">
+                        <uib-pagination
+                                ng-switch-when="true"
+                                ng-show="!isReload && history.allCount > onPage"
+                                total-items="history.allCount"
+                                ng-model="$parent.currentPage"
+                                max-size="4"
+                                items-per-page="{{:: onPage}}"
+                                class="pagination"
+                                boundary-links="true"
+                                boundary-link-numbers="true"
+                                direction-links="false"
+                                force-ellipses="true"
+                                first-text="<<"
+                                last-text=">>"
+                                ng-change="paginationChange()"
+                        ></uib-pagination>
+                        <div ng-switch-when="false">
+                            <a class="pseudolink right" ng-if="!inProgress && (from + onPage < history.allCount)" ng-click="increaseFrom()">{{'history.showMore' | translate}}</a>
+                            <inline-loader line>inProgress && !isReload</inline-loader>
+                        </div>
+                    </div>
+                    <a ng-if=":: isPreview" href="#history" class="pseudolink">{{'history.goToFullHistory' | translate}}</a>
+                </div>
+                <div class="history-not-found" ng-if="!history.allCount && !inProgress">
+                    {{'history.notFound' | translate}}
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

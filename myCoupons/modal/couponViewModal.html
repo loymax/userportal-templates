@@ -1,0 +1,35 @@
+﻿<div class="view-coupon-modal" loader="inProgress">
+    <div class="modal-header">
+        <div class="modal-closer" ng-click="cancel()"></div>
+        <h2>{{:: coupon.text}}</h2>
+    </div>
+
+    <div class="hint">
+        <p class="modal-description">{{'coupons.coupon' | translate}} №{{:: coupon.number}}</p>
+    </div>
+
+    <div class="content">
+        <div class="coupon-content" ng-switch="coupon.content.contentType.toLowerCase()">
+            <!--QRCODE-->
+            <div ng-switch-when="qrcode">
+                <qrcode data="{{:: coupon.content.data}}"
+                        href="{{:: coupon.content.data}}"
+                        size="200"></qrcode>
+            </div>
+            <!--BARCODE-->
+            <div ng-switch-when="barcode">
+                <barcode string="{{:: coupon.content.data}}" render="img" type="code128b"
+                         options="barcodeOptions"></barcode>
+            </div>
+            <!--URL-->
+            <div ng-switch-when="uri">
+                <a ng-href="{{:: coupon.content.data}}" target="_blank">{{'coupons.viewOnSite' | translate}}</a>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button ng-if="isRefundable" type="button" ng-click="refundCoupon(coupon.couponId)">
+                {{'coupons.refund' | translate}}
+            </button>
+        </div>
+    </div>
+</div>

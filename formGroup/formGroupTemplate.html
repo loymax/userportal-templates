@@ -1,0 +1,16 @@
+﻿<div class="form-group clearfix row" ng-class="{ 'has-error': form.$submitted && model.$invalid }">
+    <div ng-if="labelText !== undefined" class="label-container">
+        <label class="form-group-label {{:: labelAlign+'align'}}" for="{{itemId}}">{{labelText}}</label>
+    </div>
+    <div class="input-container">
+        <div><ng-transclude></ng-transclude></div>
+        <div class="help-block" ng-if="form.$submitted">
+            <div class="help-block__error" ng-if="model.$error.validationErrors" ng-repeat="error in model.$error.validationErrors">
+                <div>{{error}}</div>
+            </div>
+            <div class="help-block__error" ng-if="!model.$error.validationErrors" ng-repeat="(error, value) in model.$error">
+                <div>{{errorMessage(error, model.$viewValue)}}</div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<ul class="goods-or-category-item">
+    <li ng-if=":: isCategory" class="category-item-li">
+        <div>
+            <div class="category-item">
+                <p  class="material-icons">folder</p>
+                <p
+                    class="category-item-name"
+                    ng-click="changeVisibilityCategoryList()"
+                >
+                    {{:: goodsOrCategory.name}}
+                </p>
+            </div>
+            <div ng-if=":: !inProgress">
+                <goods-or-category
+                    ng-show="isShow"
+                    goods-group-id="goodsGroupId"
+                    goods-or-category="item"
+                    ng-repeat="item in nodeItems track by item.id"
+                ></goods-or-category>
+            </div>
+            <inline-loader>inProgress</inline-loader>
+        </div>
+    </li>
+    <li ng-if=":: !isCategory" class="good-item-li">
+        <p
+            ng-click="selectNewFavoriteGood()"
+            class="good-item"
+        >
+            {{:: goodsOrCategory.name}}
+        </p>
+    </li>
+</ul>

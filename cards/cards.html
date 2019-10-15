@@ -1,0 +1,39 @@
+﻿<div class="container cards">
+    <section>
+        <h2>{{'cards.title' | translate}}</h2>
+        <div loader="inProgress">
+            <div ng-if="!inProgress">
+                <lmx-tabs
+                        ng-if="isAttachCardAvailable"
+                        list="tabs"
+                        ng-model="selectedTab.value"
+                        view-field="name">
+                </lmx-tabs>
+                <div ng-show="selectedTab.value === tabs.personalCards" class="personal-cards">
+                    <p ng-bind-html="'cards.replaceHint' | translate"></p>
+
+                    <div ng-repeat="card in cards.personal track by card.id">
+                        <card card="card" class="card-item"></card>
+                    </div>
+                    <button
+                            ng-if="maxCountOfMainCardsForUserNotReached"
+                            ng-click="setCard()"
+                            type="button"
+                            class="set-card-btn right"
+                    >
+                        {{'cards.actions.set' | translate}}
+                    </button>
+                </div>
+
+                <div ng-show="selectedTab.value === tabs.accountCards" class="account-cards">
+                    <div ng-repeat="card in cards.group track by card.id">
+                        <card card="card" class="card-item" in-group></card>
+                    </div>
+                    <button ng-click="attachCard()" type="button" class="attach-btn right">
+                        {{'cards.actions.attach' | translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

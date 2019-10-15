@@ -1,0 +1,43 @@
+<div class="container showcase">
+    <h2>{{'showcase.title' | translate}}</h2>
+
+    <div class="margin-bottom">
+        <a ng-click="changeType(false)">
+            {{'showcase.main' | translate}}
+        </a>
+        <a ng-click="changeType(true)">
+            {{'showcase.categories' | translate}}
+        </a>
+    </div>
+
+    <div loader="inProgress">
+        <div ng-if="!categoriesType && !inProgress" class="main-coupon">
+            <!--ITEM STARTS-->
+            <coupon ng-repeat="coupon in coupons | orderBy: 'id'"></coupon>
+            <!--ITEM ENDS-->
+        </div>
+
+        <div ng-if="categoriesType" class="category-coupons" ng-if="!inProgress">
+            <div class="left">
+                <a
+                    ng-if="!inProgress"
+                    class="btn"
+                    ng-repeat="(logicalName, categoryObject) in couponsByCategories"
+                    ng-click="showCategory(logicalName)"
+                >
+                    {{:: categoryObject.name }}
+                </a>
+            </div>
+            <div ng-repeat="(logicalName, categoryObject) in couponsByCategories">
+                <div class="category-wrapper" ng-if="!selectedCategory || logicalName == selectedCategory">
+                    <div>
+                        <h5>
+                            <a ng-click="showCategory(logicalName)">{{:: categoryObject.name }} ({{:: categoryObject.coupons.length }})</a>
+                        </h5>
+                    </div>
+                    <coupon ng-repeat="coupon in categoryObject.coupons | limitTo: selectedCategory? null : 2"></coupon>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

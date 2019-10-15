@@ -1,0 +1,89 @@
+﻿<div class="container options">
+    <section>
+        <h2>Параметры сайта</h2>
+
+        <table>
+            <tr>
+                <td>
+                    <input type="text" id="api" ng-model="api"/>
+                    <label for="api">API</label>
+                </td>
+                <td>
+                    <button type="button" ng-click="saveConfiguration('host', api)">{{'buttons.save' | translate}}</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="showcaseApi" ng-model="showcaseApi"/>
+                    <label for="showcaseApi">ShowcaseAPI</label>
+                </td>
+                <td>
+                    <button type="button" ng-click="saveConfiguration('showcaseHost', showcaseApi)">{{'buttons.save' | translate}}</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="locales" ng-model="locales" required />
+                    <label for="locales">Локализации</label>
+                </td>
+                <td>
+                    <button type="button" ng-click="saveConfiguration('locales', locales)">{{'buttons.save' | translate}}</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="reCaptchaSiteKey" ng-model="reCaptchaSiteKey"/>
+                    <label for="reCaptchaSiteKey">reCaptchaSiteKey</label>
+                </td>
+                <td>
+                    <button type="button" ng-click="saveConfiguration('reCaptchaSiteKey', reCaptchaSiteKey)">{{'buttons.save' | translate}}</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="reCaptchaType" ng-model="reCaptchaType"/>
+                    <label for="reCaptchaType">reCaptchaType</label>
+                </td>
+                <td>
+                    <button type="button" ng-click="saveConfiguration('reCaptchaType', reCaptchaType)">{{'buttons.save' | translate}}</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="oAuthClientId" ng-model="oAuthClientId"/>
+                    <label ng-class="{'active': oAuthClientId}" for="oAuthClientId">oAuthClientId</label>
+                </td>
+                <td>
+                    <button type="button" ng-click="saveConfiguration('oAuthClientId', oAuthClientId)">{{'buttons.save' | translate}}</button>
+                </td>
+            </tr>
+        </table>
+
+        <h2>Опции</h2>
+
+        <form ng-submit="saveOptions()">
+            <table>
+                <tr ng-repeat="(key, value) in options">
+                    <td>{{key}}</td>
+                    <td ng-init="inputType = getType(value)" ng-switch="inputType">
+                        <textarea
+                            ng-switch-when="textarea"
+                            ng-attr-id="{{key}}"
+                            readonly
+                        >{{options[key] | json}}</textarea>
+                        <input
+                            ng-switch-default
+                            ng-attr-id="{{key}}"
+                            ng-attr-type="{{inputType}}"
+                            ng-class="getClass(value)"
+                            ng-model="options[key]"
+                        />
+                        <label ng-attr-for="{{key}}"></label>
+                    </td>
+                    <td>{{optionsNames[key]}}</td>
+                </tr>
+            </table>
+            <button type="submit">{{'buttons.save' | translate}}</button>
+        </form>
+    </section>
+</div>

@@ -1,0 +1,34 @@
+﻿<div>
+    <div ng-if=":: registration">
+        <h2>{{'personal.title' | translate}}</h2>
+    </div>
+    <div class="questionnaire" loader="loader.templatesInProgress" ng-class="::{'questionnaire-edit' : !registration}">
+        <div ng-hide="loader.templatesInProgress">
+            <div class="questionnaire-column">
+                <questionnaire-item
+                        ng-repeat="questionnaireItem in questionnaire | filter: {type: questionnaireItemTypes.question} : true | orderBy: 'order' track by questionnaireItem.id"
+                        question="questionnaireItem"></questionnaire-item>
+            </div>
+            <questionnaire-group
+                    ng-repeat="questionnaireItem in questionnaire | filter: {type: questionnaireItemTypes.questionGroup} : true | orderBy: 'order' track by questionnaireItem.id"
+                    group="questionnaireItem"
+                    class="questionnaire-column"></questionnaire-group>
+        </div>
+
+        <notifications ng-if=":: registration" area="registration"></notifications>
+        <notifications area="questionnaire"></notifications>
+        <div ng-if="!loader.templatesInProgress">
+            <div class="btn-container">
+                <div ng-hide="loader.saveInProgress">
+                    <button type="button" ng-if=":: registration" class="btn-cancel" ng-click="cancelForm()" id="registration-questionnaire__cancel">
+                        {{'buttons.cancel' | translate}}
+                    </button>
+                    <button type="button" ng-click="saveQuestionnaire()" id="registration-questionnaire__submit" ng-class=":: {'right': !registration}">
+                        {{(registration ? 'buttons.next' : 'buttons.save') |translate}}
+                    </button>
+                </div>
+                <inline-loader>loader.saveInProgress</inline-loader>
+            </div>
+        </div>
+    </div>
+</div>

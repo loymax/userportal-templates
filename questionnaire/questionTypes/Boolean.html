@@ -1,0 +1,23 @@
+<div class="question-boolean">
+    <form novalidate name="questionnaireForm" ng-submit="questionnaireForm.$valid && save()">
+        <form-group
+            ng-init="registerForm(questionnaireForm)"
+            ng-class="::{'required': question.isRequired}"
+        >
+            <input
+                type="checkbox"
+                ng-attr-id="{{::question.logicalName}}" name="{{::question.logicalName}}"
+                ng-model="question.value"
+                ng-disabled="question.isReadOnly || disabled"
+            >
+            <label
+                ng-attr-for="{{::question.logicalName}}"
+                class="checkbox-item-label"
+            >
+                {{::question.name}}
+            </label>
+
+            <question-errors></question-errors>
+        </form-group>
+    </form>
+</div>

@@ -1,0 +1,19 @@
+﻿<div>
+    <div class="container personal-offers" ng-if="!appLocationParts[1]">
+        <h2>{{'personalOffers.title' | translate}}</h2>
+        <div loader="inProgress">
+            <div class="margin-bottom" ng-if="!inProgress">
+                <div ng-repeat="personalOffer in personalOffers track by personalOffer.id" class="card">
+                    <personal-offer-content personal-offer="personalOffer"></personal-offer-content>
+                    <div class="card-action clearfix">
+                        <button type="button" ng-click=":: changeLocation('personal-offers/' + personalOffer.id)" class="right">
+                            {{'buttons.viewMore' | translate}}
+                        </button>
+                    </div>
+                </div>
+                <div ng-if=":: !personalOffers.length">{{'personalOffers.noActiveOffers' | translate}}</div>
+            </div>
+        </div>
+    </div>
+    <personal-offer ng-if="appLocationParts[1]" offer-id="appLocationParts[1]"></personal-offer>
+</div>

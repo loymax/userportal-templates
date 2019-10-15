@@ -1,0 +1,26 @@
+<div class="subscriptions">
+    <section>
+        <h3>{{'subscriptions.title' | translate}}</h3>
+        <div loader="inProgress">
+            <p>{{'subscriptions.hint' | translate}}</p>
+            <div ng-repeat="subscription in subscriptions track by subscription.externalId">
+                <form novalidate name="subscriptionsForm">
+                    <form-group>
+                        <div ng-repeat="notificationType in notificationTypes">
+                            <input
+                               type="checkbox"
+                               ng-attr-id="{{:: notificationType}}" ng-attr-name="{{:: notificationType}}"
+                               ng-model="subscription[notificationType].selected"
+                               ng-disabled="subscription[notificationType].readOnly"
+                               ng-click="submitSubscriptions()"
+                            >
+                            <label ng-attr-for="{{:: notificationType}}">
+                                {{:: 'subscriptions.notificationTypes.' + notificationType | translate}}
+                            </label>
+                        </div>
+                    </form-group>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>

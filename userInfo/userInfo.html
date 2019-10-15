@@ -1,0 +1,55 @@
+<div class="user-info row" loader="!isInfoLoaded">
+    <div ng-if=":: isInfoLoaded">
+        <dl class="clearfix">
+            <dt class="user-info__name">
+                <a ng-href="{{baseUrl}}#personal">
+                    <span>{{userInfo.lastName}}</span>
+                    <span>{{userInfo.firstName}}</span>
+                    <span>{{userInfo.patronymicName}}</span>
+                </a>
+            </dt>
+            <dd></dd>
+        </dl>
+
+        <dl class="user-balance clearfix" ng-class="{'no-balance': userInfo.baseBalanceAccount === undefined}">
+            <dt class="user-info__balance user-info__key">{{'userInfo.balance' | translate}}:&nbsp;</dt>
+            <dd class="user-info__balance user-info__value">
+                <span ng-bind="userInfo.baseBalanceAccount.balance | number: 2"></span>&nbsp;{{userInfo.baseBalanceAccount.currency.nameCases.abbreviation}}
+                (<a ng-href="{{baseUrl}}#balance">{{'userInfo.accounts' | translate}}: {{userInfo.balanceAccounts.length}}</a>)
+                <span class="no-balance-message hidden">0</span>
+            </dd>
+
+            <dt class="user-info__not-activated user-info__key">{{'userInfo.notActivatedBonuses' | translate}}:&nbsp;</dt>
+            <dd class="user-info__not-activated user-info__value">
+                <span ng-bind="userInfo.baseBalanceAccount.notActivated | number: 2"></span>&nbsp;{{userInfo.baseBalanceAccount.currency.nameCases.abbreviation}}
+                <span class="no-balance-message hidden">0</span>
+            </dd>
+
+            <dt class="user-info__accumulated user-info__key">{{'userInfo.accumulatedBonuses' | translate}}:&nbsp;</dt>
+            <dd class="user-info__accumulated user-info__value">
+                <span ng-bind="userInfo.baseBalanceAccount.accumulated | number: 2"></span>&nbsp;{{userInfo.baseBalanceAccount.currency.nameCases.abbreviation}}
+                <span class="no-balance-message hidden">0</span>
+            </dd>
+        </dl>
+
+        <dl class="clearfix">
+            <dt ng-if=":: statusAttribute" class="user-info__attribute user-info__key">
+                <span ng-bind=":: statusAttribute.info.name + ':&nbsp;'"></span>
+            </dt>
+            <dd ng-if=":: statusAttribute" class="user-info__attribute user-info__value">
+                <span ng-bind=":: statusAttribute.value.stringValue"></span>
+            </dd>
+
+            <dt ng-if=":: purchasesAttribute" class="user-info__attribute user-info__key">
+                <span ng-bind=":: purchasesAttribute.info.name + ':&nbsp;'"></span>
+            </dt>
+            <dd ng-if=":: purchasesAttribute" class="user-info__attribute user-info__value">
+                <span ng-bind=":: purchasesAttribute.value.doubleValue | number: 2"></span>&nbsp;{{'userInfo.purchasesAttributeCurrency' | translate}}
+            </dd>
+        </dl>
+
+        <div class="user-info__logout clearfix">
+            <a ng-click="logout(isPassiveLogout)" class="right">{{'userInfo.logout' | translate}}</a>
+        </div>
+    </div>
+</div>

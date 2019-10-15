@@ -1,0 +1,22 @@
+﻿<div class="container announcements">
+    <section>
+        <h2>{{'announcement.title' | translate}}</h2>
+        <div loader="isProgress" class="announcements-list">
+            <article ng-repeat="announcement in announcements track by announcement.id"
+                     ng-click="openAnnouncementModal(announcement)"
+                     class="announcement card"
+            >
+                <div class="card-image">
+                    <img ng-src="{{:: getAnnouncementImagePath(announcement.attributes.OfferImage.value)}}"
+                         fallback-image
+                         fallback-title="{{'imageNotFound' | translate}}"
+                         alt="">
+                </div>
+                <div class="card-content">
+                    <div class="card-title" title="{{:: announcement.attributes.OfferTitle.value}}">{{:: announcement.attributes.OfferTitle.value}}</div>
+                    <div class="card-description">{{:: announcement.attributes.OfferDescription.value}}</div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>

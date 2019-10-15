@@ -1,0 +1,20 @@
+<div class="question-date">
+    <form novalidate name="questionnaireForm" ng-submit="questionnaireForm.$valid && save()">
+        <form-group
+            label-text="{{::question.name}}"
+            ng-init="registerForm(questionnaireForm)"
+            ng-class="::{'required': question.isRequired}"
+        >
+            <birthday-picker
+                ng-attr-id="{{:: question.logicalName}}"
+                ng-attr-name="{{:: question.logicalName}}"
+                ng-model="question.value"
+                ng-required="::question.isRequired"
+                is-disabled="question.isReadOnly || disabled"
+                ng-class="{'disabled': question.isReadOnly || disabled}"
+            ></birthday-picker>
+
+            <question-errors></question-errors>
+        </form-group>
+    </form>
+</div>

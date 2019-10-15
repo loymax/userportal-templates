@@ -1,0 +1,38 @@
+<div>
+    <div class="container personal-goods" ng-if="!appLocationParts[1]">
+        <h2>{{'personalGoods.title' | translate}}</h2>
+
+        <div loader="inProgress">
+            <div ng-show="!inProgress">
+                <section class="my-goods margin-bottom" ng-if="approvedPersonalOffers.length">
+                    <h3>{{'personalGoods.myGoodsOffers' | translate}}:</h3>
+                    <personal-goods-offer-info
+                        ng-repeat="offer in approvedPersonalOffers track by offer.id"
+                        offer="offer"
+                        goods-preview
+                    ></personal-goods-offer-info>
+                </section>
+
+                <section class="current-goods margin-bottom">
+                    <h3>{{'personalGoods.activeOffers' | translate}}:</h3>
+                    <div ng-if="activePersonalOffers.length">
+                        <personal-goods-offer-info
+                            ng-repeat="offer in activePersonalOffers track by offer.id"
+                            offer="offer"
+                        ></personal-goods-offer-info>
+                    </div>
+                    <div ng-if="!activePersonalOffers.length">{{'personalGoods.noActiveOffers' | translate}}</div>
+                </section>
+
+                <section class="future-goods margin-bottom" ng-if="futurePersonalOffers.length">
+                    <h3>{{'personalGoods.futureOffers' | translate}}:</h3>
+                    <personal-goods-offer-info
+                        ng-repeat="offer in futurePersonalOffers track by offer.id"
+                        offer="offer"
+                    ></personal-goods-offer-info>
+                </section>
+            </div>
+        </div>
+    </div>
+    <personal-goods-offer ng-if="appLocationParts[1]"  offer-id="appLocationParts[1]"></personal-goods-offer>
+</div>

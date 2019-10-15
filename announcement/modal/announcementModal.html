@@ -1,0 +1,20 @@
+﻿<div>
+    <div class="modal-header">
+        <h2>{{:: announcement.attributes.OfferTitle.value}}</h2>
+    </div>
+
+    <div class="modal-content-wrapper">
+        <div class="modal-body">
+            <div class="image">
+                <img ng-src="{{:: getAnnouncementImagePath(announcement.attributes.OfferImage.value)}}"
+                     fallback-image
+                     fallback-title="{{'imageNotFound' | translate}}"
+                     alt="">
+            </div>
+            <div class="description">{{:: announcement.attributes.OfferDescription.value}}</div>
+        </div>
+        <div class="modal-footer btn-container">
+            <button type="button" ng-click="close()">{{'buttons.close' | translate}}</button>
+        </div>
+    </div>
+</div>

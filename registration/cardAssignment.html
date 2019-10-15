@@ -1,0 +1,36 @@
+﻿<div class="card-assignment">
+    <h2>{{'registration.cardStep.title' | translate}}</h2>
+    <notifications area="registration"></notifications>
+    <form novalidate name="assignCardForm" ng-show="isVirtualCardEmissionAllowed !== undefined" ng-submit="assignCardForm.$valid && assignCard()">
+        <form-group label-text="{{'registration.cardStep.cardNumber' | translate}}">
+            <input
+                type="text"
+                ng-model="cardModel.cardNumber"
+                ng-disabled="stepInProgress"
+                id="cardNumber" name="cardNumber"
+                required
+                autofocus
+            >
+        </form-group>
+        <div class="hint">
+            <p ng-if="!isVirtualCardEmissionAllowed">{{'registration.cardStep.cardNeeded' | translate}}</p>
+        </div>
+        <div class="btn-container">
+            <div ng-hide="stepInProgress">
+                <button ng-if="!isVirtualCardEmissionAllowed" type="button" ng-click="cancel()">
+                    {{'buttons.cancel' | translate}}
+                </button>
+                <button
+                    ng-if="isVirtualCardEmissionAllowed"
+                    type="button"
+                    ng-click="emitVirtualCard()"
+                    id="registration-assignCard__doNotHave"
+                >
+                    {{'cards.noCard' | translate}}
+                </button>
+                <button type="submit" id="registration-assignCard__submit">{{'buttons.complete' | translate}}</button>
+            </div>
+            <inline-loader line>stepInProgress</inline-loader>
+        </div>
+    </form>
+</div>

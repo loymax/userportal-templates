@@ -1,0 +1,81 @@
+<div ng-class=":: {
+    'question-radio': !question.isMultiSelect,
+    'question-checkbox': question.isMultiSelect,
+    'question-custom': question.hasCustomAnswer
+}">
+    <form novalidate name="questionnaireForm" ng-submit="questionnaireForm.$valid && save()">
+        <form-group
+            label-text="{{::question.name}}"
+            ng-init="registerForm(questionnaireForm)"
+            ng-class="::{'required': question.isRequired}"
+        >
+            <input
+                type="hidden"
+                ng-model="question.value"
+                ng-attr-id="{{::question.logicalName}}" ng-attr-name="{{::question.logicalName}}"
+                ng-required="::question.isRequired">
+            <div
+                ng-repeat="item in question.fixedAnswers"
+                ng-init="elementId = question.logicalName+'_'+item.id"
+                ng-class=":: {'question-radio-item': !question.isMultiSelect, 'question-checkbox-item': question.isMultiSelect}"
+            >
+                <!-- radio -->
+                <div ng-if=":: !question.isMultiSelect">
+                    <input
+                        type="radio"
+                        ng-model="question.value"
+                        ng-value="item"
+                        ng-disabled="item.isReadOnly || disabled"
+                        ng-attr-id="{{::elementId}}">
+                    <label
+                        class="radio-item-label"
+                        ng-attr-for="{{::elementId}}"
+                    >
+                        {{::item.name}}
+                    </label>
+                    <input
+                        ng-if="item.isCustom"
+                        type="text"
+                        ng-attr-name="{{::question.logicalName+'_custom'}}"
+                        ng-model="item.value"
+                        ng-click="question.value = item"
+                        ng-required="question.value === item"
+                        ng-disabled="disabled || question.value !== item"
+                        ng-pattern="question.value === item ? question.regexp : undefined"
+                        class="question-custom__text"
+                    >
+                </div>
+
+                <!-- checkBox -->
+                <div ng-if=":: question.isMultiSelect">
+                    <input
+                        type="checkbox"
+                        ng-attr-id="{{::elementId}}"
+                        ng-model="item.isSelected"
+                        ng-change="updateCheckBoxValues()"
+                        ng-disabled="item.isReadOnly || disabled"
+                    >
+                    <label
+                        ng-attr-for="{{::elementId}}"
+                        class="checkbox-item-label"
+                    >
+                        {{::item.name}}
+                    </label>
+                    <input
+                        ng-if="item.isCustom"
+                        type="text"
+                        name="{{::question.logicalName+'_custom'}}"
+                        ng-model="item.value"
+                        ng-click="item.isSelected = true"
+                        ng-required="item.isSelected"
+                        ng-disabled="disabled || !item.isSelected"
+                        ng-pattern="item.isSelected ? question.regexp : undefined"
+                        class="question-custom__text"
+                    >
+                </div>
+            </div>
+
+            <question-errors></question-errors>
+        </form-group>
+    </form>
+</div>

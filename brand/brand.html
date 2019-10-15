@@ -1,0 +1,28 @@
+﻿<div class="container brand">
+    <section>
+        <h2>{{::brand.name}}</h2>
+        <p>{{::brand.description}}</p>
+        <div class="content">
+            <div class="image">
+                <img ng-src="{{:: brand.imgUrl}}"
+                     fallback-image
+                     fallback-title="{{'imageNotFound' | translate}}"
+                     alt="">
+            </div>
+            <a ng-href="{{::brand.url}}">{{'brands.site' | translate}}</a>
+            <div ng-if="merchants.length">
+                <p>{{'brands.locations' | translate}}:</p>
+                <div ng-repeat="merchant in merchants track by merchant.id">
+                    <span>{{::merchant.location.description}}</span>
+                </div>
+                <lmx-map class="map"
+                         data="merchants"
+                         options="{
+                                    markerImg: brand.markerUrl,
+                                    markerSize: [29, 32]
+                                   }">
+                </lmx-map>
+            </div>
+        </div>
+    </section>
+</div>

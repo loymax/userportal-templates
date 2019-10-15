@@ -1,0 +1,10 @@
+﻿<div class="container offers">
+    <section>
+        <h2>{{'offers.title' | translate}}</h2>
+        <div loader="inProgress">
+            <div ng-if="!inProgress" class="offers-list">
+                <offers-list offers="offers"></offers-list>
+            </div>
+        </div>
+    </section>
+</div>

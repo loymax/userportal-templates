@@ -1,0 +1,54 @@
+﻿<div class="container my-coupons">
+    <section>
+        <h2>{{'coupons.title' | translate}}</h2>
+        <div loader="inProgress">
+            <div ng-if="!inProgress">
+                <div class="coupon card"
+                     ng-repeat="coupon in coupons track by coupon.couponId"
+                     ng-click="openCouponViewModal(coupon)">
+                    <div class="card-image">
+                        <img ng-src="{{::coupon.imageUri || 'undefined'}}"
+                             fallback-image
+                             fallback-title="{{'coupons.imageNotFound' | translate}}"
+                             alt=""
+                             style="height: 250px; padding: 10px">
+                    </div>
+                    <div class="card-content">
+                        <div class="coupon-details">
+                            <div class="coupon-number">
+                                {{:: coupon.number}}
+                            </div>
+                            <div class="coupon-content" ng-switch="coupon.content.contentType.toLowerCase()">
+                                <!--QRCODE-->
+                                <div ng-switch-when="qrcode">
+                                    <qrcode data="{{:: coupon.content.data}}"
+                                            href="{{:: coupon.content.data}}"
+                                            size="200"></qrcode>
+                                </div>
+                                <!--BARCODE-->
+                                <div ng-switch-when="barcode">
+                                    <barcode string="{{:: coupon.content.data}}" render="img" type="code128b"
+                                             options="barcodeOptions"></barcode>
+                                </div>
+                                <!--URL-->
+                                <div ng-switch-when="uri">
+                                    <a ng-href="{{:: coupon.content.data}}" target="_blank">{{'coupons.viewOnSite' | translate}}</a>
+                                </div>
+                            </div>
+                            <div class="coupon-dates">
+                                {{'coupons.date' | translate}}: {{:: coupon.recievedDate | shortDateTime}}
+                            </div>
+                            <div ng-if="coupon.expireDate" class="rating-container">
+                                {{'coupons.expirationDate' | translate}}: {{:: coupon.expireDate | shortDateTime}}
+                            </div>
+                        </div>
+                        <div class="coupon-actions">
+                            <span class="card-title">{{:: coupon.text}}</span>
+                            <a ng-if="isRefundable(coupon)" ng-click="refundCoupon(coupon.couponId)">{{'coupons.refund' | translate}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
