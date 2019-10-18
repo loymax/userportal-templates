@@ -1,55 +1,35 @@
 <div>
-    <div class="card-item__image" ng-class="{'blocked': card.block}">
-        <img
-            ng-src="{{ card.imageUrl}}"
-            fallback-image
-            fallback-title="{{'imageNotFound' | translate}}"
-            alt=""
-        />
+    <div class="lmx-card-item__image" ng-class="{'lmx-blocked': card.block}">
+        <img ng-src="{{ card.imageUrl}}" fallback-image="" fallback-title="{{'imageNotFound' | translate}}" alt="">
     </div>
-    <div class="card-item__info" ng-switch=":: !!cardNumberGraphicalCodes.length && !card.isInGroup">
+    <div class="lmx-card-item__info" ng-switch=":: !!cardNumberGraphicalCodes.length && !card.isInGroup">
         <div ng-switch-when="true">
             <!-- Пробел после :: в {{::cardNumberGraphicalCodes.join(' ')}} сводит префиксер с ума -->
-            <div class="card-number card-code {{::cardNumberGraphicalCodes.join(' ')}}" ng-click="displayCodes(card)">
-                <a class="pseudolink">{{:: card.number | charsDivide: 4}}</a>
+            <div class="lmx-card-number lmx-card-code lmx-{{::cardNumberGraphicalCodes.join(' lmx-')}}" ng-click="displayCodes(card)">
+                <a class="lmx-pseudolink">{{:: card.number | charsDivide: 4}}</a>
             </div>
         </div>
-        <div ng-switch-when="false" class="card-number">{{:: card.number | charsDivide: 4}}</div>
+        <div ng-switch-when="false" class="lmx-card-number">{{:: card.number | charsDivide: 4}}</div>
 
-        <div class="card-category" ng-hide="::card.cardCategory.title.toLowerCase() === 'стандартная'">{{:: card.cardCategory.title}}</div>
-        <div class="card-blocked-state-info" ng-if="::card.block">{{:: 'cards.info.blocked' | translate}}</div>
+        <div class="lmx-card-category" ng-hide="::card.cardCategory.title.toLowerCase() === 'стандартная'">{{:: card.cardCategory.title}}</div>
+        <div class="lmx-card-blocked-state-info" ng-if="::card.block">{{:: 'cards.info.blocked' | translate}}</div>
 
-        <dl class="card-owner" ng-if="::card.cardOwnerInfo.firstName || card.cardOwnerInfo.lastName || card.patronymicName">
+        <dl class="lmx-card-owner" ng-if="::card.cardOwnerInfo.firstName || card.cardOwnerInfo.lastName || card.patronymicName">
             <dt>{{'cards.info.owner' | translate}}: </dt>
             <dd>{{:: card.cardOwnerInfo.lastName}} {{:: card.cardOwnerInfo.firstName}} {{:: card.cardOwnerInfo.patronymicName}}</dd>
         </dl>
-        <dl class="card-paid">
+        <dl class="lmx-card-paid">
             <dt>{{'cards.info.paid' | translate}}: </dt>
             <dd>{{:: card.paid.amount | number: 2}} {{:: card.paid.currencyInfo.nameCases.abbreviation}}</dd>
         </dl>
-        <div ng-if=":: !card.isInGroup" class="card-actions">
-            <button
-                ng-class="card.block ? 'card-action__unblock' : 'card-action__block'"
-                class="block-btn"
-                ng-if="card.cardActionAccessInfo.canBlock"
-                ng-click="blockStateChange(card)"
-                type="button"
-            >
+        <div ng-if=":: !card.isInGroup" class="lmx-card-actions">
+            <button ng-class="card.block ? 'lmx-card-action__unblock' : 'lmx-card-action__block'" class="lmx-block-btn" ng-if="card.cardActionAccessInfo.canBlock" ng-click="blockStateChange(card)" type="button">
                 {{card.block ? 'cards.actions.unblock' : 'cards.actions.block' | translate}}
             </button>
-            <button
-                ng-if="card.cardActionAccessInfo.canReplace"
-                ng-click="replaceCard(card)"
-                type="button"
-                class="replace-btn"
-            >
+            <button ng-if="card.cardActionAccessInfo.canReplace" ng-click="replaceCard(card)" type="button" class="lmx-replace-btn">
                 {{'cards.actions.replace' | translate}}
             </button>
-            <a
-                ng-if="card.walletUrl && !card.block && platfotm.currentPlatform"
-                ng-href="{{::card.walletUrl}}"
-                target="_blank"
-                class="wallet-btn {{::platfotm.currentPlatform}}-wallet-btn"></a>
+            <a ng-if="card.walletUrl && !card.block && platfotm.currentPlatform" ng-href="{{::card.walletUrl}}" target="_blank" class="lmx-wallet-btn lmx-{{::platfotm.currentPlatform}}-wallet-btn"></a>
         </div>
     </div>
 </div>

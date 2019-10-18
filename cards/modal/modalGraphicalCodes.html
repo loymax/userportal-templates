@@ -1,17 +1,17 @@
-<div class="card-codes-modal">
+<div class="lmx-card-codes-modal">
     <div class="modal-body">
-        <section ng-if=":: displayBarCode" class="bar-code margin-bottom">
+        <section ng-if=":: displayBarCode" class="lmx-bar-code lmx-margin-bottom">
             <h2>{{'cards.graphicalCodesModal.barCode' | translate}}</h2>
             <angular-barcode ng-model="card.number" bc-type="svg"></angular-barcode>
         </section>
 
-        <section ng-if=":: displayQrCode" class="qr-code">
+        <section ng-if=":: displayQrCode" class="lmx-qr-code">
             <h2>{{'cards.graphicalCodesModal.qrCode' | translate}}</h2>
             <qrcode data="{{:: card.number}}" size="222"></qrcode>
         </section>
     </div>
 
-    <div class="modal-footer btn-container">
+    <div class="modal-footer lmx-btn-container">
         <button type="button" ng-click="close()">{{'buttons.close' | translate}}</button>
     </div>
 </div>

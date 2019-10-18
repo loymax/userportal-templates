@@ -1,25 +1,14 @@
-<div class="file-input">
+<div class="lmx-file-input">
     <form-group>
         <inline-loader>loader</inline-loader>
-        <input
-            type="file"
-            ng-model="attachment.fileInfo"
-            id="file-input" ng-attr-name="{{inputName}}"
-            base-sixty-four-input
-            maxsize="5120"
-            do-not-parse-if-oversize
-            onloadstart="onFileLoadStart"
-            onerror="onFileLoadError"
-            onload="onFileLoadSuccess"
-        >
-        <label for="file-input" ng-switch="loadError.value" ng-hide="loader" ng-click="clearAttachment(); loadError.value = false;">
+        <input type="file" ng-model="attachment.fileInfo" id="lmx-file-input" ng-attr-name="{{inputName}}" base-sixty-four-input="" maxsize="5120" do-not-parse-if-oversize="" onloadstart="onFileLoadStart" onerror="onFileLoadError" onload="onFileLoadSuccess">
+        <label for="lmx-file-input" ng-switch="loadError.value" ng-hide="loader" ng-click="clearAttachment(); loadError.value = false;">
             <button type="button">{{'buttons.attachFile' | translate}}</button>
-            <span ng-switch-when="false" ng-if="attachment.fileInfo" class="attachment">
-                <span class="attachment-name" ng-attr-title="{{attachment.fileInfo.filename}}">{{attachment.fileInfo.filename}}</span>
-                <span ng-click="clearAttachment($event)"
-                      class="attachment-remove glyphicon glyphicon-remove"></span>
+            <span ng-switch-when="false" ng-if="attachment.fileInfo" class="lmx-attachment">
+                <span class="lmx-attachment-name" ng-attr-title="{{attachment.fileInfo.filename}}">{{attachment.fileInfo.filename}}</span>
+                <span ng-click="clearAttachment($event)" class="lmx-attachment-remove glyphicon glyphicon-remove"></span>
             </span>
-            <span ng-switch-when="true" class="attachment-error">{{loadError.text || ('file.error' | translate)}}</span>
+            <span ng-switch-when="true" class="lmx-attachment-error">{{loadError.text || ('file.error' | translate)}}</span>
         </label>
     </form-group>
 </div>

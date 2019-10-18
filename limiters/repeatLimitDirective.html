@@ -1,0 +1,12 @@
+<ul ng-if="::items.length > 0" class="lmx-repeat-limit">
+    <li ng-repeat="item in items | limitTo: limit track by $index" class="lmx-repeat-limit-item">
+        <span ng-if="!textLimit">{{::item}}</span>
+        <text-limit ng-if="textLimit" limit="{{textLimit}}" text="item"></text-limit>
+        <span ng-if="::delimiter " class="lmx-repeat-limit-item-delimiter" ng-class="{'lmx-hide': $index === items.length - 1}">{{::delimiter}}&nbsp;</span>
+    </li>
+    <li class="lmx-toggle-limit-btn" ng-click="toggleLimit()" ng-if="items.length > limit">
+        {{ limit ? 'showAll' : 'hide' | translate | lowercase }}
+        <span ng-if="limit"> ({{:: items.length}})</span>
+    </li>
+</ul>
+<span ng-if="::items.length === 0 && defaultMessage">{{:: defaultMessage}}</span>

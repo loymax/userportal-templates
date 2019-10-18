@@ -1,18 +1,18 @@
-<div class="container message">
+<div class="lmx-container lmx-message">
     <section>
         <h2>{{'messages.title' | translate}}</h2>
 
-        <div ng-if="messages.length || state.isProgress" loader="isProgress" class="messages-container">
+        <div ng-if="messages.length || state.isProgress" loader="isProgress" class="lmx-messages-container">
             <article ng-repeat="message in messages">
                 <div class="date">{{:: message.creationDate | shortDate }}</div>
 
-                <div class="remove" ng-click="remove(message);">{{'buttons.delete' | translate | lowercase}}</div>
+                <div class="lmx-remove" ng-click="remove(message);">{{'buttons.delete' | translate | lowercase}}</div>
 
-                <h4 class="title" ng-class="{'notRead': !message.isReaded}">
+                <h4 class="lmx-title" ng-class="{'lmx-notRead': !message.isReaded}">
                     <span ng-click="toggleView(message);">{{:: message.title }}</span>
                 </h4>
 
-                <div class="text" ng-if="message._isShowText">
+                <div class="lmx-text" ng-if="message._isShowText">
                     <p>{{:: message.body }}</p>
                 </div>
             </article>

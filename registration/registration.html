@@ -1,33 +1,26 @@
-﻿<div class="container registration">
-    <div class="registration" ng-class="currentStep">
+<div class="lmx-container lmx-registration">
+    <div class="lmx-registration" ng-class="'lmx-'+currentStep">
         <!-- INITIAL-FORM -->
-        <div ng-if="!isRegistrationStarted" class="registration-form">
+        <div ng-if="!isRegistrationStarted" class="lmx-registration-form">
             <registration-start></registration-start>
         </div>
         <!-- // INITIAL-FORM -->
 
         <!-- STEPS -->
-        <div ng-if="isRegistrationStarted && !registrationCompleted" class="registration-steps" ng-switch="currentStep" loader="currentStep == undefined || inProgress">
+        <div ng-if="isRegistrationStarted && !registrationCompleted" class="lmx-registration-steps" ng-switch="currentStep" loader="currentStep == undefined || inProgress">
             <div ng-hide="inProgress">
                 <tender-offer ng-switch-when="AcceptTenderOffer"></tender-offer>
-                <user-phone
-                        ng-switch-when="ChangePhone"
-                        registration="true"
-                ></user-phone>
-                <user-email
-                        ng-switch-when="ChangeEmail"
-                        registration="true"
-                        email-skippable="emailSkippable"
-                ></user-email>
+                <user-phone ng-switch-when="ChangePhone" registration="true"></user-phone>
+                <user-email ng-switch-when="ChangeEmail" registration="true" email-skippable="emailSkippable"></user-email>
                 <user-password ng-switch-when="PasswordRequired" registration="true"></user-password>
-                <questionnaire ng-switch-when="Questions" registration="true" only-required></questionnaire>
+                <questionnaire ng-switch-when="Questions" registration="true" only-required=""></questionnaire>
                 <card-assignment ng-switch-when="AssignCard"></card-assignment>
             </div>
         </div>
         <!-- // STEPS -->
 
         <!-- COMPLETE-MESSAGE -->
-        <div ng-if="registrationCompleted" class="registration-finish" loader="inProgress">
+        <div ng-if="registrationCompleted" class="lmx-registration-finish" loader="inProgress">
             <registration-finish></registration-finish>
         </div>
         <!-- // COMPLETE-MESSAGE -->

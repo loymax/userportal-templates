@@ -1,18 +1,18 @@
-﻿<div class="offer-content-container card-content clearfix">
+<div class="lmx-offer-content-container lmx-card-content lmx-clearfix">
     <brands-names brands="personalOffer.brands"></brands-names>
 
     <div ng-switch=":: isPreview">
-        <h2 ng-switch-when="false" class="personal-offer__title">{{:: personalOffer.title}}</h2>
-        <h3 ng-switch-when="true" class="card-title personal-offer__title">{{:: personalOffer.title}}</h3>
+        <h2 ng-switch-when="false" class="lmx-personal-offer__title">{{:: personalOffer.title}}</h2>
+        <h3 ng-switch-when="true" class="lmx-card-title lmx-personal-offer__title">{{:: personalOffer.title}}</h3>
     </div>
 
-    <div class="personal-offer__map-link">
-        <a ng-click="openPersonalOfferMapModal()" class="pseudolink">{{'personalOffers.showOnMap' | translate}}</a>
+    <div class="lmx-personal-offer__map-link">
+        <a ng-click="openPersonalOfferMapModal()" class="lmx-pseudolink" href="">{{'personalOffers.showOnMap' | translate}}</a>
     </div>
-    <div ng-if=":: personalOffer.description" class="personal-offer__description row">
+    <div ng-if=":: personalOffer.description" class="lmx-personal-offer__description lmx-row">
         {{:: personalOffer.description}}
     </div>
-    <div class="personal-offer__duration row">
+    <div class="lmx-personal-offer__duration lmx-row">
         <b>{{'personalOffers.offerPeriod' | translate}}:</b>
         <div>{{:: personalOffer.begin | toUTC | dateRange: (personalOffer.end | toUTC) | capitalize}}</div>
     </div>

@@ -1,17 +1,11 @@
-﻿<div class="social" ng-class=":: {'social-binding': isBinding}">
+<div class="lmx-social" ng-class="::{'lmx-social-binding': isBinding}">
     <div ng-if=":: clients.length" ng-switch=":: isBinding">
         <div ng-switch-when="false">
-            <div class="hint row" ng-bind-html="'accounts.socials.login' | translate"></div>
+            <div class="lmx-hint lmx-row" ng-bind-html="'accounts.socials.login' | translate"></div>
 
             <ul loader="isProgress.getSocialInfo">
                 <li ng-repeat="client in clients">
-                    <img
-                        class="social-logo"
-                        title="{{:: client.name }}"
-                        ng-click="authHandler(client)"
-                        ng-src="{{:: socialImagesPath}}/{{:: client.providerType.toLowerCase()}}-logo.svg"
-                        fallback-image
-                    >
+                    <img class="lmx-social-logo" title="{{:: client.name }}" ng-click="authHandler(client)" ng-src="{{:: socialImagesPath}}/{{:: client.providerType.toLowerCase()}}-logo.svg" fallback-image="">
                 </li>
             </ul>
         </div>
@@ -21,16 +15,10 @@
 
             <ul loader="isProgress.getSocialInfo">
                 <li ng-repeat="client in clients">
-                    <img
-                        class="social-logo"
-                        alt="{{:: client.name }}"
-                        ng-click="authHandler(client)"
-                        ng-src="{{:: socialImagesPath}}/{{:: client.providerType.toLowerCase()}}-logo.svg"
-                        fallback-image
-                    >
+                    <img class="lmx-social-logo" alt="{{:: client.name }}" ng-click="authHandler(client)" ng-src="{{:: socialImagesPath}}/{{:: client.providerType.toLowerCase()}}-logo.svg" fallback-image="">
 
-                    <div class="social-action">
-                        <a ng-click="toggleBind(client)" class="pseudolink">{{'accounts.socials.' + (isBinded(client) ? 'unbind' : 'bind') | translate}}</a>
+                    <div class="lmx-social-action">
+                        <a ng-click="toggleBind(client)" class="lmx-pseudolink" href="">{{'accounts.socials.' + (isBinded(client) ? 'unbind' : 'bind') | translate}}</a>
                     </div>
                 </li>
             </ul>

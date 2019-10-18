@@ -1,11 +1,11 @@
-<div class="buy-coupon-modal" loader="inProgress">
+<div class="lmx-buy-coupon-modal" loader="inProgress">
     <div class="modal-header">
-        <div class="modal-closer" ng-click="cancel()"></div>
+        <div class="lmx-modal-closer" ng-click="cancel()"></div>
         <h2>{{'showcase.buyCoupon.title' | translate}}</h2>
-        <div class="modal-description">{{:: coupon.name}}</div>
+        <div class="lmx-modal-description">{{:: coupon.name}}</div>
     </div>
     <div class="modal-body">
-        <div class="clearfix" >
+        <div class="lmx-clearfix">
             <div ng-if="!triedToBuy">
                 {{:: coupon.description}}
             </div>
@@ -21,10 +21,10 @@
             </div>
         </div>
     </div>
-    <div class="modal-footer btn-container">
+    <div class="modal-footer lmx-btn-container">
         <div ng-if="!triedToBuy">
             <button type="button" ng-click="buyCoupon(coupon.id)">{{'showcase.buyCoupon.payBonuses' | translate}}</button>
-            <button type="button" class="btn-cancel" ng-click="cancel()">{{'buttons.cancel' | translate}}</button>
+            <button type="button" class="lmx-btn-cancel" ng-click="cancel()">{{'buttons.cancel' | translate}}</button>
         </div>
         <div ng-if="triedToBuy">
             <button type="button" ng-click="cancel()">{{'buttons.close' | translate}}</button>

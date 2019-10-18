@@ -1,17 +1,13 @@
-﻿<div loader="inProgress">
+<div loader="inProgress">
     <div ng-if="!inProgress" class="modal-content-wrapper">
         <div class="modal-body">
             <a href="#/offers">
-                <div class="image">
-                    <img ng-src="{{:: getAnnouncementImagePath(announcement.attributesDictionary.OfferImage.value)}}"
-                         fallback-image
-                         fallback-title="{{'imageNotFound' | translate}}"
-                         alt=""
-                         ng-click="openOffer()">
+                <div class="lmx-image">
+                    <img ng-src="{{:: getAnnouncementImagePath(announcement.attributesDictionary.OfferImage.value)}}" fallback-image="" fallback-title="{{'imageNotFound' | translate}}" alt="" ng-click="openOffer()">
                 </div>
             </a>
         </div>
-        <div class="modal-footer btn-container">
+        <div class="modal-footer lmx-btn-container">
             <button type="button" ng-click="close()">{{'buttons.close' | translate}}</button>
         </div>
     </div>

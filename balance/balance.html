@@ -1,18 +1,15 @@
-<div class="container balance">
+<div class="lmx-container lmx-balance">
     <section>
         <h2>{{'balance.title' | translate}}</h2>
         <div loader="inProgress">
             <div ng-if="!inProgress" ng-switch="!!balanceAccounts.length">
                 <div ng-switch-when="true">
-                    <lmx-tabs
-                        list="balanceAccounts"
-                        ng-model="selectedAccount"
-                        view-field="title">
+                    <lmx-tabs list="balanceAccounts" ng-model="selectedAccount" view-field="title">
                     </lmx-tabs>
-                    <div class="balance-tab-content">
+                    <div class="lmx-balance-tab-content">
                         <h3>{{selectedAccount.currency.name}}</h3>
-                        <div class="account-description">{{selectedAccount.currency.description}}</div>
-                        <div class="account-details">
+                        <div class="lmx-account-description">{{selectedAccount.currency.description}}</div>
+                        <div class="lmx-account-details">
                             <div>
                                 <b>{{'balance.amount' | translate}}</b>:
                                 {{selectedAccount.amount | number: 2}}

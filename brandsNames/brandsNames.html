@@ -1,4 +1,4 @@
-<div class="brands-names">
+<div class="lmx-brands-names">
     <div ng-if="brands.length > 1">
         <span ng-repeat="brand in brands track by brand.id">
             {{::brand.name | nbspSpaces}}<span ng-show="!$last">, </span>
@@ -6,11 +6,6 @@
     </div>
     <div ng-if="brands.length === 1" ng-switch=":: !!brands[0].imgUrl && brands[0].imgUrl !== 'undefined'">
         <span ng-switch-when="false">{{:: brands[0].name | nbspSpaces}}</span>
-        <img ng-switch-when="true"
-             class="brand-img"
-             ng-src="{{:: brands[0].imgUrl}}"
-             fallback-image
-             alt=""
-             title="{{:: brands[0].name}}">
+        <img ng-switch-when="true" class="lmx-brand-img" ng-src="{{:: brands[0].imgUrl}}" fallback-image="" alt="" title="{{:: brands[0].name}}">
     </div>
 </div>

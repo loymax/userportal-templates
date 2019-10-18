@@ -1,24 +1,18 @@
-﻿<div class="block-state-change-modal">
+<div class="lmx-block-state-change-modal">
     <div class="modal-header">
         <h2>{{'cards.blockCardModal.' + (isBlocked ? 'unblockTitle' : 'blockTitle') | translate}}</h2>
     </div>
     <notifications area="cardModal"></notifications>
-    <form novalidate name="blockCardForm" ng-submit="blockCardForm.$valid && blockStateChange()">
+    <form novalidate="" name="blockCardForm" ng-submit="blockCardForm.$valid && blockStateChange()">
         <div class="modal-content-wrapper">
             <div class="modal-body">
                 <form-group label-text="{{'cards.blockCardModal.password' | translate}}">
-                    <input type="password"
-                           ng-model="model.password"
-                           ng-disabled="inProgress"
-                           id="userPassword" name="userPassword"
-                           autocomplete="off"
-                           required
-                           autofocus>
+                    <input type="password" ng-model="model.password" ng-disabled="inProgress" id="lmx-userPassword" name="userPassword" autocomplete="off" required="" autofocus="">
                 </form-group>
             </div>
-            <div class="modal-footer btn-container">
+            <div class="modal-footer lmx-btn-container">
                 <div ng-hide="inProgress">
-                    <button class="btn-cancel" ng-click="cancel()" type="button">
+                    <button class="lmx-btn-cancel" ng-click="cancel()" type="button">
                         {{'buttons.cancel' | translate}}
                     </button>
                     <button type="submit">

@@ -1,68 +1,50 @@
-﻿<div class="container personal-goods-offer" loader="inProgress">
-    <div class="margin-bottom" ng-show="!inProgress">
-        <div class="margin-bottom">
+<div class="lmx-container lmx-personal-goods-offer" loader="inProgress">
+    <div class="lmx-margin-bottom" ng-show="!inProgress">
+        <div class="lmx-margin-bottom">
             <a href="#personal-goods">&larr; {{'buttons.backToList' | translate}}</a>
         </div>
 
-        <personal-goods-offer-info offer="offer" class="margin-bottom"></personal-goods-offer-info>
+        <personal-goods-offer-info offer="offer" class="lmx-margin-bottom"></personal-goods-offer-info>
 
-        <div class="personal-goods-offer__goods-list card" ng-class="{'unselectable': !selectableGoodsCount, 'readonly': !offer.canSelectGoods}" loader="offerDetailsInProgress">
-            <div class="approve card-action">
-                <div class="available-amount-hint">
+        <div class="lmx-personal-goods-offer__goods-list lmx-card" ng-class="{'lmx-unselectable': !selectableGoodsCount,'lmx-readonly': !offer.canSelectGoods}" loader="offerDetailsInProgress">
+            <div class="lmx-approve lmx-card-action">
+                <div class="lmx-available-amount-hint">
                     {{selectableGoodsCount
                     ? ('personalGoods.availableGoodsCount' | translate: {availableCount: selectableGoodsCount || 0, maxGoodsCount: offer.attribute.maxGoodsCount})
                     : ('personalGoods.maxGoodsCount' | translate)}}
                 </div>
-                <button type="button"
-                        ng-if="availableGoodsCount"
-                        ng-click="approveSelectedGoods()"
-                        ng-disabled="!selectedGoods.length">{{'buttons.approve' | translate}}</button>
+                <button type="button" ng-if="availableGoodsCount" ng-click="approveSelectedGoods()" ng-disabled="!selectedGoods.length">{{'buttons.approve' | translate}}</button>
             </div>
-            <div class="card-content">
-                <div ng-repeat="goods in offerGoods track by goods.id"
-                     ng-click="changeSelectedGoods(goods)"
-                     ng-class="{'approved': goods.selected, 'selected': selectedGoods.contains(goods)}"
-                     class="goods"
-                >
-                    <div class="img-wrapper">
-                        <img ng-src="{{:: goods.imgUrl}}"
-                             fallback-image
-                             fallback-title="{{'imageNotFound' | translate}}"
-                             alt="">
+            <div class="lmx-card-content">
+                <div ng-repeat="goods in offerGoods track by goods.id" ng-click="changeSelectedGoods(goods)" ng-class="{'lmx-approved': goods.selected,'lmx-selected': selectedGoods.contains(goods)}" class="lmx-goods">
+                    <div class="lmx-img-wrapper">
+                        <img ng-src="{{:: goods.imgUrl}}" fallback-image="" fallback-title="{{'imageNotFound' | translate}}" alt="">
                     </div>
-                    <div class="goods__title" title="{{:: goods.title}}">{{:: goods.title}}</div>
+                    <div class="lmx-goods__title" title="{{:: goods.title}}">{{:: goods.title}}</div>
                     <div ng-if="goods.typeRewardThumbnail" ng-switch="goods.typeRewardThumbnail">
-                        <div  ng-switch-when="oldNewPrice" class="old-new-price">
-                            <span class="new-price">{{:: goods.rewardThumbnail.newPrice}}</span>
-                            <span class="old-price">{{:: goods.rewardThumbnail.oldPrice}}</span>
+                        <div ng-switch-when="oldNewPrice" class="lmx-old-new-price">
+                            <span class="lmx-new-price">{{:: goods.rewardThumbnail.newPrice}}</span>
+                            <span class="lmx-old-price">{{:: goods.rewardThumbnail.oldPrice}}</span>
                         </div>
-                        <div  ng-switch-when="imageWithText" class="image-with-text">
+                        <div ng-switch-when="imageWithText" class="lmx-image-with-text">
                             <div title="{{::goods.rewardThumbnail.header}}">{{::goods.rewardThumbnail.header}}</div>
-                            <div class="reward-image">
-                                <img ng-src="{{::goods.rewardThumbnail.imgUrl}}"
-                                     fallback-image
-                                     fallback-title="{{'imageNotFound' | translate}}"
-                                     alt="">
+                            <div class="lmx-reward-image">
+                                <img ng-src="{{::goods.rewardThumbnail.imgUrl}}" fallback-image="" fallback-title="{{'imageNotFound' | translate}}" alt="">
                             </div>
                             <div title="{{::goods.rewardThumbnail.footer}}">{{::goods.rewardThumbnail.footer}}</div>
                         </div>
-                        <div  ng-switch-when="twoLineText" class="two-line-text">
-                            <div title="{{:: goods.rewardThumbnail.firstLine}}" class="first-line">{{:: goods.rewardThumbnail.firstLine}}</div>
-                            <div title="{{:: goods.rewardThumbnail.secondLine}}" class="second-line">{{:: goods.rewardThumbnail.secondLine}}</div>
+                        <div ng-switch-when="twoLineText" class="lmx-two-line-text">
+                            <div title="{{:: goods.rewardThumbnail.firstLine}}" class="lmx-first-line">{{:: goods.rewardThumbnail.firstLine}}</div>
+                            <div title="{{:: goods.rewardThumbnail.secondLine}}" class="lmx-second-line">{{:: goods.rewardThumbnail.secondLine}}</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div ng-if="availableGoodsCount" class="approve card-action clearfix">
-                <button type="button"
-                        ng-show="offerGoods.length > 9"
-                        ng-click="approveSelectedGoods()"
-                        ng-disabled="!selectedGoods.length"
-                        class="right">{{'buttons.approve' | translate}}</button>
+            <div ng-if="availableGoodsCount" class="lmx-approve lmx-card-action lmx-clearfix">
+                <button type="button" ng-show="offerGoods.length > 9" ng-click="approveSelectedGoods()" ng-disabled="!selectedGoods.length" class="lmx-right">{{'buttons.approve' | translate}}</button>
             </div>
-            <div class="goods-list-overlayer">
-                <p
-                    ng-bind-html="('personalGoods.editingNotAvailable' | translate) + ': ' + ((offer.attribute.startFillDate | toUTC | dateRange: (offer.attribute.endFillDate | toUTC)) | nbspSpaces)">
+            <div class="lmx-goods-list-overlayer">
+                <p ng-bind-html="('personalGoods.editingNotAvailable' | translate) + ': ' + ((offer.attribute.startFillDate | toUTC | dateRange: (offer.attribute.endFillDate | toUTC)) | nbspSpaces)">
                 </p>
             </div>
         </div>

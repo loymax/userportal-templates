@@ -1,45 +1,33 @@
-﻿<div class="container personal-offer" loader="inProgress">
+<div class="lmx-container lmx-personal-offer" loader="inProgress">
     <div ng-if="!inProgress">
-        <div class="margin-bottom">
-            <a href="#personal-offers" class="go-back-link">&larr; {{'buttons.backToList' | translate}}</a>
+        <div class="lmx-margin-bottom">
+            <a href="#personal-offers" class="lmx-go-back-link">&larr; {{'buttons.backToList' | translate}}</a>
         </div>
 
-        <personal-offer-content class="margin-bottom" personal-offer="personalOffer"></personal-offer-content>
+        <personal-offer-content class="lmx-margin-bottom" personal-offer="personalOffer"></personal-offer-content>
 
-        <div ng-if=":: offerDetails.length" class="offer-details-container margin-bottom">
-            <uib-accordion class="offer-details-accordion">
-                <uib-accordion-group ng-repeat="offerDetail in offerDetails" class="offer-details-accordion-group">
-                    <uib-accordion-heading class="offer-details-header">
+        <div ng-if=":: offerDetails.length" class="lmx-offer-details-container lmx-margin-bottom">
+            <uib-accordion class="lmx-offer-details-accordion">
+                <uib-accordion-group ng-repeat="offerDetail in offerDetails" class="lmx-offer-details-accordion-group">
+                    <uib-accordion-heading class="lmx-offer-details-header">
                         <span>{{::offerDetail.title}}</span>
                         <span class="glyphicon glyphicon-chevron-down"></span>
                         <span class="glyphicon glyphicon-chevron-up"></span>
                     </uib-accordion-heading>
-                    <dl class="offer-details-list">
-                        <dt class="offer-detail__title">{{'personalOffers.offer' | translate}}:</dt>
-                        <dd class="offer-detail__description">{{::offerDetail.description}}</dd>
+                    <dl class="lmx-offer-details-list">
+                        <dt class="lmx-offer-detail__title">{{'personalOffers.offer' | translate}}:</dt>
+                        <dd class="lmx-offer-detail__description">{{::offerDetail.description}}</dd>
 
-                        <dt class="offer-detail__title">{{'personalOffers.details' | translate}}:</dt>
-                        <dd class="offer-detail__values">
-                            <personal-offer-discount-view
-                                ng-if="offerDetail.discount"
-                                value="offerDetail.discount.value"
-                                type="offerDetail.discount.$type"
-                                measure-amount="offerDetail.discount.measureAmount"
-                                discount-type="offerDetail.discount.discountType"
-                            ></personal-offer-discount-view>
+                        <dt class="lmx-offer-detail__title">{{'personalOffers.details' | translate}}:</dt>
+                        <dd class="lmx-offer-detail__values">
+                            <personal-offer-discount-view ng-if="offerDetail.discount" value="offerDetail.discount.value" type="offerDetail.discount.$type" measure-amount="offerDetail.discount.measureAmount" discount-type="offerDetail.discount.discountType"></personal-offer-discount-view>
                             <div>{{::offerDetail.annotation}}</div>
                         </dd>
 
-                        <dt
-                            class="offer-detail__title _interval"
-                            ng-if="offerDetail.detailBeginLocalDate || offerDetail.detailEndLocalDate"
-                        >
+                        <dt class="lmx-offer-detail__title lmx-_interval" ng-if="offerDetail.detailBeginLocalDate || offerDetail.detailEndLocalDate">
                             {{'personalOffers.detailPeriodTitle' | translate}}:
                         </dt>
-                        <dd
-                            class="offer-detail__dates"
-                            ng-if="offerDetail.detailBeginLocalDate || offerDetail.detailEndLocalDate"
-                        >
+                        <dd class="lmx-offer-detail__dates" ng-if="offerDetail.detailBeginLocalDate || offerDetail.detailEndLocalDate">
                             <span ng-if="offerDetail.detailBeginLocalDate && !offerDetail.detailEndLocalDate">
                                 {{('personalOffers.detailPeriod' | translate: {offerBeginning: (offerDetail.detailBeginLocalDate | toUTC | shortDate), offerEnd: ('personalOffers.offerEnd' | translate)})}}
                             </span>
@@ -51,19 +39,15 @@
                             </span>
                         </dd>
 
-                        <dt class="offer-detail__title">
+                        <dt class="lmx-offer-detail__title">
                             {{'personalOffers.goodsCode' | translate}}:
                         </dt>
-                        <dd class="offer-detail__codes">
-                            <span ng-repeat="code in offerDetail.codes">{{::code.value}}</span>
+                        <dd class="lmx-offer-detail__codes">
+                            <repeat-limit list="offerDetail.codes" delimiter="," limit="3" field="value"></repeat-limit>
                         </dd>
                     </dl>
-                    <div class="btn-container offer-details-map">
-                        <button
-                            type="button"
-                            ng-show="offerDetail.hasMerchants"
-                            ng-click="openPersonalOfferMapModal(offerDetail.id)"
-                        >
+                    <div class="lmx-btn-container lmx-offer-details-map">
+                        <button type="button" ng-show="offerDetail.hasMerchants" ng-click="openPersonalOfferMapModal(offerDetail.id)">
                             {{'personalOffers.viewOnMap' | translate}}
                         </button>
                     </div>

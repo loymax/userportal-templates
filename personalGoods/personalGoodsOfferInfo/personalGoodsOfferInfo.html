@@ -1,37 +1,34 @@
-﻿<div class="personal-goods-offer__info" ng-class=":: {'card': isPreview}">
-    <div class="card-content clearfix">
-        <div ng-if=":: goodsPreview" class="goods-preview">
-            <div class="selected-count">
+<div class="lmx-personal-goods-offer__info" ng-class="::{'lmx-card': isPreview}">
+    <div class="lmx-card-content lmx-clearfix">
+        <div ng-if=":: goodsPreview" class="lmx-goods-preview">
+            <div class="lmx-selected-count">
                 {{('personalGoods.goodsSelected' | translate: {approvedCount: offer.approvedGoodsCount, maxGoodsCount: offer.attribute.maxGoodsCount})}}
             </div>
-            <div ng-repeat="goods in offer.approvedGoods track by goods.id" class="goods">
-                <img ng-src="{{:: goods.imgUrl}}"
-                     fallback-image
-                     alt=""
-                     title="{{:: goods.title}}">
+            <div ng-repeat="goods in offer.approvedGoods track by goods.id" class="lmx-goods">
+                <img ng-src="{{:: goods.imgUrl}}" fallback-image="" alt="" title="{{:: goods.title}}">
             </div>
         </div>
 
         <brands-names brands="offer.brands"></brands-names>
 
         <div ng-switch=":: isPreview">
-            <h2 ng-switch-when="false" class="title">{{:: offer.title}}</h2>
-            <h4 ng-switch-when="true" class="title">{{:: offer.title}}</h4>
+            <h2 ng-switch-when="false" class="lmx-title">{{:: offer.title}}</h2>
+            <h4 ng-switch-when="true" class="lmx-title">{{:: offer.title}}</h4>
         </div>
 
 
-        <div class="description row" ng-bind-html=":: offer.description"></div>
-        <div class="duration row">
+        <div class="lmx-description lmx-row" ng-bind-html=":: offer.description"></div>
+        <div class="lmx-duration lmx-row">
             <b>{{'personalGoods.offerPeriod' | translate}}:</b>
             <div>{{:: offer.begin | toUTC | dateRange: (offer.end | toUTC) | capitalize}}</div>
         </div>
-        <div class="edit-duration row">
+        <div class="lmx-edit-duration lmx-row">
             <b ng-bind-html="('personalGoods.editingNotAvailable' | translate) + ':'"></b>
             <div>{{:: offer.attribute.startFillDate | toUTC | dateRange: (offer.attribute.endFillDate | toUTC) | capitalize}}</div>
         </div>
     </div>
-    <div class="card-action clearfix">
-        <button type="button" ng-click=":: changeLocation('personal-goods/' + offer.id)" class="right">
+    <div class="lmx-card-action lmx-clearfix">
+        <button type="button" ng-click=":: changeLocation('personal-goods/' + offer.id)" class="lmx-right">
             {{'buttons.viewMore' | translate}}
         </button>
     </div>

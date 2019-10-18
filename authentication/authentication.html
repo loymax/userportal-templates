@@ -1,101 +1,39 @@
-﻿<div class="container auth">
+<div class="lmx-container lmx-auth">
     <h2>{{'authentication.title' | translate}}</h2>
     <notifications area="login"></notifications>
 
-    <identifiers ng-if=":: identifiers.arr !== undefined"
-            identifiers="identifiers.arr"
-            ng-model="model.identifier"
-            ng-change="resetFormModels()"
-    ></identifiers>
+    <identifiers ng-if=":: identifiers.arr !== undefined" identifiers="identifiers.arr" ng-model="model.identifier" ng-change="resetFormModels()"></identifiers>
 
-    <form novalidate method="post" name="loginForm" ng-submit="loginForm.$valid && !(reCaptcha && reCaptcha.isInvalid) && login()" id="loginForm">
-        <form-group
-            ng-if="model.identifier === IDENTIFIERS.phone"
-            label-text="{{'identifiers.' + model.identifier | translate}}"
-        >
-            <phone-input
-                ng-model="model.loginData.login"
-                id="login_{{model.identifier}}" name="login"
-                ng-disabled="authInProgress"
-                required
-                autofocus></phone-input>
+    <form novalidate="" method="post" name="loginForm" ng-submit="loginForm.$valid && !(reCaptcha && reCaptcha.isInvalid) && login()" id="lmx-loginForm">
+        <form-group ng-if="model.identifier === IDENTIFIERS.phone" label-text="{{'identifiers.' + model.identifier | translate}}">
+            <phone-input ng-model="model.loginData.login" id="lmx-login_{{model.identifier}}" name="login" ng-disabled="authInProgress" required="" autofocus=""></phone-input>
         </form-group>
-        <form-group
-            ng-if="model.identifier === IDENTIFIERS.email"
-            label-text="{{'identifiers.' + model.identifier | translate}}"
-        >
-            <input
-                type="email"
-                ng-model="model.loginData.login"
-                id="login_{{model.identifier}}"
-                name="login"
-                placeholder="example@mail.com"
-                required>
+        <form-group ng-if="model.identifier === IDENTIFIERS.email" label-text="{{'identifiers.' + model.identifier | translate}}">
+            <input type="email" ng-model="model.loginData.login" id="lmx-login_{{model.identifier}}" name="login" placeholder="example@mail.com" required="">
         </form-group>
-        <form-group
-            ng-if="model.identifier === IDENTIFIERS.card"
-            label-text="{{'identifiers.' + model.identifier | translate}}"
-        >
-            <input
-                type="text"
-                ng-model="model.loginData.login"
-                id="login_{{model.identifier}}"
-                name="login"
-                ng-disabled="authInProgress"
-                placeholder="0000 0000 0000 0000"
-                mask="9999 9999 9999 9999"
-                clean="true"
-                validate="false"
-                restrict="reject"
-                required>
+        <form-group ng-if="model.identifier === IDENTIFIERS.card" label-text="{{'identifiers.' + model.identifier | translate}}">
+            <input type="text" ng-model="model.loginData.login" id="lmx-login_{{model.identifier}}" name="login" ng-disabled="authInProgress" placeholder="0000 0000 0000 0000" mask="9999 9999 9999 9999" clean="true" validate="false" restrict="reject" required="">
         </form-group>
         <form-group label-text="{{'authentication.password' | translate}}">
-            <input
-                type="password"
-                ng-model="model.loginData.password"
-                id="password"
-                name="password"
-                ng-disabled="authInProgress"
-                required>
+            <input type="password" ng-model="model.loginData.password" id="lmx-password" name="password" ng-disabled="authInProgress" required="">
         </form-group>
-        <div class="auth-links row" ng-class="{'invisible': authInProgress}">
-            <div><a ng-click="resetPassword()">{{'authentication.forgotPassword' | translate}}</a></div>
+        <div class="lmx-auth-links lmx-row" ng-class="{'lmx-invisible': authInProgress}">
+            <div><a ng-click="resetPassword()" href="">{{'authentication.forgotPassword' | translate}}</a></div>
             <div><a href="#registration">{{'authentication.register' | translate}}</a></div>
         </div>
-        <form-group ng-if=":: reCaptcha && !reCaptcha.isInvisible" class="reCaptcha-container">
+        <form-group ng-if=":: reCaptcha && !reCaptcha.isInvisible" class="lmx-reCaptcha-container">
             <!-- Классическая reCAPTCHA v2 -->
             <!-- Без required="false" пустая модель валидна, а с ним - нет, хотя казалось бы..  (ಠ__ಠ) -->
-            <div
-                vc-recaptcha
-                ng-hide="authInProgress"
-                ng-model="reCaptchaResponse.value"
-                id="reCaptcha" name="reCaptcha"
-                key="reCaptcha.siteKey"
-                on-expire="resetReCaptcha()"
-                on-error="errorReCaptcha()"
-                required="false"
-                required-message="{{'reCaptcha.required' | translate}}"
-                lang="ru"
-            ></div>
+            <div vc-recaptcha="" ng-hide="authInProgress" ng-model="reCaptchaResponse.value" id="lmx-reCaptcha" name="reCaptcha" key="reCaptcha.siteKey" on-expire="resetReCaptcha()" on-error="errorReCaptcha()" required="false" required-message="{{'reCaptcha.required' | translate}}" lang="ru"></div>
         </form-group>
-        <div class="btn-container">
+        <div class="lmx-btn-container">
             <button type="submit" ng-hide="authInProgress">{{'authentication.login' | translate}}</button>
 
-            <inline-loader line>authInProgress</inline-loader>
+            <inline-loader line="">authInProgress</inline-loader>
         </div>
         <lmx-social ng-hide="authInProgress"></lmx-social>
     </form>
 
     <!-- Invisible reCAPTCHA v2 -->
-    <div
-        vc-recaptcha
-        ng-if=":: reCaptcha && reCaptcha.isInvisible"
-        key="reCaptcha.siteKey"
-        size="invisible"
-        badge="bottomleft"
-        on-success="requestLogin(response)"
-        on-expire="resetReCaptcha()"
-        on-error="errorReCaptcha()"
-        lang="ru"
-    ></div>
+    <div vc-recaptcha="" ng-if=":: reCaptcha && reCaptcha.isInvisible" key="reCaptcha.siteKey" size="invisible" badge="bottomleft" on-success="requestLogin(response)" on-expire="resetReCaptcha()" on-error="errorReCaptcha()" lang="ru"></div>
 </div>

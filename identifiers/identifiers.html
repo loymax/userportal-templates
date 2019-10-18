@@ -1,15 +1,8 @@
-﻿<div>
-    <div class="identifier-types row" ng-if=":: identifiers.length > 1">
-         <div class="identifier-type-radio" ng-repeat="identifier in identifiers track by $index">
-             <input
-                    type="radio"
-                    ng-model="model.currentIdentifier"
-                    value="{{identifier}}"
-                    id="{{identifier}}"
-                    ng-disabled="authInProgress"
-                    name="{{identifier}}"
-                >
-                <label for="{{identifier}}">{{'identifiers.' + identifier | translate}}</label>
+<div>
+    <div class="lmx-identifier-types lmx-row" ng-if=":: identifiers.length > 1">
+         <div class="lmx-identifier-type-radio" ng-repeat="identifier in identifiers track by $index">
+             <input type="radio" ng-model="model.currentIdentifier" value="{{identifier}}" id="lmx-{{identifier}}" ng-disabled="authInProgress" name="{{identifier}}">
+                <label for="lmx-{{identifier}}">{{'identifiers.' + identifier | translate}}</label>
             </div>
     </div>
 </div>

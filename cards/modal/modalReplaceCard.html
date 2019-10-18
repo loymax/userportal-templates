@@ -1,31 +1,21 @@
-﻿<div class="replace-card-modal">
+<div class="lmx-replace-card-modal">
     <div class="modal-header">
         <h2>{{'cards.replaceCardModal.title' | translate}}</h2>
     </div>
     <notifications area="cardModal"></notifications>
-    <form novalidate name="replaceCardForm" ng-submit="replaceCardForm.$valid && replaceCard()">
+    <form novalidate="" name="replaceCardForm" ng-submit="replaceCardForm.$valid && replaceCard()">
         <div class="modal-content-wrapper">
             <div class="modal-body">
                 <form-group label-text="{{'cards.replaceCardModal.cardNumber' | translate}}">
-                    <input type="text"
-                           ng-model="model.cardNumber"
-                           ng-disabled="inProgress"
-                           id="cardNumber" name="cardNumber"
-                           required
-                           autofocus>
+                    <input type="text" ng-model="model.cardNumber" ng-disabled="inProgress" id="lmx-cardNumber" name="cardNumber" required="" autofocus="">
                 </form-group>
                 <form-group label-text="{{'cards.replaceCardModal.password' | translate}}">
-                    <input type="password"
-                           ng-model="model.password"
-                           ng-disabled="inProgress"
-                           id="password" name="password"
-                           autocomplete="off"
-                           required>
+                    <input type="password" ng-model="model.password" ng-disabled="inProgress" id="lmx-password" name="password" autocomplete="off" required="">
                 </form-group>
             </div>
-            <div class="modal-footer btn-container">
+            <div class="modal-footer lmx-btn-container">
                 <div ng-hide="inProgress">
-                    <button class="btn-cancel" ng-click="cancel()" type="button">
+                    <button class="lmx-btn-cancel" ng-click="cancel()" type="button">
                         {{'buttons.cancel' | translate}}
                     </button>
                     <button type="submit">

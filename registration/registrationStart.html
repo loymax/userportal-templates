@@ -1,117 +1,52 @@
-﻿<div class="registration-start">
+<div class="lmx-registration-start">
     <h2>{{'registration.title' | translate}}</h2>
     <notifications area="registration"></notifications>
     <div loader="acceptTenderOfferByCheck && (isOfferAndAgreementLoaded === undefined)">
-        <identifiers ng-if=":: identifiers.arr !== undefined"
-                     identifiers="identifiers.arr"
-                     ng-model="model.identifier"
-                     ng-change="resetFormModels(registrationForm)"
-        ></identifiers>
-        <form
-            novalidate
-            name="registrationForm"
-            ng-submit="registrationForm.$valid && registration(registrationForm)"
-            id="registrationForm"
-            ng-hide="acceptTenderOfferByCheck && (isOfferAndAgreementLoaded === undefined)"
-        >
-            <form-group
-                    ng-if="!tokenForSocialRegistration && model.identifier === IDENTIFIERS.phone"
-                    label-text="{{'identifiers.' + model.identifier | translate}}"
-                    ng-class=":: {'required': referralRegistration}"
-            >
-                <phone-input
-                        ng-model="registrationData.login"
-                        id="login_{{model.identifier}}" name="login"
-                        ng-disabled="inProgress || authInProgress || actionsInProgress"
-                        required
-                        autofocus></phone-input>
+        <identifiers ng-if=":: identifiers.arr !== undefined" identifiers="identifiers.arr" ng-model="model.identifier" ng-change="resetFormModels(registrationForm)"></identifiers>
+        <form novalidate="" name="registrationForm" ng-submit="registrationForm.$valid && registration(registrationForm)" id="lmx-registrationForm" ng-hide="acceptTenderOfferByCheck && (isOfferAndAgreementLoaded === undefined)">
+            <form-group ng-if="!tokenForSocialRegistration && model.identifier === IDENTIFIERS.phone" label-text="{{'identifiers.' + model.identifier | translate}}" ng-class="::{'lmx-required': referralRegistration}">
+                <phone-input ng-model="registrationData.login" id="lmx-login_{{model.identifier}}" name="login" ng-disabled="inProgress || authInProgress || actionsInProgress" required="" autofocus=""></phone-input>
             </form-group>
-            <div class="hint input-hint" ng-if="!tokenForSocialRegistration && model.identifier === IDENTIFIERS.phone">
+            <div class="lmx-hint lmx-input-hint" ng-if="!tokenForSocialRegistration && model.identifier === IDENTIFIERS.phone">
                 <p ng-bind-html="'registration.phoneHint' | translate"></p>
             </div>
-            <form-group
-                    ng-if="!tokenForSocialRegistration && model.identifier === IDENTIFIERS.card"
-                    label-text="{{'identifiers.' + model.identifier | translate}}"
-                    ng-class=":: {'required': referralRegistration}"
-            >
-                <input
-                        type="text"
-                        ng-model="registrationData.login"
-                        id="login_{{model.identifier}}"
-                        name="login"
-                        ng-disabled="inProgress || authInProgress || actionsInProgress"
-                        placeholder="0000 0000 0000 0000"
-                        mask="9999 9999 9999 9999"
-                        clean="true"
-                        validate="false"
-                        restrict="reject"
-                        required>
+            <form-group ng-if="!tokenForSocialRegistration && model.identifier === IDENTIFIERS.card" label-text="{{'identifiers.' + model.identifier | translate}}" ng-class="::{'lmx-required': referralRegistration}">
+                <input type="text" ng-model="registrationData.login" id="lmx-login_{{model.identifier}}" name="login" ng-disabled="inProgress || authInProgress || actionsInProgress" placeholder="0000 0000 0000 0000" mask="9999 9999 9999 9999" clean="true" validate="false" restrict="reject" required="">
             </form-group>
 
             <div ng-if="passwordRequired">
                 <form-group label-text="{{'registration.password' | translate}}">
-                    <input
-                        type="password"
-                        ng-model="registrationData.password"
-                        id="password" name="password"
-                        ng-disabled="authInProgress || actionsInProgress"
-                        required
-                    >
+                    <input type="password" ng-model="registrationData.password" id="lmx-password" name="password" ng-disabled="authInProgress || actionsInProgress" required="">
                 </form-group>
-                <div class="hint input-hint margin-bottom">
+                <div class="lmx-hint lmx-input-hint lmx-margin-bottom">
                     <p>
                         <span ng-if=":: registrationSmsCodeAsPassword" ng-bind-html="'registration.codeHint' | translate"></span>
-                        <a ng-click="resetPassword()">{{'registration.forgotPassword' | translate}}</a>
+                        <a ng-click="resetPassword()" href="">{{'registration.forgotPassword' | translate}}</a>
                     </p>
                 </div>
             </div>
 
             <form-group ng-if=":: referralRegistration" label-text="{{'registration.referrerCardNumber' | translate}}">
-                <input
-                    type="text"
-                    ng-model="referrerCardNumber.value"
-                    ng-disabled="authInProgress || actionsInProgress"
-                    name="referrerCardNumber"
-                    id="referrerCardNumber"
-                >
+                <input type="text" ng-model="referrerCardNumber.value" ng-disabled="authInProgress || actionsInProgress" name="referrerCardNumber" id="lmx-referrerCardNumber">
             </form-group>
             <form-group ng-if="acceptTenderOfferByCheck">
-                <input
-                    type="checkbox"
-                    id="userAgreesWithOfferByCheck"
-                    name="userAgreesWithOfferByCheck"
-                    ng-model="offer"
-                    ng-disabled="!isOfferAndAgreementLoaded || authInProgress || actionsInProgress"
-                    required
-                >
-                <label for="userAgreesWithOfferByCheck">
+                <input type="checkbox" id="lmx-userAgreesWithOfferByCheck" name="userAgreesWithOfferByCheck" ng-model="offer" ng-disabled="!isOfferAndAgreementLoaded || authInProgress || actionsInProgress" required="">
+                <label for="lmx-userAgreesWithOfferByCheck">
                     {{'registration.offerAccept' | translate}} <a target="_blank" href="{{apiHost}}api/Files/{{::offerPdfFileId}}">{{'registration.tenderOffer' | translate}}</a>
                 </label>
             </form-group>
             <form-group ng-if="acceptTenderOfferByCheck">
-                <input
-                    type="checkbox"
-                    id="userAgreesWithPDPByCheck"
-                    name="userAgreesWithPDPByCheck"
-                    ng-model="agreement"
-                    ng-disabled="!isOfferAndAgreementLoaded || authInProgress || actionsInProgress"
-                    required
-                >
-                <label for="userAgreesWithPDPByCheck">
+                <input type="checkbox" id="lmx-userAgreesWithPDPByCheck" name="userAgreesWithPDPByCheck" ng-model="agreement" ng-disabled="!isOfferAndAgreementLoaded || authInProgress || actionsInProgress" required="">
+                <label for="lmx-userAgreesWithPDPByCheck">
                     {{'registration.opdAgree' | translate}}
                     <a target="_blank" href="{{apiHost}}api/Files/{{::opdAgreementFileId}}">{{'registration.opd' | translate}}</a>
                 </label>
             </form-group>
-            <div class="btn-container">
-                <button
-                    type="submit"
-                    ng-hide="authInProgress || actionsInProgress"
-                    ng-disabled="acceptTenderOfferByCheck && !isOfferAndAgreementLoaded"
-                    id="registration-phone__submit"
-                >
+            <div class="lmx-btn-container">
+                <button type="submit" ng-hide="authInProgress || actionsInProgress" ng-disabled="acceptTenderOfferByCheck && !isOfferAndAgreementLoaded" id="lmx-registration-phone__submit">
                     {{'registration.register' | translate}}
                 </button>
-                <inline-loader line>authInProgress || actionsInProgress</inline-loader>
+                <inline-loader line="">authInProgress || actionsInProgress</inline-loader>
             </div>
             <lmx-social ng-hide="authInProgress || actionsInProgress"></lmx-social>
         </form>

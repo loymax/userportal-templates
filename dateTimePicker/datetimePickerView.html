@@ -1,18 +1,6 @@
 <span class="date-picker-wrap" outside-click="toggleCalendar($event, false)">
     <div class="toggler glyphicon glyphicon-calendar" ng-click="toggleCalendar($event)"></div>
 
-    <input type="text"
-           ng-if=":: timepickerOptions"
-           ng-class="inputClass"
-           datetime-picker="{{dateFormat}}"
-           ng-model="model"
-           ng-keyup="checkModel($event)"
-           ng-model-options="modelOptions"
-           button-bar="buttonsOptions"
-           initial-picker="date"
-           re-open-default="date"
-           datepicker-options="{showWeeks:false}"
-           timepicker-options="timepickerOptions"
-           is-open="isOpen"/>
+    <input type="text" ng-if=":: timepickerOptions" ng-class="'lmx-'+inputClass" datetime-picker="{{dateFormat}}" ng-model="model" ng-keyup="checkModel($event)" ng-model-options="modelOptions" button-bar="buttonsOptions" initial-picker="date" re-open-default="date" datepicker-options="{showWeeks:false}" timepicker-options="timepickerOptions" is-open="isOpen">
 
 </span>

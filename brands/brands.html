@@ -1,21 +1,16 @@
-﻿<div>
-    <div class="container brands" ng-if="!appLocationParts[1]">
+<div>
+    <div class="lmx-container lmx-brands" ng-if="!appLocationParts[1]">
         <section>
             <h2>{{'brands.title' | translate}}</h2>
             <div loader="inProgress">
                 <!-- TODO width: 400px; height: 400px; -->
-                <div class="card" style="width: 400px; height: 400px;"
-                     ng-repeat="brand in brands track by brand.id" ng-click="changeLocation('brands/' + brand.id)">
+                <div class="lmx-card" style="width: 400px; height: 400px;" ng-repeat="brand in brands track by brand.id" ng-click="changeLocation('brands/' + brand.id)">
                     <div>
-                        <img ng-src="{{:: brand.imgUrl}}"
-                             fallback-image
-                             fallback-title="{{'imageNotFound' | translate}}"
-                             alt=""
-                             style="height: 250px; padding: 10px">
+                        <img ng-src="{{:: brand.imgUrl}}" fallback-image="" fallback-title="{{'imageNotFound' | translate}}" alt="" style="height: 250px; padding: 10px">
                     </div>
-                    <div class="card-content">
-                        <span class="card-title">{{:: brand.name}}</span>
-                        <div class="description">{{::brand.description}}</div>
+                    <div class="lmx-card-content">
+                        <span class="lmx-card-title">{{:: brand.name}}</span>
+                        <div class="lmx-description">{{::brand.description}}</div>
                     </div>
                 </div>
             </div>

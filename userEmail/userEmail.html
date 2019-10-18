@@ -1,4 +1,4 @@
-﻿<div class="user-email row">
+<div class="lmx-user-email lmx-row">
     <div ng-if=":: registration">
         <h2>
             {{'registration.emailStep.' + (step === 1 ? 'emailTitle' : 'codeTitle') | translate}}
@@ -6,80 +6,67 @@
         <notifications area="registration"></notifications>
     </div>
     <div loader="isChangeProcessStarted === undefined">
-        <div ng-if="isChangeProcessStarted === false" class="settings-line">
+        <div ng-if="isChangeProcessStarted === false" class="lmx-settings-line">
             <h3>Email</h3>
             <notifications area="userEmail"></notifications>
-            <div class="current-value-container">
-                <div class="current-value">{{:: currentEmail}}</div>
+            <div class="lmx-current-value-container">
+                <div class="lmx-current-value">{{:: currentEmail}}</div>
                 <div>
-                    <a ng-click="openForm()" class="pseudolink">{{'buttons.change'|translate}}</a>
+                    <a ng-click="openForm()" class="lmx-pseudolink" href="">{{'buttons.change'|translate}}</a>
                 </div>
             </div>
         </div>
-        <div ng-if="isChangeProcessStarted" class="user-email-changing">
+        <div ng-if="isChangeProcessStarted" class="lmx-user-email-changing">
             <div ng-if=":: !registration">
                 <h3>Email</h3>
                 <notifications area="userEmail"></notifications>
             </div>
-            <form novalidate name="form" ng-submit="form.$valid && next(form)">
+            <form novalidate="" name="form" ng-submit="form.$valid && next(form)">
 
                 <div ng-if="step === 1">
-                    <div ng-if=":: !registration" class="hint">
+                    <div ng-if=":: !registration" class="lmx-hint">
                         <p ng-bind-html="'contacts.userEmail.emailHint' | translate"></p>
                     </div>
 
                     <form-group label-text="{{(registration ? 'registration.emailStep' : 'contacts.userEmail') + '.email' | translate}}">
-                        <input type="email"
-                               ng-model="model.newEmail"
-                               name="email"
-                               id="newEmail"
-                               ng-disabled="loader.inProgress"
-                               required
-                               autofocus>
+                        <input type="email" ng-model="model.newEmail" name="email" id="lmx-newEmail" ng-disabled="loader.inProgress" required="" autofocus="">
                     </form-group>
 
-                    <div ng-if="emailSkippable" class="margin-bottom">
-                        <a ng-click="skipStep()">{{'registration.emailStep.skipEmailStep' | translate}}</a>
+                    <div ng-if="emailSkippable" class="lmx-margin-bottom">
+                        <a ng-click="skipStep()" href="">{{'registration.emailStep.skipEmailStep' | translate}}</a>
                     </div>
                 </div>
 
                 <div ng-if="step === 2">
-                    <div class="hint" ng-switch=":: !!registration">
+                    <div class="lmx-hint" ng-switch=":: !!registration">
                         <p ng-switch-when="true">{{'registration.emailStep.codeHint' | translate}}</p>
                         <p ng-switch-when="false" ng-bind-html="('contacts.userEmail.codeHint' | translate) + ' <strong>' + newEmail + '</strong>'"></p>
                     </div>
 
                     <form-group label-text="{{(registration ? 'registration.emailStep' : 'contacts.userEmail') + '.confirmationCode' | translate}}">
-                        <input type="text"
-                               ng-model="model.confirmationCode"
-                               name="confirmcode"
-                               id="confirmationCode"
-                               integer
-                               ng-disabled="loader.inProgress"
-                               required
-                               autofocus>
+                        <input type="text" ng-model="model.confirmationCode" name="confirmcode" id="lmx-confirmationCode" integer="" ng-disabled="loader.inProgress" required="" autofocus="">
                     </form-group>
 
-                    <div ng-if="emailSkippable" class="margin-bottom">
-                        <a ng-click="skipStep()">{{'registration.emailStep.skipCodeStep' | translate}}</a>
+                    <div ng-if="emailSkippable" class="lmx-margin-bottom">
+                        <a ng-click="skipStep()" href="">{{'registration.emailStep.skipCodeStep' | translate}}</a>
                     </div>
 
-                    <div class="margin-bottom" ng-hide="loader.inProgress">
-                        <a ng-click="reSendCode()" id="changeEmail-resend">
+                    <div class="lmx-margin-bottom" ng-hide="loader.inProgress">
+                        <a ng-click="reSendCode()" id="lmx-changeEmail-resend" href="">
                             {{(registration ? 'registration.emailStep' : 'contacts.userEmail') + '.sendConfirmCode' | translate}}
                         </a><br>
-                        <a ng-click="reEnterEmail(form)" id="changeEmail-reenter">
+                        <a ng-click="reEnterEmail(form)" id="lmx-changeEmail-reenter" href="">
                             {{(registration ? 'registration.emailStep' : 'contacts.userEmail') + '.resetEmail' | translate}}
                         </a>
                     </div>
                 </div>
-                <div class="btn-container">
-                    <inline-loader line>loader.inProgress</inline-loader>
+                <div class="lmx-btn-container">
+                    <inline-loader line="">loader.inProgress</inline-loader>
                     <div ng-hide="loader.inProgress">
-                        <button type="button" ng-click="closeForm()" class="btn-cancel" id="changeEmail-cancel">
+                        <button type="button" ng-click="closeForm()" class="lmx-btn-cancel" id="lmx-changeEmail-cancel">
                             {{'buttons.cancel' | translate}}
                         </button>
-                        <button type="submit" id="changeEmail-continue">
+                        <button type="submit" id="lmx-changeEmail-continue">
                             {{'buttons.next' | translate}}
                         </button>
                     </div>

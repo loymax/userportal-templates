@@ -1,12 +1,12 @@
-﻿<div class="container options">
+<div class="lmx-container lmx-options">
     <section>
         <h2>Параметры сайта</h2>
 
         <table>
             <tr>
                 <td>
-                    <input type="text" id="api" ng-model="api"/>
-                    <label for="api">API</label>
+                    <input type="text" id="lmx-api" ng-model="api">
+                    <label for="lmx-api">API</label>
                 </td>
                 <td>
                     <button type="button" ng-click="saveConfiguration('host', api)">{{'buttons.save' | translate}}</button>
@@ -14,8 +14,8 @@
             </tr>
             <tr>
                 <td>
-                    <input type="text" id="showcaseApi" ng-model="showcaseApi"/>
-                    <label for="showcaseApi">ShowcaseAPI</label>
+                    <input type="text" id="lmx-showcaseApi" ng-model="showcaseApi">
+                    <label for="lmx-showcaseApi">ShowcaseAPI</label>
                 </td>
                 <td>
                     <button type="button" ng-click="saveConfiguration('showcaseHost', showcaseApi)">{{'buttons.save' | translate}}</button>
@@ -23,8 +23,8 @@
             </tr>
             <tr>
                 <td>
-                    <input type="text" id="locales" ng-model="locales" required />
-                    <label for="locales">Локализации</label>
+                    <input type="text" id="lmx-locales" ng-model="locales" required="">
+                    <label for="lmx-locales">Локализации</label>
                 </td>
                 <td>
                     <button type="button" ng-click="saveConfiguration('locales', locales)">{{'buttons.save' | translate}}</button>
@@ -32,8 +32,8 @@
             </tr>
             <tr>
                 <td>
-                    <input type="text" id="reCaptchaSiteKey" ng-model="reCaptchaSiteKey"/>
-                    <label for="reCaptchaSiteKey">reCaptchaSiteKey</label>
+                    <input type="text" id="lmx-reCaptchaSiteKey" ng-model="reCaptchaSiteKey">
+                    <label for="lmx-reCaptchaSiteKey">reCaptchaSiteKey</label>
                 </td>
                 <td>
                     <button type="button" ng-click="saveConfiguration('reCaptchaSiteKey', reCaptchaSiteKey)">{{'buttons.save' | translate}}</button>
@@ -41,8 +41,8 @@
             </tr>
             <tr>
                 <td>
-                    <input type="text" id="reCaptchaType" ng-model="reCaptchaType"/>
-                    <label for="reCaptchaType">reCaptchaType</label>
+                    <input type="text" id="lmx-reCaptchaType" ng-model="reCaptchaType">
+                    <label for="lmx-reCaptchaType">reCaptchaType</label>
                 </td>
                 <td>
                     <button type="button" ng-click="saveConfiguration('reCaptchaType', reCaptchaType)">{{'buttons.save' | translate}}</button>
@@ -50,8 +50,8 @@
             </tr>
             <tr>
                 <td>
-                    <input type="text" id="oAuthClientId" ng-model="oAuthClientId"/>
-                    <label ng-class="{'active': oAuthClientId}" for="oAuthClientId">oAuthClientId</label>
+                    <input type="text" id="lmx-oAuthClientId" ng-model="oAuthClientId">
+                    <label ng-class="{'active': oAuthClientId}" for="lmx-oAuthClientId">oAuthClientId</label>
                 </td>
                 <td>
                     <button type="button" ng-click="saveConfiguration('oAuthClientId', oAuthClientId)">{{'buttons.save' | translate}}</button>
@@ -66,18 +66,8 @@
                 <tr ng-repeat="(key, value) in options">
                     <td>{{key}}</td>
                     <td ng-init="inputType = getType(value)" ng-switch="inputType">
-                        <textarea
-                            ng-switch-when="textarea"
-                            ng-attr-id="{{key}}"
-                            readonly
-                        >{{options[key] | json}}</textarea>
-                        <input
-                            ng-switch-default
-                            ng-attr-id="{{key}}"
-                            ng-attr-type="{{inputType}}"
-                            ng-class="getClass(value)"
-                            ng-model="options[key]"
-                        />
+                        <textarea ng-switch-when="textarea" ng-attr-id="{{key}}" readonly="">{{options[key] | json}}</textarea>
+                        <input ng-switch-default="" ng-attr-id="{{key}}" ng-attr-type="{{inputType}}" ng-class="'lmx-'+getClass(value)" ng-model="options[key]">
                         <label ng-attr-for="{{key}}"></label>
                     </td>
                     <td>{{optionsNames[key]}}</td>

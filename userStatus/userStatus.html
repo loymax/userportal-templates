@@ -1,6 +1,6 @@
-<div class="container user-status-container">
+<div class="lmx-container lmx-user-status-container">
     <section>
-        <dt class="user-status__name">
+        <dt class="lmx-user-status__name">
             <a ng-href="{{:: baseUrl}}#personal">
                 <span>{{:: userInfo.lastName}}</span>
                 <span>{{:: userInfo.firstName}}</span>
@@ -8,30 +8,26 @@
             </a>
         </dt>
 
-        <div class="current-user-status">
+        <div class="lmx-current-user-status">
             <div ng-repeat="status in userStatus.statuses track by $index" ng-if=":: status.isCurrent">
-                <dl class="user-status">
+                <dl class="lmx-user-status">
                     <dt>{{:: 'status.currentLevel' | translate}}:</dt>
                     <dd>{{:: status.name}}</dd>
                 </dl>
-                <dl class="user-status">
+                <dl class="lmx-user-status">
                     <dt>{{:: 'status.countMeetcoin' | translate}}:</dt>
                     <dd>{{:: userStatus.balance}}</dd>
                 </dl>
             </div>
-            <div ng-repeat="status in userStatus.statuses track by $index"
-                 ng-if=":: status.amountToThisLevel === 0 && ($index === userStatus.statuses.length - 1 || userStatus.statuses[$index + 1].amountToThisLevel > 0)"
-                 ng-init="currentLevelNextMonth = {name: status.name}">
-                <dl class="user-status">
+            <div ng-repeat="status in userStatus.statuses track by $index" ng-if=":: status.amountToThisLevel === 0 && ($index === userStatus.statuses.length - 1 || userStatus.statuses[$index + 1].amountToThisLevel > 0)" ng-init="currentLevelNextMonth = {name: status.name}">
+                <dl class="lmx-user-status">
                     <dt>
                         {{:: 'status.currentLevelNextMonth' | translate}}
                         "{{:: currentLevelNextMonth.name}}"
                         {{:: 'status.necessaryForNextLevel.nextLevel' | translate | lowercase}}
                     </dt>
                 </dl>
-                <dl ng-if=":: status.amountToThisLevel === 0 && userStatus.statuses[$index + 1].amountToThisLevel > 0 && $index !== userStatus.statuses.length - 1"
-                    ng-init="nextStatus = {amountToNextLevel: userStatus.statuses[$index + 1].amountToThisLevel, nextLevelName: userStatus.statuses[$index + 1].name}"
-                    class="user-status">
+                <dl ng-if=":: status.amountToThisLevel === 0 && userStatus.statuses[$index + 1].amountToThisLevel > 0 && $index !== userStatus.statuses.length - 1" ng-init="nextStatus = {amountToNextLevel: userStatus.statuses[$index + 1].amountToThisLevel, nextLevelName: userStatus.statuses[$index + 1].name}" class="lmx-user-status">
                     <dt>
                         {{:: 'status.necessaryForNextLevel.necessary' | translate}}
                         {{:: nextStatus.amountToNextLevel}}
@@ -42,7 +38,7 @@
                 </dl>
             </div>
         </div>
-        <dl class="user-status">
+        <dl class="lmx-user-status">
             <dt>{{:: 'status.countBonuses' | translate}}:</dt>
             <dd>{{:: userInfo.balanceAccounts[0].balance}}</dd>
         </dl>

@@ -1,41 +1,35 @@
-﻿<div class="container feedback">
+<div class="lmx-container lmx-feedback">
     <section>
         <h2>{{'feedback.title' | translate}}</h2>
         <notifications area="feedback"></notifications>
 
         <div loader="inProgress && messages === undefined">
             <div ng-show="!inProgress || messages !== undefined">
-                <div class="hint">
+                <div class="lmx-hint">
                     <p>{{'feedback.askQuestion' | translate}}:</p>
                 </div>
 
-                <form novalidate name="feedbackForm" ng-submit="feedbackForm.$valid && send(feedbackForm)">
+                <form novalidate="" name="feedbackForm" ng-submit="feedbackForm.$valid && send(feedbackForm)">
                     <form-group>
-                        <textarea
-                            ng-disabled="sendInProgress"
-                            id="msgTextarea" name="msgTextarea"
-                            ng-model="messageModel.text"
-                            placeholder="{{'feedback.typeText' | translate}}"
-                            required
-                        >
+                        <textarea ng-disabled="sendInProgress" id="lmx-msgTextarea" name="msgTextarea" ng-model="messageModel.text" placeholder="{{'feedback.typeText' | translate}}" required="">
                         </textarea>
                     </form-group>
 
-                    <inline-loader line>sendInProgress</inline-loader>
+                    <inline-loader line="">sendInProgress</inline-loader>
 
-                    <div class="file-input-and-submitter clearfix margin-bottom" ng-if="!sendInProgress">
-                        <file-input ng-model="messageModel.attachment" class="left"></file-input>
-                        <button type="submit" class="right row">{{'buttons.send' | translate}}</button>
+                    <div class="lmx-file-input-and-submitter lmx-clearfix lmx-margin-bottom" ng-if="!sendInProgress">
+                        <file-input ng-model="messageModel.attachment" class="lmx-left"></file-input>
+                        <button type="submit" class="lmx-right lmx-row">{{'buttons.send' | translate}}</button>
                     </div>
                 </form>
 
-                <div class="message-history" loader="sendInProgress || inProgress">
+                <div class="lmx-message-history" loader="sendInProgress || inProgress">
                     <lmx-scroller>
-                        <div class="chat-message-line clearfix" ng-repeat="item in messages track by item.message.id">
-                            <div ng-class="{'outcoming': item.isUserMessage}" class="chat-message">
-                                <div class="from">{{'feedback.' + (item.isUserMessage ? 'you' : 'operator') | translate}}</div>
-                                <div class="text">{{::item.message.message}}</div>
-                                <div class="file-name" ng-if="item.message.fileName">{{'feedback.file' | translate}}: {{::item.message.fileName}}
+                        <div class="lmx-chat-message-line lmx-clearfix" ng-repeat="item in messages track by item.message.id">
+                            <div ng-class="{'lmx-outcoming': item.isUserMessage}" class="lmx-chat-message">
+                                <div class="lmx-from">{{'feedback.' + (item.isUserMessage ? 'you' : 'operator') | translate}}</div>
+                                <div class="lmx-text">{{::item.message.message}}</div>
+                                <div class="lmx-file-name" ng-if="item.message.fileName">{{'feedback.file' | translate}}: {{::item.message.fileName}}
                                 </div>
                                 <div class="date">{{::item.message.dateTime | toUTC | shortDateTime}}</div>
                             </div>

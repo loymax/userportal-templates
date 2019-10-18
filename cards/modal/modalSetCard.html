@@ -1,25 +1,20 @@
-<div class="set-card-modal">
+<div class="lmx-set-card-modal">
     <div class="modal-header">
         <h2>{{'cards.setCardModal.title' | translate}}</h2>
     </div>
 
     <notifications area="cardModal"></notifications>
 
-    <form novalidate name="setCardForm" ng-submit="setCardForm.$valid && setCard()">
+    <form novalidate="" name="setCardForm" ng-submit="setCardForm.$valid && setCard()">
         <div class="modal-content-wrapper">
             <div class="modal-body">
                 <form-group label-text="{{'cards.setCardModal.cardNumber' | translate}}">
-                    <input type="text"
-                        ng-model="model.cardNumber"
-                        ng-disabled="inProgress"
-                        id="cardNumber" name="cardNumber"
-                        required
-                        autofocus>
+                    <input type="text" ng-model="model.cardNumber" ng-disabled="inProgress" id="lmx-cardNumber" name="cardNumber" required="" autofocus="">
                 </form-group>
             </div>
-            <div class="modal-footer btn-container">
+            <div class="modal-footer lmx-btn-container">
                 <div ng-hide="inProgress">
-                    <button class="btn-cancel" ng-click="cancel()" type="button">
+                    <button class="lmx-btn-cancel" ng-click="cancel()" type="button">
                         {{'buttons.cancel' | translate}}
                     </button>
                     <button type="submit">

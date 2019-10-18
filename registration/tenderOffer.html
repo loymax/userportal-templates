@@ -1,53 +1,36 @@
-﻿<div class="tenter-offer">
+<div class="lmx-tenter-offer">
     <h2>{{'registration.tenderOfferStep.title' | translate}}</h2>
     <notifications area="registration"></notifications>
-    <form novalidate
-          name="acceptTenderOfferForm"
-          ng-submit="acceptTenderOfferForm.$valid && isOfferAndAgreementLoaded && acceptTenderOffer()"
-          loader="inProgress || (isOfferAndAgreementLoaded === undefined)">
-        <lmx-scroller class="margin-bottom">
-            <div class="tender-offer-content" ng-bind-html="tenderOfferFile"></div>
+    <form novalidate="" name="acceptTenderOfferForm" ng-submit="acceptTenderOfferForm.$valid && isOfferAndAgreementLoaded && acceptTenderOffer()" loader="inProgress || (isOfferAndAgreementLoaded === undefined)">
+        <lmx-scroller class="lmx-margin-bottom">
+            <div class="lmx-tender-offer-content" ng-bind-html="tenderOfferFile"></div>
         </lmx-scroller>
 
         <form-group>
-            <input
-                type="checkbox"
-                id="userAgreesWithOffer"
-                name="userAgreesWithOffer"
-                ng-model="offer"
-                ng-disabled="stepInProgress"
-                required
-            >
-            <label for="userAgreesWithOffer" ng-if="isOfferAndAgreementLoaded">
+            <input type="checkbox" id="lmx-userAgreesWithOffer" name="userAgreesWithOffer" ng-model="offer" ng-disabled="stepInProgress" required="">
+            <label for="lmx-userAgreesWithOffer" ng-if="isOfferAndAgreementLoaded">
                 {{'registration.tenderOfferStep.offerAccept' | translate}}
             </label>
         </form-group>
 
         <form-group>
-            <input
-                type="checkbox"
-                id="userAgreesWithPDP"
-                name="userAgreesWithPDP"
-                ng-model="agreement"
-                ng-disabled="stepInProgress"
-                required
-            >
-            <label for="userAgreesWithPDP" ng-if="isOfferAndAgreementLoaded">
+            <input type="checkbox" id="lmx-userAgreesWithPDP" name="userAgreesWithPDP" ng-model="agreement" ng-disabled="stepInProgress" required="">
+            <label for="lmx-userAgreesWithPDP" ng-if="isOfferAndAgreementLoaded">
                 {{'registration.tenderOfferStep.opdAccept' | translate}}
                 <a target="_blank" href="{{apiHost}}api/Files/{{::opdAgreementFileId}}">{{'registration.tenderOfferStep.opd' | translate}}</a>.
             </label>
         </form-group>
 
-        <div class="btn-container" ng-hide="inProgress || (isOfferAndAgreementLoaded === undefined)">
+        <div class="lmx-btn-container" ng-hide="inProgress || (isOfferAndAgreementLoaded === undefined)">
             <div ng-hide="stepInProgress">
-                <button type="button" ng-click="cancel()" id="registration-offer__cancel">
+                <button type="button" ng-click="cancel()" id="lmx-registration-offer__cancel">
                     {{'buttons.cancel' | translate}}
                 </button>
-                <button type="submit" ng-disabled="!isOfferAndAgreementLoaded" id="registration-offer__submit">
+                <button type="submit" ng-disabled="!isOfferAndAgreementLoaded" id="lmx-registration-offer__submit">
                     {{'buttons.accept' | translate}}
                 </button>
             </div>
-            <inline-loader line>stepInProgress</inline-loader>
+            <inline-loader line="">stepInProgress</inline-loader>
         </div>
     </form>
 </div>

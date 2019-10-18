@@ -1,12 +1,12 @@
-﻿<div>
-    <div class="container personal-offers" ng-if="!appLocationParts[1]">
+<div>
+    <div class="lmx-container lmx-personal-offers" ng-if="!appLocationParts[1]">
         <h2>{{'personalOffers.title' | translate}}</h2>
         <div loader="inProgress">
-            <div class="margin-bottom" ng-if="!inProgress">
-                <div ng-repeat="personalOffer in personalOffers track by personalOffer.id" class="card">
+            <div class="lmx-margin-bottom" ng-if="!inProgress">
+                <div ng-repeat="personalOffer in personalOffers track by personalOffer.id" class="lmx-card">
                     <personal-offer-content personal-offer="personalOffer"></personal-offer-content>
-                    <div class="card-action clearfix">
-                        <button type="button" ng-click=":: changeLocation('personal-offers/' + personalOffer.id)" class="right">
+                    <div class="lmx-card-action lmx-clearfix">
+                        <button type="button" ng-click=":: changeLocation('personal-offers/' + personalOffer.id)" class="lmx-right">
                             {{'buttons.viewMore' | translate}}
                         </button>
                     </div>

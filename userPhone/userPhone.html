@@ -1,4 +1,4 @@
-﻿<div class="user-phone row">
+<div class="lmx-user-phone lmx-row">
     <div ng-if=":: registration">
         <h2 ng-show=":: isChangeProcessStarted">
             {{'registration.phoneStep.' + (step === 1 ? 'numberTitle' : 'codeTitle') | translate}}
@@ -6,68 +6,57 @@
         <notifications area="registration"></notifications>
     </div>
     <div loader="isChangeProcessStarted === undefined">
-        <div ng-if="isChangeProcessStarted === false" class="settings-line">
+        <div ng-if="isChangeProcessStarted === false" class="lmx-settings-line">
             <h3>{{(registration ? 'registration.phoneStep' : 'contacts.userPhone') + '.phone'|translate}}</h3>
             <notifications area="userPhone"></notifications>
-            <div class="current-value-container">
-                <div class="current-value">{{currentPhoneNumber}}</div>
+            <div class="lmx-current-value-container">
+                <div class="lmx-current-value">{{currentPhoneNumber}}</div>
                 <div>
-                    <a ng-click="openForm()" class="pseudolink">{{'buttons.change'|translate}}</a>
+                    <a ng-click="openForm()" class="lmx-pseudolink" href="">{{'buttons.change'|translate}}</a>
                 </div>
             </div>
         </div>
-        <div ng-if="isChangeProcessStarted" class="user-phone-changing">
+        <div ng-if="isChangeProcessStarted" class="lmx-user-phone-changing">
             <div ng-if=":: !registration">
                 <h3>{{'contacts.userPhone.title' | translate}}</h3>
                 <notifications area="userPhone"></notifications>
             </div>
-            <form novalidate name="form" ng-submit="form.$valid && next(form)">
+            <form novalidate="" name="form" ng-submit="form.$valid && next(form)">
                 <div ng-if="step === 1">
-                    <div class="hint">
+                    <div class="lmx-hint">
                         <p ng-bind-html="(registration ? 'registration.phoneStep' : 'contacts.userPhone') + '.numberHint' | translate"></p>
                     </div>
                     <form-group>
-                        <phone-input
-                            ng-model="model.newPhone"
-                            name="newPhone" id="newPhone"
-                            ng-disabled="loader.inProgress"
-                            required></phone-input>
+                        <phone-input ng-model="model.newPhone" name="newPhone" id="lmx-newPhone" ng-disabled="loader.inProgress" required=""></phone-input>
                     </form-group>
                 </div>
 
                 <div ng-if="step === 2">
-                    <div class="hint">
+                    <div class="lmx-hint">
                         <p ng-bind-html="((registration ? 'registration.phoneStep' : 'contacts.userPhone') + '.codeHint' | translate) + ' <b>' + newPhone + '</b>'"></p>
                     </div>
                     <form-group label-text="{{(registration ? 'registration.phoneStep' : 'contacts.userPhone') + '.confirmationCode' | translate}}">
-                        <input
-                            type="text"
-                            ng-model="model.confirmationCode"
-                            name="confirmationCode"
-                            id="confirmationCode"
-                            ng-disabled="loader.inProgress"
-                            autofocus
-                            required>
+                        <input type="text" ng-model="model.confirmationCode" name="confirmationCode" id="lmx-confirmationCode" ng-disabled="loader.inProgress" autofocus="" required="">
                     </form-group>
-                    <div class="margin-bottom" ng-hide="loader.inProgress">
+                    <div class="lmx-margin-bottom" ng-hide="loader.inProgress">
                         <div>
-                            <a ng-click="reSendCode()" id="changePhone-resendCode">
+                            <a ng-click="reSendCode()" id="lmx-changePhone-resendCode" href="">
                                 {{(registration ? 'registration.phoneStep' : 'contacts.userPhone') + '.sendConfirmCode' | translate}}
                             </a>
                         </div>
                         <div>
-                            <a ng-click="reEnterPhone(form)" id="changePhone-reenterPhone">
+                            <a ng-click="reEnterPhone(form)" id="lmx-changePhone-reenterPhone" href="">
                                 {{(registration ? 'registration.phoneStep' : 'contacts.userPhone') + '.resetPhone' | translate}}
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="btn-container">
-                    <inline-loader line>loader.inProgress</inline-loader>
+                <div class="lmx-btn-container">
+                    <inline-loader line="">loader.inProgress</inline-loader>
                     <div ng-hide="loader.inProgress">
-                        <button type="button" ng-click="closeForm()" class="btn-cancel" id="changePhone-cancel">{{'buttons.cancel' | translate}}</button>
-                        <button type="submit" id="changePhone-submit">{{'buttons.next' | translate}}</button>
+                        <button type="button" ng-click="closeForm()" class="lmx-btn-cancel" id="lmx-changePhone-cancel">{{'buttons.cancel' | translate}}</button>
+                        <button type="submit" id="lmx-changePhone-submit">{{'buttons.next' | translate}}</button>
                     </div>
                 </div>
             </form>

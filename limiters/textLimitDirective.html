@@ -1,0 +1,12 @@
+<span>
+    {{:: framing}}{{ text | limitTo: limit }}
+    <span ng-if="::framing && text.length < limit">{{:: framing}}</span>
+    <span ng-if="::framing && text.length > limit">{{limit ? '' : framing}}</span>
+</span>
+<span ng-click="toggleLimit()" ng-if="text.length > limit" class="lmx-toggle-limit-btn">
+    <span ng-if="limit">
+        ...
+        <span ng-if="::framing">{{limit ? framing : ''}}</span>
+    </span>
+    {{ limit ? 'show' : 'hide' | translate | lowercase}}
+</span>

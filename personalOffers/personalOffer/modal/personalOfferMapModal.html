@@ -1,13 +1,9 @@
-<div class="personal-offers-map">
+<div class="lmx-personal-offers-map">
     <div loader="inProgress" class="modal-body">
-        <lmx-map
-            ng-if="merchants.length"
-            class="map"
-            data="merchants"
-        >
+        <lmx-map ng-if="merchants.length" class="lmx-map" data="merchants">
         </lmx-map>
     </div>
-    <div class="modal-footer btn-container">
+    <div class="modal-footer lmx-btn-container">
         <button type="button" ng-click="cancel()">{{'buttons.close' | translate}}</button>
     </div>
 </div>
