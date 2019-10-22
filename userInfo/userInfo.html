@@ -2,16 +2,62 @@
     <div ng-if=":: isInfoLoaded">
         <dl class="lmx-clearfix">
             <dt class="lmx-user-info__name">
-                <a ng-href="{{baseUrl}}#personal">
+                <a ng-href="/#/personal">
                     <span>{{userInfo.lastName}}</span>
                     <span>{{userInfo.firstName}}</span>
                     <span>{{userInfo.patronymicName}}</span>
                 </a>
             </dt>
-            <dd></dd>
         </dl>
 
-        <dl class="lmx-user-balance lmx-clearfix" ng-class="{'lmx-no-balance': userInfo.baseBalanceAccount === undefined}">
+        <div class="lmx-user-info__attribute user-info__key" ng-repeat="stateItem in userStatus.statuses" ng-if="stateItem.isCurrent" ng-init="currentStatus.key=$index" ng-init="currentStatus = {}">
+            <span>{{'status.currentLevel' | translate}}:&nbsp;</span>
+            <span class='lmx-definition'> {{userStatus.statuses[currentStatus.key].name}} </span>
+        </div>
+
+        <div class="lmx-user-info__attribute user-info__key" ng-repeat="stateItem in userStatus.statuses" ng-if="stateItem.isCurrent" ng-init="currentStatus.key=$index" ng-init="currentStatus = {}">
+            <span>Кол-во любимых вкусов: </span>
+            <span class='lmx-definition'> {{userStatus.statuses[currentStatus.key].count}} л. в. </span>
+        </div>
+
+        <div class="lmx-user-info__balance user-info__key">
+            <span>{{'status.countMeetcoin' | translate}}: </span>
+            <span class='lmx-definition' ng-bind="userInfo.balanceAccounts[1].balance || 0">
+            </span>&nbsp;
+            <span class='lmx-definition lmx-definition-plural'>{{ userStatus.bonusCurrency.nameCases.plural }}</span>
+        </div>
+
+        <div ng-repeat="status in userStatus.statuses track by $index"
+                 ng-if=":: status.amountToThisLevel === 0 && ($index === userStatus.statuses.length - 1 || userStatus.statuses[$index + 1].amountToThisLevel > 0)"
+                 ng-init="currentLevelNextMonth = {name: status.name}"
+                 class='lmx-user-info__next-status'>
+                <div ng-if="$index === userStatus.statuses.length - 1" class="user-status user-info__value">
+                    <span class='lmx-text-nextlevel'>
+                        {{:: 'status.currentLevelNextMonth' | translate}}
+                        {{:: 'status.maxLevel' | translate | lowercase}}
+                        {{:: 'status.necessaryForNextLevel.nextLevel' | translate | lowercase}}
+                    </span>
+                </div>
+                <div ng-if=":: userStatus.statuses[$index + 1].amountToThisLevel > 0 && $index !== userStatus.statuses.length - 1"
+                    ng-init="nextStatus = {amountToNextLevel: userStatus.statuses[$index + 1].amountToThisLevel, nextLevelName: userStatus.statuses[$index + 1].name}"
+                    class="user-status user-info__value">
+                    <span class='lmx-text-nextlevel'>
+                        ({{:: 'status.necessaryForNextLevel.necessary' | translate}}
+                        {{:: nextStatus.amountToNextLevel}}
+                        {{:: 'status.necessaryForNextLevel.meetcoinFor' | translate | lowercase}}
+                        {{:: 'status.necessaryForNextLevel.nextMonthLevel' | translate | lowercase}}
+                        {{:: nextStatus.nextLevelName}})
+                    </span>
+                </div>
+        </div>
+
+        <div class="lmx-user-info__not-activated user-info__key roubles-amount">
+            <span >{{'status.countBonuses' | translate}}: </span>
+            <span ng-bind="userInfo.balanceAccounts[0].balance || 0"></span>&nbsp;
+            <span> б. р.</span>
+        </div>
+
+        <!-- <dl class="lmx-user-balance lmx-clearfix" ng-class="{'lmx-no-balance': userInfo.baseBalanceAccount === undefined}">
             <dt class="lmx-user-info__balance lmx-user-info__key">{{'userInfo.balance' | translate}}:&nbsp;</dt>
             <dd class="lmx-user-info__balance lmx-user-info__value">
                 <span ng-bind="userInfo.baseBalanceAccount.balance | number: 2"></span>&nbsp;{{userInfo.baseBalanceAccount.currency.nameCases.abbreviation}}
@@ -50,6 +96,6 @@
 
         <div class="lmx-user-info__logout lmx-clearfix">
             <a ng-click="logout(isPassiveLogout)" class="lmx-right" href="">{{'userInfo.logout' | translate}}</a>
-        </div>
+        </div> -->
     </div>
 </div>
