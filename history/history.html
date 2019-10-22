@@ -33,26 +33,27 @@
                             <table ng-if="history.rows.length">
                                 <thead>
                                 <tr>
+                                	<th>{{'history.description' | translate}}</th>
                                     <th>{{'history.date' | translate}}</th>
                                     <th>{{'history.cardNumber' | translate}}</th>
-                                    <th>{{'history.description' | translate}}</th>
                                     <th>{{'history.operation' | translate}}</th>
                                     <th>{{'history.amount' | translate}}</th>
                                     <th></th>
                                 </tr>
                                 </thead>
-                                <tbody ng-repeat="item in history.rows track by item.id" class-toggle-click="cheque-opened" ng-class="::{'lmx-empty-cheque': !item.data.chequeItems.length}">
+                                <tbody ng-repeat="item in history.rows track by item.id" class-toggle-click="cheque-opened" ng-class="::{'lmx-empty-info': !item.data.chequeItems.length}">
                                 <tr>
+                                	<td class="lmx-description" ng-attr-title="{{:: item.description}}">
+                                        <img ng-if=":: item.logoSquareUrl" ng-src="{{:: item.logoSquareUrl}}" class="lmx-logo-square" fallback-image="" fallback-title="{{'imageNotFound' | translate}}" alt="">
+                                        <span class="lmx-description-text">{{:: item.description}}</span>
+                                    </td>
                                     <td class="date-time" ng-attr-title="{{:: item.dateTime | toUTC | shortDateTime}}">
                                         {{:: item.dateTime | toUTC | shortDateTime}}
                                     </td>
                                     <td class="lmx-identity" ng-attr-title="{{:: item.identity ? ('**** ' + (item.identity | lastCount: 4)) : undefined}}">
                                         <span ng-if="::item.identity">**** <b>{{:: item.identity | lastCount: 4 }}</b></span>
                                     </td>
-                                    <td class="lmx-description" ng-attr-title="{{:: item.description}}">
-                                        <img ng-if=":: item.logoSquareUrl" ng-src="{{:: item.logoSquareUrl}}" class="lmx-logo-square" fallback-image="" fallback-title="{{'imageNotFound' | translate}}" alt="">
-                                        <span class="lmx-description-text">{{:: item.description}}</span>
-                                    </td>
+                                    
                                     <td class="lmx-withdraws lmx-text">
                                         <div ng-if=":: item.data.withdraws.length" ng-repeat="wdrw in item.data.withdraws" ng-attr-title="{{'history.gift' + (item.data.isRefund ? 'Refund' : '' ) + '.withdraw' | translate}}" class="lmx-text-overflow-ellipsis">
                                             {{'history.gift' + (item.data.isRefund ? 'Refund' : '' ) + '.withdraw' | translate}}
@@ -84,15 +85,36 @@
                                     </td>
                                     <td class="lmx-cheque-expander"></td>
                                 </tr>
-                                <tr class="lmx-cheque-info" ng-if="item.data.chequeItems.length">
+
+                                <tr>
+                                    <td colspan="6" class="lmx-description-second" ng-attr-title="{{:: item.description}}">
+                                        <img ng-if=":: item.logoSquareUrl"
+                                            ng-src="{{:: item.logoSquareUrl}}"
+                                            class="logo-square"
+                                            fallback-image
+                                            fallback-title="{{'imageNotFound' | translate}}"
+                                            alt="">
+                                        
+                                        {{:: item.description}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" class="lmx-identity-second">
+                                        <span ng-if="::item.identity"><b> Номер карты: **** {{:: item.identity | lastCount: 4 }}</b></span>
+                                    </td>   
+                                </tr>
+
+                                <tr class="lmx-cheque-info">
                                     <td colspan="6">
                                         <div class="lmx-cheque-content">
                                             <div class="lmx-cheque-line" ng-repeat="chequeItem in item.data.chequeItems">
                                                 <span class="lmx-cheque-item">{{::chequeItem.description | nbspSpaces}}</span>
                                                 <span class="lmx-cheque-count">{{::chequeItem.count}}</span>
+                                                <span class="lmx-cheque-amount">{{::chequeItem.amount}}</span>
                                             </div>
                                             <div class="lmx-cheque-total">
-                                                {{::item.data.amount.amount | number: 2}} {{:: item.data.amount.currency }}
+                                                <span class='summary-text summary'>Сумма покупки</span>
+                                                <span class='summary'>{{::item.data.amount.amount | number: 2}} {{:: item.data.amount.currency }}</span>
                                             </div>
                                         </div>
                                     </td>
