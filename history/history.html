@@ -89,7 +89,7 @@
                                         <div class="lmx-cheque-content">
                                             <div class="lmx-cheque-line" ng-repeat="chequeItem in item.data.chequeItems">
                                                 <span class="lmx-cheque-item">{{::chequeItem.description | nbspSpaces}}</span>
-                                                <span class="lmx-cheque-count">{{::chequeItem.count}}</span>
+                                                <span class="lmx-cheque-count">{{::chequeItem.count}} <span ng-if=":: chequeItem.unit" class="lmx-cheque-unit">{{:: chequeItem.unit}}</span></span>
                                             </div>
                                             <div class="lmx-cheque-total">
                                                 {{::item.data.amount.amount | number: 2}} {{:: item.data.amount.currency }}

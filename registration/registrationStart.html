@@ -3,7 +3,7 @@
     <notifications area="registration"></notifications>
     <div loader="acceptTenderOfferByCheck && (isOfferAndAgreementLoaded === undefined)">
         <identifiers ng-if=":: identifiers.arr !== undefined" identifiers="identifiers.arr" ng-model="model.identifier" ng-change="resetFormModels(registrationForm)"></identifiers>
-        <form novalidate="" name="registrationForm" ng-submit="registrationForm.$valid && registration(registrationForm)" id="lmx-registrationForm" ng-hide="acceptTenderOfferByCheck && (isOfferAndAgreementLoaded === undefined)">
+        <form novalidate="" name="registrationForm" ng-submit="registrationForm.$valid && !(reCaptcha && reCaptcha.isInvalid) && registration(registrationForm)" id="lmx-registrationForm" ng-hide="acceptTenderOfferByCheck && (isOfferAndAgreementLoaded === undefined)">
             <form-group ng-if="!tokenForSocialRegistration && model.identifier === IDENTIFIERS.phone" label-text="{{'identifiers.' + model.identifier | translate}}" ng-class="::{'lmx-required': referralRegistration}">
                 <phone-input ng-model="registrationData.login" id="lmx-login_{{model.identifier}}" name="login" ng-disabled="inProgress || authInProgress || actionsInProgress" required="" autofocus=""></phone-input>
             </form-group>
@@ -50,5 +50,6 @@
             </div>
             <lmx-social ng-hide="authInProgress || actionsInProgress"></lmx-social>
         </form>
+        <div vc-recaptcha="" ng-if=":: reCaptcha && reCaptcha.isInvisible" key="reCaptcha.siteKey" size="invisible" badge="bottomleft" on-success="requestRegistration(registrationForm, response)" on-expire="resetReCaptcha()" on-error="errorReCaptcha()" lang="ru"></div>
     </div>
 </div>
