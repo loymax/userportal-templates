@@ -4,6 +4,7 @@
 
         <div loader="loaders.inProgress">
             <div ng-if="!loaders.inProgress" ng-switch="!!merchants.length">
+
                 <div ng-if=":: filterByRegion" class="lmx-row">
                     <div class="lmx-merchant-filter" ng-if=":: regions.length">
                         <div lmx-custom-select="" ng-model="region.id" repeat="regions" placeholder="{{'merchants.chooseRegion' | translate}}" options="r.id as r.name for r in regions"></div>
@@ -12,13 +13,21 @@
                     <div ng-if="!regions.length">{{'merchants.noRegionInfo' | translate}}</div>
                 </div>
 
-                <div ng-switch-when="true" class="lmx-merchants-map-row" loader="loaders.brands || loaders.ymaps || loaders.merchantsList">
+                <lmx-tabs
+                    class="merchantsMobileTabs"
+                    list="{mapMobile: {name: 'На карте', value: 'mapMobile'}, merchantMobile: {name: 'Списком', value: 'merchantMobile'}}"
+                    ng-model="selectedMobileTab"
+                    view-field="name">
+                </lmx-tabs>
+
+                <div ng-switch-when="true" class="{{selectedMobileTab.value}} lmx-merchants-map-row" loader="loaders.brands || loaders.ymaps || loaders.merchantsList">
+                    <lmx-map class="lmx-map" data="merchants" ng-if="merchants.length && !loaders.brands"></lmx-map>
                     <div class="lmx-merchant-list">
                         <lmx-scroller ng-hide="loaders.merchantsList">
                             <ul>
                                 <li ng-repeat="merchant in merchants | limitTo: merchantsLimit track by merchant.id" ng-init="isUnclickable = !merchant.location" ng-class="::{'lmx-unclickable': isUnclickable}" ng-click="!isUnclickable && showMerchantOnMap($index)">
-                                    <p>{{:: merchant.title}}{{:: merchant.location ? (', ' + merchant.location.description) : ''}}</p>
-                                </li>
+                                    <p onclick='clickOnMapTab()'>{{:: merchant.location ? (merchant.location.description) : ''}}</p>
+                                 </li>
                             </ul>
 
                             <a class="lmx-pseudolink" ng-if="merchants.length > merchantsLimit" ng-click="changeListExpansionState(true)" href="">
@@ -29,8 +38,6 @@
                             </a>
                         </lmx-scroller>
                     </div>
-
-                    <lmx-map class="lmx-map" data="merchants" ng-if="merchants.length && !loaders.brands"></lmx-map>
                 </div>
                 <div ng-if="!merchants.length && !loaders.merchantsList">
                     {{'merchants.' + (filterByRegion ? 'filteredNotFound' : 'notFound') | translate}}
