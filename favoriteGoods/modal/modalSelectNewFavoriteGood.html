@@ -1,15 +1,19 @@
-<div loader="inProgress" class="lmx-modal-favorite-goods-container">
-    <div ng-if="!inProgress" class="lmx-modal-favorite-goods-content">
-        <div class="modal-header">
-            <h2>{{:: 'favoriteGoods.modal.selectGood' | translate}}</h2>
-        </div>
-        <div class="lmx-content lmx-select-new-favorite-good">
-            <div class="lmx-categories-list">
-               <goods-or-category goods-group-id="goodsGroupId" goods-or-category="goodsOrCategory" ng-repeat="goodsOrCategory in categories track by goodsOrCategory.id"></goods-or-category>
+<div>
+    <div class="lmx-modal-closer" ng-click="cancel()"></div>
+    <div loader="inProgress" class="lmx-modal-favorite-goods-container">
+        <div ng-if="!inProgress" class="lmx-modal-favorite-goods-content">
+            <div class="modal-header">
+                <h2>{{:: 'favoriteGoods.modal.selectGood' | translate}}</h2>
             </div>
-            <button class="lmx-btn lmx-close-modal-btn" ng-click="close()" type="button">
-                {{:: 'favoriteGoods.modal.close' | translate}}
-            </button>
+            <div class="lmx-content lmx-select-new-favorite-good">
+                <div class="lmx-categories-list">
+                    <goods-or-category goods-group-id="goodsGroupId" goods-or-category="goodsOrCategory" ng-repeat="goodsOrCategory in categories track by goodsOrCategory.id"></goods-or-category>
+                </div>
+                <button class="lmx-btn lmx-close-modal-btn" ng-click="cancel()" type="button">
+                    {{:: 'favoriteGoods.modal.close' | translate}}
+                </button>
+            </div>
         </div>
     </div>
 </div>
+

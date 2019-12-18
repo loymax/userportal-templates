@@ -6,7 +6,7 @@
 
         <personal-goods-offer-info offer="offer" class="lmx-margin-bottom"></personal-goods-offer-info>
 
-        <div class="lmx-personal-goods-offer__goods-list lmx-card" ng-class="{'lmx-unselectable': !selectableGoodsCount,'lmx-readonly': !offer.canSelectGoods}" loader="offerDetailsInProgress">
+        <div class="lmx-personal-goods-offer__goods-list lmx-card" ng-class="{'lmx-unselectable': !selectableGoodsCount,'lmx-readonly': !offer.canSelectGoods,'lmx-many-goods': offerGoods.length > 9}" loader="offerDetailsInProgress">
             <div class="lmx-approve lmx-card-action">
                 <div class="lmx-available-amount-hint">
                     {{selectableGoodsCount
@@ -40,8 +40,10 @@
                     </div>
                 </div>
             </div>
-            <div ng-if="availableGoodsCount" class="lmx-approve lmx-card-action lmx-clearfix">
-                <button type="button" ng-show="offerGoods.length > 9" ng-click="approveSelectedGoods()" ng-disabled="!selectedGoods.length" class="lmx-right">{{'buttons.approve' | translate}}</button>
+            <div ng-if="availableGoodsCount" class="lmx-approve lmx-card-action lmx-approve-footer-duplicate lmx-clearfix">
+                <button type="button" ng-click="approveSelectedGoods()" ng-disabled="!selectedGoods.length">
+                    {{'buttons.approve' | translate}}
+                </button>
             </div>
             <div class="lmx-goods-list-overlayer">
                 <p ng-bind-html="('personalGoods.editingNotAvailable' | translate) + ': ' + ((offer.attribute.startFillDate | toUTC | dateRange: (offer.attribute.endFillDate | toUTC)) | nbspSpaces)">

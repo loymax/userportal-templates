@@ -11,7 +11,7 @@
 
         <brands-names brands="offer.brands"></brands-names>
 
-        <div ng-switch=":: isPreview">
+        <div class="lmx-title-wrap" ng-switch=":: isPreview">
             <h2 ng-switch-when="false" class="lmx-title">{{:: offer.title}}</h2>
             <h4 ng-switch-when="true" class="lmx-title">{{:: offer.title}}</h4>
         </div>
@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="lmx-card-action lmx-clearfix">
-        <button type="button" ng-click=":: changeLocation('personal-goods/' + offer.id)" class="lmx-right">
+        <button type="button" ng-click=":: changeLocation('personal-goods/' + offer.id)">
             {{'buttons.viewMore' | translate}}
         </button>
     </div>

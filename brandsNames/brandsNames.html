@@ -1,4 +1,4 @@
-<div class="lmx-brands-names">
+<div class="lmx-brands-names" ng-class="{'lmx-one-brand': brands.length === 1}">
     <div ng-if="brands.length > 1">
         <span ng-repeat="brand in brands track by brand.id">
             {{::brand.name | nbspSpaces}}<span ng-show="!$last">, </span>

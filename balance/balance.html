@@ -3,58 +3,24 @@
         <h2>{{'balance.title' | translate}}</h2>
         <div loader="inProgress">
             <div ng-if="!inProgress" ng-switch="!!balanceAccounts.length">
-                <div ng-switch-when="true">
+                <div ng-switch-when="true" class="lmx-balance-block">
                     <lmx-tabs list="balanceAccounts" ng-model="selectedAccount" view-field="title">
                     </lmx-tabs>
-                    <div class="lmx-balance-tab-content">
-                        <h3>{{selectedAccount.currency.name}}</h3>
-                        <div class="lmx-account-description">{{selectedAccount.currency.description}}</div>
-                        <div class="lmx-account-details">
-                            <div>
-                                <b>{{'balance.amount' | translate}}</b>:
-                                {{selectedAccount.amount | number: 2}}
-                                {{selectedAccount.currency.nameCases[getCurrencyNameCase(selectedAccount.amount)]}}
-                            </div>
-                            <div>
-                                <b>{{'balance.notActivatedAmount' | translate}}</b>:
-                                {{selectedAccount.notActivatedAmount | number: 2}}
-                                {{selectedAccount.currency.nameCases[getCurrencyNameCase(selectedAccount.notActivatedAmount)]}}
-                            </div>
-                        </div>
-                        <table ng-if="selectedAccount.lifeTimesByTime.length">
-                            <tr>
-                                <th>{{'balance.lastWeekChanges' | translate}}</th>
-                                <th>{{'balance.date' | translate}}</th>
-                            </tr>
-                            <tr ng-repeat="lifeTime in selectedAccount.lifeTimesByTime track by $index">
-                                <td>
-                                    {{lifeTime.amount | number: 2}}
-                                    {{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.amount)]}}
-                                </td>
-                                <td>{{lifeTime.date | toUTC | shortDateTime}}</td>
-                            </tr>
-                        </table>
-                        <table ng-if="selectedAccount.lifeTimesByPeriod.length">
-                            <tr>
-                                <th>{{'balance.period' | translate}}</th>
-                                <th>{{'balance.activationAmount' | translate}}</th>
-                                <th>{{'balance.expirationAmount' | translate}}</th>
-                            </tr>
-                            <tr ng-repeat="lifeTime in selectedAccount.lifeTimesByPeriod track by $index">
-                                <td>{{('balance.lifeTimePeriod.' + (lifeTime.period | lowerCamelCase)) | translate}}</td>
-                                <td>
-                                    {{lifeTime.activationAmount | number: 2}}
-                                    {{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.activationAmount)]}}
-                                </td>
-                                <td>
-                                    {{lifeTime.expirationAmount | number: 2}}
-                                    {{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.expirationAmount)]}}
-                                </td>
-                            </tr>
-                        </table>
+                    <balance-info></balance-info>
+                    <div class="lmx-hidden lmx-balance-accordion-wrap">
+                        <uib-accordion class="lmx-balance-accordion">
+                            <uib-accordion-group ng-repeat="selectedAccount in balanceAccounts" class="lmx-balance-accordion-group">
+                                <uib-accordion-heading class="lmx-balance-header">
+                                    <span>{{::selectedAccount.title}}</span>
+                                    <span class="glyphicon glyphicon-chevron-down"></span>
+                                    <span class="glyphicon glyphicon-chevron-up"></span>
+                                </uib-accordion-heading>
+                                <balance-info></balance-info>
+                            </uib-accordion-group>
+                        </uib-accordion>
                     </div>
                 </div>
-                <div ng-switch-when="false">
+                <div ng-switch-when="false" class="lmx-no-balance-block">
                     {{'balance.infoNotFound' | translate}}
                 </div>
             </div>

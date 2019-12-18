@@ -1,4 +1,6 @@
 <ul class="lmx-tabs-container">
+    <!-- TODO ng-class 'active' не срабатывает на внешние события (изменения URL, например) !-->
+    <!-- После исправления - обновить page.html в плагине (меню в разделе "Настройки" -> на эти табы) !-->
     <li ng-repeat="item in list track by $index" ng-click="selectItem(item)" ng-class="{'active': selectedItem === item}">
         {{viewField ? item[viewField] : item}}
     </li>

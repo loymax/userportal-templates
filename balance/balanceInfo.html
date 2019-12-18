@@ -1,0 +1,44 @@
+<div class="lmx-balance-tab-content">
+    <h3>{{selectedAccount.currency.name}}</h3>
+    <div class="lmx-account-description">{{selectedAccount.currency.description}}</div>
+    <div class="lmx-account-details">
+        <div>
+            <b>{{'balance.amount' | translate}}</b>:
+            {{selectedAccount.amount | number: 2}}
+            {{selectedAccount.currency.nameCases[getCurrencyNameCase(selectedAccount.amount)]}}
+        </div>
+        <div>
+            <b>{{'balance.notActivatedAmount' | translate}}</b>:
+            {{selectedAccount.notActivatedAmount | number: 2}}
+            {{selectedAccount.currency.nameCases[getCurrencyNameCase(selectedAccount.notActivatedAmount)]}}
+        </div>
+    </div>
+    <table ng-if="selectedAccount.lifeTimesByTime.length">
+        <tr>
+            <th>{{'balance.lastWeekChanges' | translate}}</th>
+            <th>{{'balance.date' | translate}}</th>
+        </tr>
+        <tr ng-repeat="lifeTime in selectedAccount.lifeTimesByTime track by $index">
+            <td>
+                {{lifeTime.amount | number: 2}}&nbsp;{{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.amount)]}}
+            </td>
+            <td>{{lifeTime.date | toUTC | shortDateTime}}</td>
+        </tr>
+    </table>
+    <table ng-if="selectedAccount.lifeTimesByPeriod.length">
+        <tr>
+            <th>{{'balance.period' | translate}}</th>
+            <th>{{'balance.activationAmount' | translate}}</th>
+            <th>{{'balance.expirationAmount' | translate}}</th>
+        </tr>
+        <tr ng-repeat="lifeTime in selectedAccount.lifeTimesByPeriod track by $index">
+            <td>{{('balance.lifeTimePeriod.' + (lifeTime.period | lowerCamelCase)) | translate}}</td>
+            <td>
+                {{lifeTime.activationAmount | number: 2}}&nbsp;{{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.activationAmount)]}}
+            </td>
+            <td>
+                {{lifeTime.expirationAmount | number: 2}}&nbsp;{{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.expirationAmount)]}}
+            </td>
+        </tr>
+    </table>
+</div>

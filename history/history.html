@@ -4,15 +4,17 @@
         <div loader="history === undefined">
             <div ng-show=":: history">
                 <div ng-show=":: !isPreview" class="lmx-history-filters lmx-clearfix lmx-margin-bottom">
-                    <div class="lmx-since-date-filter">
-                        <span class="lmx-pretext">{{'history.fromDate' | translate}}</span>
-                        <date-picker ng-model="fromDate" ng-change="reloadHistory()">
-                        </date-picker>
-                    </div>
-                    <div class="lmx-to-date-filter">
-                        <span class="lmx-pretext">{{'history.toDate' | translate}}</span>
-                        <date-picker ng-model="toDate" ng-change="reloadHistory()">
-                        </date-picker>
+                    <div class="date-filters">
+                        <div class="date-filter lmx-since-date-filter">
+                            <span class="lmx-pretext">{{'history.fromDate' | translate}}</span>
+                            <date-picker ng-model="fromDate" ng-change="reloadHistory()">
+                            </date-picker>
+                        </div>
+                        <div class="date-filter lmx-to-date-filter">
+                            <span class="lmx-pretext">{{'history.toDate' | translate}}</span>
+                            <date-picker ng-model="toDate" ng-change="reloadHistory()">
+                            </date-picker>
+                        </div>
                     </div>
                     <div class="lmx-card-filter">
                         <inline-loader>cardsInProgress</inline-loader>
@@ -42,7 +44,7 @@
                                 </tr>
                                 </thead>
                                 <tbody ng-repeat="item in history.rows track by item.id" class-toggle-click="cheque-opened" ng-class="::{'lmx-empty-cheque': !item.data.chequeItems.length}">
-                                <tr>
+                                <tr class="lmx-operation-info">
                                     <td class="date-time" ng-attr-title="{{:: item.dateTime | toUTC | shortDateTime}}">
                                         {{:: item.dateTime | toUTC | shortDateTime}}
                                     </td>

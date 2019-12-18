@@ -5,24 +5,28 @@
             <div ng-if="!inProgress">
                 <lmx-tabs ng-if="isAttachCardAvailable" list="tabs" ng-model="selectedTab.value" view-field="name">
                 </lmx-tabs>
-                <div ng-show="selectedTab.value === tabs.personalCards" class="lmx-personal-cards">
+                <div ng-show="selectedTab.value === tabs.personalCards" ng-class="::{'lmx-no-add-card-button': !maxCountOfMainCardsForUserNotReached}" class="lmx-personal-cards">
                     <p ng-bind-html="'cards.replaceHint' | translate"></p>
 
-                    <div ng-repeat="card in cards.personal track by card.id">
+                    <div class="lmx-card-item-wrap" ng-repeat="card in cards.personal track by card.id">
                         <card card="card" class="lmx-card-item"></card>
                     </div>
-                    <button ng-if="maxCountOfMainCardsForUserNotReached" ng-click="setCard()" type="button" class="lmx-set-card-btn lmx-right">
-                        {{'cards.actions.set' | translate}}
-                    </button>
+                    <div class="lmx-add-card-buttons" ng-if="maxCountOfMainCardsForUserNotReached">
+                        <button ng-click="setCard()" type="button" class="lmx-set-card-btn">
+                            {{'cards.actions.set' | translate}}
+                        </button>
+                    </div>
                 </div>
 
                 <div ng-show="selectedTab.value === tabs.accountCards" class="lmx-account-cards">
                     <div ng-repeat="card in cards.group track by card.id">
                         <card card="card" class="lmx-card-item" in-group=""></card>
                     </div>
-                    <button ng-click="attachCard()" type="button" class="lmx-attach-btn lmx-right">
-                        {{'cards.actions.attach' | translate}}
-                    </button>
+                    <div class="lmx-add-card-buttons">
+                        <button ng-click="attachCard()" type="button" class="lmx-attach-btn">
+                            {{'cards.actions.attach' | translate}}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

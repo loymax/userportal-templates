@@ -1,6 +1,10 @@
 <div class="lmx-registration-start">
     <h2>{{'registration.title' | translate}}</h2>
     <notifications area="registration"></notifications>
+    <p ng-if="tokenForSocialRegistration" class="lmx-info-social-registration">
+        Начат процесс регистрации через социальную сеть. Чтобы отменить регистрацию,
+        <a class="lmx-pseudo-link" ng-click="cancel()" href="">нажмите&nbsp;здесь</a>
+    </p>
     <div loader="acceptTenderOfferByCheck && (isOfferAndAgreementLoaded === undefined)">
         <identifiers ng-if=":: identifiers.arr !== undefined" identifiers="identifiers.arr" ng-model="model.identifier" ng-change="resetFormModels(registrationForm)"></identifiers>
         <form novalidate="" name="registrationForm" ng-submit="registrationForm.$valid && !(reCaptcha && reCaptcha.isInvalid) && registration(registrationForm)" id="lmx-registrationForm" ng-hide="acceptTenderOfferByCheck && (isOfferAndAgreementLoaded === undefined)">
@@ -48,7 +52,7 @@
                 </button>
                 <inline-loader line="">authInProgress || actionsInProgress</inline-loader>
             </div>
-            <lmx-social ng-hide="authInProgress || actionsInProgress"></lmx-social>
+            <lmx-social ng-hide="authInProgress || actionsInProgress || tokenForSocialRegistration" class="lmx-center"></lmx-social>
         </form>
         <div vc-recaptcha="" ng-if=":: reCaptcha && reCaptcha.isInvisible" key="reCaptcha.siteKey" size="invisible" badge="bottomleft" on-success="requestRegistration(registrationForm, response)" on-expire="resetReCaptcha()" on-error="errorReCaptcha()" lang="ru"></div>
     </div>

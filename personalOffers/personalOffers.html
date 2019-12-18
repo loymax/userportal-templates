@@ -6,7 +6,7 @@
                 <div ng-repeat="personalOffer in personalOffers track by personalOffer.id" class="lmx-card">
                     <personal-offer-content personal-offer="personalOffer"></personal-offer-content>
                     <div class="lmx-card-action lmx-clearfix">
-                        <button type="button" ng-click=":: changeLocation('personal-offers/' + personalOffer.id)" class="lmx-right">
+                        <button type="button" ng-click=":: changeLocation('personal-offers/' + personalOffer.id)">
                             {{'buttons.viewMore' | translate}}
                         </button>
                     </div>
