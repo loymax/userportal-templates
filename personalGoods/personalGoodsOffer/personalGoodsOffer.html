@@ -4,7 +4,7 @@
             <a href="#personal-goods">&larr; {{'buttons.backToList' | translate}}</a>
         </div>
 
-        <personal-goods-offer-info offer="offer" class="lmx-margin-bottom"></personal-goods-offer-info>
+        <personal-goods-offer-info offer="offer" class="lmx-margin-bottom" show-full-description="showFullDescription"></personal-goods-offer-info>
 
         <div class="lmx-personal-goods-offer__goods-list lmx-card" ng-class="{'lmx-unselectable': !selectableGoodsCount,'lmx-readonly': !offer.canSelectGoods,'lmx-many-goods': offerGoods.length > 9}" loader="offerDetailsInProgress">
             <div class="lmx-approve lmx-card-action">

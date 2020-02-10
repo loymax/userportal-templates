@@ -11,35 +11,35 @@
         <div class="lmx-current-user-status">
             <div ng-repeat="status in userStatus.statuses track by $index" ng-if=":: status.isCurrent">
                 <dl class="lmx-user-status">
-                    <dt>{{:: 'status.currentLevel' | translate}}:</dt>
+                    <dt>{{'status.currentLevel' | translate}}:</dt>
                     <dd>{{:: status.name}}</dd>
                 </dl>
                 <dl class="lmx-user-status">
-                    <dt>{{:: 'status.countMeetcoin' | translate}}:</dt>
+                    <dt>{{'status.countMeetcoin' | translate}}:</dt>
                     <dd>{{:: userStatus.balance}}</dd>
                 </dl>
             </div>
             <div ng-repeat="status in userStatus.statuses track by $index" ng-if=":: status.amountToThisLevel === 0 && ($index === userStatus.statuses.length - 1 || userStatus.statuses[$index + 1].amountToThisLevel > 0)" ng-init="currentLevelNextMonth = {name: status.name}">
                 <dl class="lmx-user-status">
                     <dt>
-                        {{:: 'status.currentLevelNextMonth' | translate}}
+                        {{'status.currentLevelNextMonth' | translate}}
                         "{{:: currentLevelNextMonth.name}}"
-                        {{:: 'status.necessaryForNextLevel.nextLevel' | translate | lowercase}}
+                        {{'status.necessaryForNextLevel.nextLevel' | translate | lowercase}}
                     </dt>
                 </dl>
                 <dl ng-if=":: status.amountToThisLevel === 0 && userStatus.statuses[$index + 1].amountToThisLevel > 0 && $index !== userStatus.statuses.length - 1" ng-init="nextStatus = {amountToNextLevel: userStatus.statuses[$index + 1].amountToThisLevel, nextLevelName: userStatus.statuses[$index + 1].name}" class="lmx-user-status">
                     <dt>
-                        {{:: 'status.necessaryForNextLevel.necessary' | translate}}
+                        {{'status.necessaryForNextLevel.necessary' | translate}}
                         {{:: nextStatus.amountToNextLevel}}
-                        {{:: 'status.necessaryForNextLevel.meetcoinFor' | translate | lowercase}}
+                        {{'status.necessaryForNextLevel.meetcoinFor' | translate | lowercase}}
                         "{{:: nextStatus.nextLevelName}}"
-                        {{:: 'status.necessaryForNextLevel.nextLevel' | translate | lowercase}}
+                        {{'status.necessaryForNextLevel.nextLevel' | translate | lowercase}}
                     </dt>
                 </dl>
             </div>
         </div>
         <dl class="lmx-user-status">
-            <dt>{{:: 'status.countBonuses' | translate}}:</dt>
+            <dt>{{'status.countBonuses' | translate}}:</dt>
             <dd>{{:: userInfo.balanceAccounts[0].balance}}</dd>
         </dl>
     </section>

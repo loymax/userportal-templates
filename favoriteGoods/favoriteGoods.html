@@ -1,16 +1,16 @@
 <div class="lmx-container lmx-favorite-goods" ng-class="{'lmx-empty': !inProgress && !favoriteGoods}">
     <section>
-        <h2>{{:: 'favoriteGoods.name' | translate}}</h2>
+        <h2>{{'favoriteGoods.title' | translate}}</h2>
         <div loader="inProgress">
             <div ng-if="!inProgress">
                 <div>
-                    <p>{{:: 'favoriteGoods.info.description' | translate}} 15%.</p>
-                    <p>{{:: 'favoriteGoods.info.limitation.part1' | translate}}
-                        <a href="#offers">{{:: 'favoriteGoods.info.limitation.part2' | translate}}</a>.
+                    <p>{{'favoriteGoods.info.description' | translate}}.</p>
+                    <p>{{'favoriteGoods.info.limitation.part1' | translate}}
+                        <a href="#offers">{{'favoriteGoods.info.limitation.part2' | translate}}</a>.
                     </p>
                 </div>
                 <div class="lmx-favorite-goods-list">
-                    <p ng-if="!favoriteGoods">{{:: 'favoriteGoods.favoriteGoodsEmpty' | translate}}</p>
+                    <p ng-if="!(favoriteGoods && favoriteGoods.goods && favoriteGoods.goods.length)">{{'favoriteGoods.favoriteGoodsEmpty' | translate}}</p>
                     <favorite-good favorite-good="favoriteGoodsItem" change-good="changeGood" ng-repeat="favoriteGoodsItem in favoriteGoods.goods" loader="goodsInProgres_{{:: favoriteGoodsItem.position}}"></favorite-good>
                 </div>
             </div>

@@ -1,27 +1,27 @@
 <div>
     <div class="modal-header">
-        <h2>{{::'unregistration.refuseToParticipateInLP' | translate}}</h2>
+        <h2>{{'unregistration.refuseToParticipateInLP' | translate}}</h2>
     </div>
 
     <div class="modal-content-wrapper">
         <form novalidate="" name="unregistration" ng-submit="unregistration.$valid && confirm()">
             <div class="modal-body">
                 <div class="lmx-hint">
-                    <p ng-bind-html="::'unregistration.message' | translate"></p>
+                    <p ng-bind-html="'unregistration.message' | translate"></p>
                 </div>
                 <form-group>
-                    <textarea ng-disabled="inProgress" placeholder="{{::'unregistration.reason' | translate}}" ng-model="model.reason"></textarea>
+                    <textarea ng-disabled="inProgress" placeholder="{{'unregistration.reason' | translate}}" ng-model="model.reason"></textarea>
                 </form-group>
                 <form-group ng-if=":: isConfirmation" class="lmx-confirm-code-field">
                     <div class="lmx-hint">
-                        <span>{{::'unregistration.enterConfirmCode' | translate}} <p ng-if=":: currentPhone">{{::currentPhone}}</p></span>
+                        <span>{{'unregistration.enterConfirmCode' | translate}} <p ng-if=":: currentPhone">{{::currentPhone}}</p></span>
                     </div>
                     <input ng-model="model.confirmCode" ng-disabled="inProgress" id="lmx-confirmCode" name="confirmcode" type="text" required="">
                 </form-group>
             </div>
             <div class="modal-footer lmx-btn-container">
-                <button ng-disabled="inProgress" type="button" ng-click="cencel()">{{::'unregistration.cancel' | translate}}</button>
-                <button ng-disabled="inProgress" type="submit">{{::'unregistration.confirm' | translate}}</button>
+                <button ng-disabled="inProgress" type="button" ng-click="cencel()">{{'unregistration.cancel' | translate}}</button>
+                <button ng-disabled="inProgress" type="submit">{{'unregistration.confirm' | translate}}</button>
             </div>
         </form>
     </div>

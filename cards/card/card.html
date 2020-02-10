@@ -12,7 +12,7 @@
         <div ng-switch-when="false" class="lmx-card-number">{{:: card.number | charsDivide: 4}}</div>
 
         <div class="lmx-card-category" ng-hide="::card.cardCategory.title.toLowerCase() === 'стандартная'">{{:: card.cardCategory.title}}</div>
-        <div class="lmx-card-blocked-state-info" ng-if="::card.block">{{:: 'cards.info.blocked' | translate}}</div>
+        <div class="lmx-card-blocked-state-info" ng-if="::card.block">{{'cards.info.blocked' | translate}}</div>
 
         <dl class="lmx-card-owner" ng-if="::card.cardOwnerInfo.firstName || card.cardOwnerInfo.lastName || card.patronymicName">
             <dt>{{'cards.info.owner' | translate}}: </dt>

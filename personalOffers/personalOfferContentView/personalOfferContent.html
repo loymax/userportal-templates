@@ -9,8 +9,10 @@
     <div class="lmx-personal-offer__map-link">
         <a ng-click="openPersonalOfferMapModal()" class="lmx-pseudolink" href="">{{'personalOffers.showOnMap' | translate}}</a>
     </div>
-    <div ng-if=":: personalOffer.description" class="lmx-personal-offer__description lmx-row">
-        {{:: personalOffer.description}}
+    <div ng-if=":: showFullDescription" class="lmx-personal-offer__description lmx-row" ng-bind-html="personalOffer.description | markdown">
+    </div>
+    <div ng-if=":: !showFullDescription" class="lmx-personal-offer__description lmx-row">
+        {{:: personalOffer.shortDescription}}
     </div>
     <div class="lmx-personal-offer__duration lmx-row">
         <b>{{'personalOffers.offerPeriod' | translate}}:</b>

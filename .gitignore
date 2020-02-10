@@ -1,8 +1,9 @@
 #exclude everything
 *
 
-#but userportal html
+#but userportal html or license.txt
 !*.html
+!license.txt
 
 #even if they in subdirectories
 !*/

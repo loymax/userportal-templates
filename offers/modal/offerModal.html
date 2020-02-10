@@ -36,7 +36,7 @@
 
                     <section ng-if=":: offer.description">
                         <div class="lmx-offer-title">{{'offers.description' | translate}}:</div>
-                        <div>{{:: offer.description}}</div>
+                        <div ng-bind-html="offer.description | markdown"></div>
                     </section>
 
                     <section ng-if=":: offer.instructions.length">

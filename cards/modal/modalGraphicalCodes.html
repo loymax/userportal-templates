@@ -2,7 +2,7 @@
     <div class="modal-body">
         <section ng-if=":: displayBarCode" class="lmx-bar-code lmx-margin-bottom">
             <h2>{{'cards.graphicalCodesModal.barCode' | translate}}</h2>
-            <angular-barcode ng-model="card.number" bc-type="svg"></angular-barcode>
+            <angular-barcode ng-model="card.barCode" bc-type="svg"></angular-barcode>
         </section>
 
         <section ng-if=":: displayQrCode" class="lmx-qr-code">

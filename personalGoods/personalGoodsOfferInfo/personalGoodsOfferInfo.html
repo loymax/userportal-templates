@@ -16,8 +16,8 @@
             <h4 ng-switch-when="true" class="lmx-title">{{:: offer.title}}</h4>
         </div>
 
-
-        <div class="lmx-description lmx-row" ng-bind-html=":: offer.description"></div>
+        <div ng-if="showFullDescription" class="lmx-description lmx-row" ng-bind-html="offer.description | markdown"></div>
+        <div ng-if="!showFullDescription" class="lmx-description lmx-row">{{:: offer.shortDescription}}</div>
         <div class="lmx-duration lmx-row">
             <b>{{'personalGoods.offerPeriod' | translate}}:</b>
             <div>{{:: offer.begin | toUTC | dateRange: (offer.end | toUTC) | capitalize}}</div>
