@@ -5,6 +5,9 @@
         <form-group label-text="{{'registration.cardStep.cardNumber' | translate}}">
             <input type="text" ng-model="cardModel.cardNumber" ng-disabled="stepInProgress" id="lmx-cardNumber" name="cardNumber" required="" autofocus="">
         </form-group>
+        <form-group ng-if="cvcCodeCardsRegistration" label-text="{{'registration.cardStep.cvcCode' | translate}}">
+            <input type="number" ng-model="cardModel.cvcCode" ng-disabled="stepInProgress" id="lmx-cvcCode" name="cvcCode">
+        </form-group>
         <div class="lmx-hint">
             <p ng-if="!isVirtualCardEmissionAllowed">{{'registration.cardStep.cardNeeded' | translate}}</p>
         </div>

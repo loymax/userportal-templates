@@ -4,7 +4,7 @@
 
     <identifiers ng-if=":: identifiers.arr !== undefined" identifiers="identifiers.arr" ng-model="model.identifier" ng-change="resetFormModels()"></identifiers>
 
-    <form novalidate="" method="post" name="loginForm" ng-submit="loginForm.$valid && !(reCaptcha && reCaptcha.isInvalid) && login()" id="lmx-loginForm">
+    <form novalidate="" method="post" name="loginForm" ng-submit="loginForm.$valid && login()" id="lmx-loginForm">
         <form-group ng-if="model.identifier === IDENTIFIERS.phone" label-text="{{'identifiers.' + model.identifier | translate}}">
             <phone-input ng-model="model.loginData.login" id="lmx-login_{{model.identifier}}" name="login" ng-disabled="authInProgress" required="" autofocus=""></phone-input>
         </form-group>
@@ -21,11 +21,6 @@
             <div><a ng-click="resetPassword()" href="">{{'authentication.forgotPassword' | translate}}</a></div>
             <div><a href="#registration">{{'authentication.register' | translate}}</a></div>
         </div>
-        <form-group ng-if=":: reCaptcha && !reCaptcha.isInvisible" class="lmx-reCaptcha-container">
-            <!-- Классическая reCAPTCHA v2 -->
-            <!-- Без required="false" пустая модель валидна, а с ним - нет, хотя казалось бы..  (ಠ__ಠ) -->
-            <div vc-recaptcha="" ng-hide="authInProgress" ng-model="reCaptchaResponse.value" id="lmx-reCaptcha" name="reCaptcha" key="reCaptcha.siteKey" on-expire="resetReCaptcha()" on-error="errorReCaptcha()" required="false" required-message="{{'reCaptcha.required' | translate}}" lang="ru"></div>
-        </form-group>
         <div class="lmx-btn-container">
             <button type="submit" ng-hide="authInProgress">{{'authentication.login' | translate}}</button>
 
@@ -33,7 +28,4 @@
         </div>
         <lmx-social ng-hide="authInProgress"></lmx-social>
     </form>
-
-    <!-- Invisible reCAPTCHA v2 -->
-    <div vc-recaptcha="" ng-if=":: reCaptcha && reCaptcha.isInvisible" key="reCaptcha.siteKey" size="invisible" badge="bottomleft" on-success="requestLogin(response)" on-expire="resetReCaptcha()" on-error="errorReCaptcha()" lang="ru"></div>
 </div>

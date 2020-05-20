@@ -1,0 +1,5 @@
+<div>
+    <div ng-if="reCaptchaCheckingInProgress.value">
+        <div vc-recaptcha="" key="reCaptchaSiteKey.value" size="invisible" badge="bottomleft" ng-model="reCaptchaResponse.value" on-success="commitResponse(response)" on-create="start()" on-expire="reload()" on-error="error(e)" lang="ru"></div>
+    </div>
+</div>
