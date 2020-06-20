@@ -2,30 +2,44 @@
     <h2>{{'authentication.title' | translate}}</h2>
     <notifications area="login"></notifications>
 
-    <identifiers ng-if=":: identifiers.arr !== undefined" identifiers="identifiers.arr" ng-model="model.identifier" ng-change="resetFormModels()"></identifiers>
+    <identifiers ng-if=":: identifiers.arr !== undefined" ng-hide="cvcRequired" identifiers="identifiers.arr" ng-model="model.identifier" ng-change="resetFormModels()"></identifiers>
 
     <form novalidate="" method="post" name="loginForm" ng-submit="loginForm.$valid && login()" id="lmx-loginForm">
-        <form-group ng-if="model.identifier === IDENTIFIERS.phone" label-text="{{'identifiers.' + model.identifier | translate}}">
-            <phone-input ng-model="model.loginData.login" id="lmx-login_{{model.identifier}}" name="login" ng-disabled="authInProgress" required="" autofocus=""></phone-input>
-        </form-group>
-        <form-group ng-if="model.identifier === IDENTIFIERS.email" label-text="{{'identifiers.' + model.identifier | translate}}">
-            <input type="email" ng-model="model.loginData.login" id="lmx-login_{{model.identifier}}" name="login" placeholder="example@mail.com" required="">
-        </form-group>
-        <form-group ng-if="model.identifier === IDENTIFIERS.card" label-text="{{'identifiers.' + model.identifier | translate}}">
-            <input type="text" ng-model="model.loginData.login" id="lmx-login_{{model.identifier}}" name="login" ng-disabled="authInProgress" placeholder="0000 0000 0000 0000" mask="9999 9999 9999 9999" clean="true" validate="false" restrict="reject" required="">
-        </form-group>
-        <form-group label-text="{{'authentication.password' | translate}}">
-            <input type="password" ng-model="model.loginData.password" id="lmx-password" name="password" ng-disabled="authInProgress" required="">
-        </form-group>
-        <div class="lmx-auth-links lmx-row" ng-class="{'lmx-invisible': authInProgress}">
-            <div><a ng-click="resetPassword()" href="">{{'authentication.forgotPassword' | translate}}</a></div>
-            <div><a href="#registration">{{'authentication.register' | translate}}</a></div>
+        <div ng-if="cvcRequired">
+            <p>{{cvcMessage}}</p>
+            <form-group label-text="{{'authentication.code' | translate}}">
+                <input type="text" ng-model="model.cvcData.password" id="lmx-cvc" name="cvc" ng-disabled="authInProgress" required="">
+            </form-group>
+            <div>
+                <a id="lmx-confirm-code-repeated" ng-click="resendCode()" ng-hide="authInProgress" href="">{{'resetPassword.resendCode' | translate}}</a>
+            </div>
+        </div>
+        <div ng-if="!cvcRequired">
+            <form-group ng-if="model.identifier === IDENTIFIERS.phone" label-text="{{'identifiers.' + model.identifier | translate}}">
+                <phone-input ng-model="model.loginData.login" id="lmx-login_{{model.identifier}}" name="login" ng-disabled="authInProgress" required="" autofocus=""></phone-input>
+            </form-group>
+            <form-group ng-if="model.identifier === IDENTIFIERS.email" label-text="{{'identifiers.' + model.identifier | translate}}">
+                <input type="email" ng-model="model.loginData.login" id="lmx-login_{{model.identifier}}" name="login" placeholder="example@mail.com" required="">
+            </form-group>
+            <form-group ng-if="model.identifier === IDENTIFIERS.card" label-text="{{'identifiers.' + model.identifier | translate}}">
+                <input type="text" ng-model="model.loginData.login" id="lmx-login_{{model.identifier}}" name="login" ng-disabled="authInProgress" placeholder="0000 0000 0000 0000" mask="9999 9999 9999 9999" clean="true" validate="false" restrict="reject" required="">
+            </form-group>
+            <form-group label-text="{{'authentication.password' | translate}}">
+                <input type="password" ng-model="model.loginData.password" id="lmx-password" name="password" ng-disabled="authInProgress" required="">
+            </form-group>
+            <div ng-if="!cvcRequired" class="lmx-auth-links lmx-row" ng-class="{'lmx-invisible': authInProgress}">
+                <div><a ng-click="resetPassword()" href="">{{'authentication.forgotPassword' | translate}}</a></div>
+                <div><a href="#registration">{{'authentication.register' | translate}}</a></div>
+            </div>
         </div>
         <div class="lmx-btn-container">
+            <button type="reset" ng-hide="authInProgress" ng-if="cvcRequired" ng-click="cancelCvcConfirmation()">
+                {{'buttons.cancel' | translate}}
+            </button>
             <button type="submit" ng-hide="authInProgress">{{'authentication.login' | translate}}</button>
 
             <inline-loader line="">authInProgress</inline-loader>
         </div>
-        <lmx-social ng-hide="authInProgress"></lmx-social>
+        <lmx-social ng-if="!cvcRequired" ng-hide="authInProgress"></lmx-social>
     </form>
 </div>

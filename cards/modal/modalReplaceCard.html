@@ -9,6 +9,9 @@
                 <form-group label-text="{{'cards.replaceCardModal.cardNumber' | translate}}">
                     <input type="text" ng-model="model.cardNumber" ng-disabled="inProgress" id="lmx-cardNumber" name="cardNumber" required="" autofocus="">
                 </form-group>
+                <form-group ng-if="cvcCodeCardsRegistration" label-text="{{'cards.replaceCardModal.cvcCode' | translate}}">
+                    <input type="number" ng-model="model.cvcCode" ng-disabled="inProgress" id="lmx-cvcCode" name="cvcCode">
+                </form-group>
                 <form-group label-text="{{'cards.replaceCardModal.password' | translate}}">
                     <input type="password" ng-model="model.password" ng-disabled="inProgress" id="lmx-password" name="password" autocomplete="off" required="">
                 </form-group>
