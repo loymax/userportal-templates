@@ -2,7 +2,8 @@
     <div class="lmx-card-content lmx-clearfix">
         <div ng-if=":: goodsPreview" class="lmx-goods-preview">
             <div class="lmx-selected-count">
-                {{('personalGoods.goodsSelected' | translate: {approvedCount: offer.approvedGoodsCount, maxGoodsCount: offer.attribute.maxGoodsCount})}}
+                {{('personalGoods.goodsSelected' | translate: {approvedCount:
+                offer.approvedGoodsCount, maxGoodsCount: offer.attribute.maxGoodsCount})}}
             </div>
             <div ng-repeat="goods in offer.approvedGoods track by goods.id" class="lmx-goods">
                 <img ng-src="{{:: goods.imgUrl}}" fallback-image="" alt="" title="{{:: goods.title}}">
@@ -17,14 +18,19 @@
         </div>
 
         <div ng-if="showFullDescription" class="lmx-description lmx-row" ng-bind-html="offer.description | markdown"></div>
-        <div ng-if="!showFullDescription" class="lmx-description lmx-row">{{:: offer.shortDescription}}</div>
+        <div ng-if="!showFullDescription" class="lmx-description lmx-row">
+            {{:: offer.shortDescription}}
+        </div>
         <div class="lmx-duration lmx-row">
             <b>{{'personalGoods.offerPeriod' | translate}}:</b>
             <div>{{:: offer.begin | toUTC | dateRange: (offer.end | toUTC) | capitalize}}</div>
         </div>
         <div class="lmx-edit-duration lmx-row">
             <b ng-bind-html="('personalGoods.editingNotAvailable' | translate) + ':'"></b>
-            <div>{{:: offer.attribute.startFillDate | toUTC | dateRange: (offer.attribute.endFillDate | toUTC) | capitalize}}</div>
+            <div>
+                {{:: offer.attribute.startFillDate | toUTC | dateRange: (offer.attribute.endFillDate
+                | toUTC) | capitalize}}
+            </div>
         </div>
     </div>
     <div class="lmx-card-action lmx-clearfix">

@@ -1,6 +1,6 @@
 <div class="lmx-tenter-offer">
     <h2>{{'registration.tenderOfferStep.title' | translate}}</h2>
-    <notifications area="registration"></notifications>
+    <lmx-notifications area="registration"></lmx-notifications>
     <form novalidate="" name="acceptTenderOfferForm" ng-submit="acceptTenderOfferForm.$valid && isOfferAndAgreementLoaded && acceptTenderOffer()" loader="inProgress || (isOfferAndAgreementLoaded === undefined)">
         <lmx-scroller class="lmx-margin-bottom">
             <div class="lmx-tender-offer-content" ng-bind-html="tenderOfferFile"></div>

@@ -20,12 +20,16 @@
                         <lmx-scroller ng-hide="loaders.merchantsList">
                             <ul>
                                 <li ng-repeat="merchant in merchants | limitTo: merchantsLimit track by merchant.id" ng-init="isUnclickable = !merchant.location" ng-class="::{'lmx-unclickable': isUnclickable}" ng-click="!isUnclickable && showMerchantOnMap($index)">
-                                    <p>{{:: merchant.title}}{{:: merchant.location ? (', ' + merchant.location.description) : ''}}</p>
+                                    <p>
+                                        {{:: merchant.title}}{{:: merchant.location ? (', ' +
+                                        merchant.location.description) : ''}}
+                                    </p>
                                 </li>
                             </ul>
 
                             <a class="lmx-pseudolink" ng-if="merchants.length > merchantsLimit" ng-click="changeListExpansionState(true)" href="">
-                                <span ng-if="merchantsCountText">{{'merchants.showAll' | translate}} <span ng-bind-html="merchantsCountText"></span></span>
+                                <span ng-if="merchantsCountText">{{'merchants.showAll' | translate}}
+                                    <span ng-bind-html="merchantsCountText"></span></span>
                             </a>
                             <a class="lmx-pseudolink" ng-if="merchantsLimit === merchants.length" ng-click="changeListExpansionState()" href="">
                                 {{'merchants.hide' | translate}}
@@ -36,30 +40,35 @@
                     <lmx-map class="lmx-map" data="merchants" ng-if="merchants.length && !loaders.brands"></lmx-map>
 
                     <script type="text/javascript">
-                        document.addEventListener('lmxMapReady', function () {
+                        document.addEventListener("lmxMapReady", function() {
                             var map = window.lmxMap;
-                            map.balloon.events.add('open', function () {
-                                $('.ymaps-2-1-74-panel-pane').addClass('panel-opened');
-                                $('.ymaps-2-1-74-panel-pane').removeClass('panel-closed');
-                                $('.ymaps-2-1-74-copyrights-pane').addClass('copyrights-hidden');
+                            map.balloon.events.add("open", function() {
+                                $(".ymaps-2-1-74-panel-pane").addClass("panel-opened");
+                                $(".ymaps-2-1-74-panel-pane").removeClass("panel-closed");
+                                $(".ymaps-2-1-74-copyrights-pane").addClass("copyrights-hidden");
                             });
-                            map.balloon.events.add('close', function () {
-                                $('.ymaps-2-1-74-panel-pane').addClass('panel-closed');
-                                $('.ymaps-2-1-74-panel-pane').removeClass('panel-opened');
-                                $('.ymaps-2-1-74-copyrights-pane').removeClass('copyrights-hidden');
+                            map.balloon.events.add("close", function() {
+                                $(".ymaps-2-1-74-panel-pane").addClass("panel-closed");
+                                $(".ymaps-2-1-74-panel-pane").removeClass("panel-opened");
+                                $(".ymaps-2-1-74-copyrights-pane").removeClass("copyrights-hidden");
                             });
-                        })
+                        });
                     </script>
                     <style>
                         @media (max-width: 450px) {
                             .ymaps-2-1-74-panel-pane.panel-opened,
-                            .ymaps-2-1-74-panel-pane.panel-opened .ymaps-2-1-74-balloon-panel .ymaps-2-1-74-balloon {
+                            .ymaps-2-1-74-panel-pane.panel-opened
+                                .ymaps-2-1-74-balloon-panel
+                                .ymaps-2-1-74-balloon {
                                 top: 10px;
                                 left: 10px;
                                 right: 10px;
                                 bottom: 10px;
                             }
-                            .ymaps-2-1-74-panel-pane.panel-opened .ymaps-2-1-74-balloon-panel .ymaps-2-1-74-balloon__content ymaps {
+                            .ymaps-2-1-74-panel-pane.panel-opened
+                                .ymaps-2-1-74-balloon-panel
+                                .ymaps-2-1-74-balloon__content
+                                ymaps {
                                 overflow-y: visible !important;
                                 height: 100% !important;
                             }
@@ -70,11 +79,14 @@
                     </style>
                 </div>
                 <div ng-if="!merchants.length && !loaders.merchantsList">
-                    {{'merchants.' + (filterByRegion ? 'filteredNotFound' : 'notFound') | translate}}
+                    {{'merchants.' + (filterByRegion ? 'filteredNotFound' : 'notFound') |
+                    translate}}
                 </div>
 
                 <div class="lmx-offers lmx-row" ng-if="offers.length" loader="loaders.offers">
-                    <h3>{{'merchants.offers' | translate}} &laquo;{{titleOfMerchantOffers}}&raquo;</h3>
+                    <h3>
+                        {{'merchants.offers' | translate}} &laquo;{{titleOfMerchantOffers}}&raquo;
+                    </h3>
                     <offers-list offers="offers"></offers-list>
                 </div>
             </div>

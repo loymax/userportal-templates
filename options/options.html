@@ -9,7 +9,9 @@
                     <label for="lmx-api">API</label>
                 </td>
                 <td>
-                    <button type="button" ng-click="saveConfiguration('host', api)">{{'buttons.save' | translate}}</button>
+                    <button type="button" ng-click="saveConfiguration('host', api)">
+                        {{'buttons.save' | translate}}
+                    </button>
                 </td>
             </tr>
             <tr>
@@ -18,7 +20,9 @@
                     <label for="lmx-showcaseApi">ShowcaseAPI</label>
                 </td>
                 <td>
-                    <button type="button" ng-click="saveConfiguration('showcaseHost', showcaseApi)">{{'buttons.save' | translate}}</button>
+                    <button type="button" ng-click="saveConfiguration('showcaseHost', showcaseApi)">
+                        {{'buttons.save' | translate}}
+                    </button>
                 </td>
             </tr>
             <tr>
@@ -27,7 +31,9 @@
                     <label for="lmx-locales">Локализации</label>
                 </td>
                 <td>
-                    <button type="button" ng-click="saveConfiguration('locales', locales)">{{'buttons.save' | translate}}</button>
+                    <button type="button" ng-click="saveConfiguration('locales', locales)">
+                        {{'buttons.save' | translate}}
+                    </button>
                 </td>
             </tr>
             <tr>
@@ -36,7 +42,9 @@
                     <label for="lmx-reCaptchaSiteKey">reCaptchaSiteKey</label>
                 </td>
                 <td>
-                    <button type="button" ng-click="saveConfiguration('reCaptchaSiteKey', reCaptchaSiteKey)">{{'buttons.save' | translate}}</button>
+                    <button type="button" ng-click="saveConfiguration('reCaptchaSiteKey', reCaptchaSiteKey)">
+                        {{'buttons.save' | translate}}
+                    </button>
                 </td>
             </tr>
             <tr>
@@ -45,26 +53,53 @@
                     <label ng-class="{'active': oAuthClientId}" for="lmx-oAuthClientId">oAuthClientId</label>
                 </td>
                 <td>
-                    <button type="button" ng-click="saveConfiguration('oAuthClientId', oAuthClientId)">{{'buttons.save' | translate}}</button>
+                    <button type="button" ng-click="saveConfiguration('oAuthClientId', oAuthClientId)">
+                        {{'buttons.save' | translate}}
+                    </button>
                 </td>
             </tr>
         </table>
 
-        <h2>Опции</h2>
+        <h2>Опции компонент</h2>
+        <div>
+            <table ng-repeat="(key, value) in components">
+                <th>{{optionsNames[key]}}</th>
 
-        <form ng-submit="saveOptions()">
+                <tr ng-repeat="(compKey, compValue) in value">
+                    <td>{{compKey}}</td>
+                    <td ng-init="inputType = getType(compValue)" ng-switch="inputType">
+                        <textarea ng-switch-when="textarea" ng-attr-id="{{compKey}}" readonly="">
+{{value[compKey] | json}}</textarea>
+                        <input ng-switch-default="" ng-attr-id="{{compKey}}" ng-attr-type="{{inputType}}" ng-class="'lmx-'+getClass(compValue)" ng-model="value[compKey]">
+                        <label ng-attr-for="{{compKey}}"></label>
+                    </td>
+                    <td>{{optionsNames[compKey]}}</td>
+                </tr>
+            </table>
+
+            <button type="button" ng-click="saveComponentsOptions()">
+                {{'buttons.save' | translate}}
+            </button>
+        </div>
+
+        <h2>Общие опции</h2>
+        <div>
             <table>
-                <tr ng-repeat="(key, value) in options">
+                <tr ng-repeat="(key, value) in common">
                     <td>{{key}}</td>
                     <td ng-init="inputType = getType(value)" ng-switch="inputType">
-                        <textarea ng-switch-when="textarea" ng-attr-id="{{key}}" readonly="">{{options[key] | json}}</textarea>
-                        <input ng-switch-default="" ng-attr-id="{{key}}" ng-attr-type="{{inputType}}" ng-class="'lmx-'+getClass(value)" ng-model="options[key]">
+                        <textarea ng-switch-when="textarea" ng-attr-id="{{key}}" readonly="">
+{{common[key] | json}}</textarea>
+                        <input ng-switch-default="" ng-attr-id="{{key}}" ng-attr-type="{{inputType}}" ng-class="'lmx-'+getClass(value)" ng-model="common[key]">
                         <label ng-attr-for="{{key}}"></label>
                     </td>
                     <td>{{optionsNames[key]}}</td>
                 </tr>
             </table>
-            <button type="submit">{{'buttons.save' | translate}}</button>
-        </form>
+
+            <button type="button" ng-click="saveCommonOptions()">
+                {{'buttons.save' | translate}}
+            </button>
+        </div>
     </section>
 </div>

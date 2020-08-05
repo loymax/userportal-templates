@@ -5,12 +5,15 @@
             <div ng-if="!inProgress">
                 <div>
                     <p>{{'favoriteGoods.info.description' | translate}}.</p>
-                    <p>{{'favoriteGoods.info.limitation.part1' | translate}}
+                    <p>
+                        {{'favoriteGoods.info.limitation.part1' | translate}}
                         <a href="#offers">{{'favoriteGoods.info.limitation.part2' | translate}}</a>.
                     </p>
                 </div>
                 <div class="lmx-favorite-goods-list">
-                    <p ng-if="!(favoriteGoods && favoriteGoods.goods && favoriteGoods.goods.length)">{{'favoriteGoods.favoriteGoodsEmpty' | translate}}</p>
+                    <p ng-if="!(favoriteGoods && favoriteGoods.goods && favoriteGoods.goods.length)">
+                        {{'favoriteGoods.favoriteGoodsEmpty' | translate}}
+                    </p>
                     <favorite-good favorite-good="favoriteGoodsItem" change-good="changeGood" ng-repeat="favoriteGoodsItem in favoriteGoods.goods" loader="goodsInProgres_{{:: favoriteGoodsItem.position}}"></favorite-good>
                 </div>
             </div>

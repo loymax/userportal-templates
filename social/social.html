@@ -18,7 +18,8 @@
                     <img class="lmx-social-logo" alt="{{:: client.name }}" ng-click="authHandler(client)" ng-src="{{:: socialImagesPath}}/{{:: client.providerType.toLowerCase()}}-logo.svg" fallback-image="">
 
                     <div class="lmx-social-action">
-                        <a ng-click="toggleBind(client)" class="lmx-pseudolink" href="">{{'accounts.socials.' + (isBinded(client) ? 'unbind' : 'bind') | translate}}</a>
+                        <a ng-click="toggleBind(client)" class="lmx-pseudolink" href="">{{'accounts.socials.' + (isBinded(client) ? 'unbind' : 'bind') |
+                            translate}}</a>
                     </div>
                 </li>
             </ul>

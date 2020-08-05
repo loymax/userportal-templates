@@ -12,8 +12,10 @@
             <div ng-if="triedToBuy">
                 <div ng-if="result.success">
                     <span ng-bind-html="'showcase.buyCoupon.couponBought' | translate: {couponNumber: result.success.text}"></span>
-                    <br>{{'showcase.buyCoupon.date' | translate}}: {{:: result.success.recievedDate | shortDateTime}}
-                    <span ng-if="result.success.expireDate"><br>{{'showcase.buyCoupon.expirationDate' | translate}} {{:: result.success.expireDate | shortDateTime}}</span>
+                    <br>{{'showcase.buyCoupon.date' | translate}}: {{::
+                    result.success.recievedDate | shortDateTime}}
+                    <span ng-if="result.success.expireDate"><br>{{'showcase.buyCoupon.expirationDate' | translate}} {{::
+                        result.success.expireDate | shortDateTime}}</span>
                 </div>
                 <div ng-if="result.error">
                     <pre>{{'showcase.buyCoupon.error' | translate}}</pre>
@@ -23,8 +25,12 @@
     </div>
     <div class="modal-footer lmx-btn-container">
         <div ng-if="!triedToBuy">
-            <button type="button" ng-click="buyCoupon(coupon.id)">{{'showcase.buyCoupon.payBonuses' | translate}}</button>
-            <button type="button" class="lmx-btn-cancel" ng-click="cancel()">{{'buttons.cancel' | translate}}</button>
+            <button type="button" ng-click="buyCoupon(coupon.id)">
+                {{'showcase.buyCoupon.payBonuses' | translate}}
+            </button>
+            <button type="button" class="lmx-btn-cancel" ng-click="cancel()">
+                {{'buttons.cancel' | translate}}
+            </button>
         </div>
         <div ng-if="triedToBuy">
             <button type="button" ng-click="cancel()">{{'buttons.close' | translate}}</button>

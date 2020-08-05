@@ -1,7 +1,7 @@
 <div class="lmx-container lmx-personal-offer" loader="inProgress">
     <div ng-if="!inProgress">
         <div class="lmx-margin-bottom">
-            <a href="#personal-offers" class="lmx-go-back-link">&larr; {{'buttons.backToList' | translate}}</a>
+            <a href="{{:: personalOffersUrl}}" class="lmx-go-back-link">&larr; {{'buttons.backToList' | translate}}</a>
         </div>
 
         <personal-offer-content class="lmx-margin-bottom" personal-offer="personalOffer" show-full-description="true"></personal-offer-content>
@@ -18,7 +18,9 @@
                         <dt class="lmx-offer-detail__title">{{'personalOffers.offer' | translate}}:</dt>
                         <dd class="lmx-offer-detail__description">{{::offerDetail.description}}</dd>
 
-                        <dt class="lmx-offer-detail__title">{{'personalOffers.details' | translate}}:</dt>
+                        <dt class="lmx-offer-detail__title">
+                            {{'personalOffers.details' | translate}}:
+                        </dt>
                         <dd class="lmx-offer-detail__values">
                             <personal-offer-discount-view ng-if="offerDetail.discount" value="offerDetail.discount.value" type="offerDetail.discount.$type" measure-amount="offerDetail.discount.measureAmount" discount-type="offerDetail.discount.discountType"></personal-offer-discount-view>
                             <div>{{::offerDetail.annotation}}</div>
@@ -29,13 +31,19 @@
                         </dt>
                         <dd class="lmx-offer-detail__dates" ng-if="offerDetail.detailBeginLocalDate || offerDetail.detailEndLocalDate">
                             <span ng-if="offerDetail.detailBeginLocalDate && !offerDetail.detailEndLocalDate">
-                                {{('personalOffers.detailPeriod' | translate: {offerBeginning: (offerDetail.detailBeginLocalDate | toUTC | shortDate), offerEnd: ('personalOffers.offerEnd' | translate)})}}
+                                {{('personalOffers.detailPeriod' | translate: {offerBeginning:
+                                (offerDetail.detailBeginLocalDate | toUTC | shortDate), offerEnd:
+                                ('personalOffers.offerEnd' | translate)})}}
                             </span>
                             <span ng-if="!offerDetail.detailBeginLocalDate && offerDetail.detailEndLocalDate">
-                                {{('personalOffers.detailPeriod' | translate: {offerBeginning: ('personalOffers.offerBeginning' | translate), offerEnd: (offerDetail.detailEndLocalDate | toUTC | shortDate)})}}
+                                {{('personalOffers.detailPeriod' | translate: {offerBeginning:
+                                ('personalOffers.offerBeginning' | translate), offerEnd:
+                                (offerDetail.detailEndLocalDate | toUTC | shortDate)})}}
                             </span>
                             <span ng-if="offerDetail.detailBeginLocalDate && offerDetail.detailEndLocalDate">
-                                {{('personalOffers.detailPeriod' | translate: {offerBeginning: (offerDetail.detailBeginLocalDate | toUTC | shortDate), offerEnd: (offerDetail.detailEndLocalDate | toUTC | shortDate)})}}
+                                {{('personalOffers.detailPeriod' | translate: {offerBeginning:
+                                (offerDetail.detailBeginLocalDate | toUTC | shortDate), offerEnd:
+                                (offerDetail.detailEndLocalDate | toUTC | shortDate)})}}
                             </span>
                         </dd>
 

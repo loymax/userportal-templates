@@ -14,7 +14,9 @@
                     <div ng-if="activePersonalOffers.length">
                         <personal-goods-offer-info ng-repeat="offer in activePersonalOffers track by offer.id" offer="offer"></personal-goods-offer-info>
                     </div>
-                    <div ng-if="!activePersonalOffers.length">{{'personalGoods.noActiveOffers' | translate}}</div>
+                    <div ng-if="!activePersonalOffers.length">
+                        {{'personalGoods.noActiveOffers' | translate}}
+                    </div>
                 </section>
 
                 <section class="lmx-future-goods lmx-margin-bottom" ng-if="futurePersonalOffers.length">

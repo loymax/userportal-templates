@@ -11,16 +11,27 @@
         </div>
         <div ng-switch-when="false" class="lmx-card-number">{{:: card.number | charsDivide: 4}}</div>
 
-        <div class="lmx-card-category" ng-hide="::card.cardCategory.title.toLowerCase() === 'стандартная'">{{:: card.cardCategory.title}}</div>
-        <div class="lmx-card-blocked-state-info" ng-if="::card.block">{{'cards.info.blocked' | translate}}</div>
+        <div class="lmx-card-category" ng-hide="::card.cardCategory.title.toLowerCase() === 'стандартная'">
+            {{:: card.cardCategory.title}}
+        </div>
+        <div class="lmx-card-blocked-state-info" ng-if="::card.block">
+            {{'cards.info.blocked' | translate}}
+        </div>
 
         <dl class="lmx-card-owner" ng-if="::card.cardOwnerInfo.firstName || card.cardOwnerInfo.lastName || card.patronymicName">
-            <dt>{{'cards.info.owner' | translate}}: </dt>
-            <dd>{{:: card.cardOwnerInfo.lastName}} {{:: card.cardOwnerInfo.firstName}} {{:: card.cardOwnerInfo.patronymicName}}</dd>
+            <dt>{{'cards.info.owner' | translate}}:</dt>
+            <dd>
+                <span>{{:: card.cardOwnerInfo.lastName}}</span>
+                <span>{{:: card.cardOwnerInfo.firstName}}</span>
+                <span>{{:: card.cardOwnerInfo.patronymicName}}</span>
+            </dd>
         </dl>
         <dl class="lmx-card-paid">
-            <dt>{{'cards.info.paid' | translate}}: </dt>
-            <dd>{{:: card.paid.amount | number: 2}} {{:: card.paid.currencyInfo.nameCases.abbreviation}}</dd>
+            <dt>{{'cards.info.paid' | translate}}:</dt>
+            <dd>
+                <span>{{:: card.paid.amount | number: 2}}</span>
+                <span>{{:: card.paid.currencyInfo.nameCases.abbreviation}}</span>
+            </dd>
         </dl>
         <div ng-if=":: !card.isInGroup" class="lmx-card-actions">
             <button ng-class="card.block ? 'lmx-card-action__unblock' : 'lmx-card-action__block'" class="lmx-block-btn" ng-if="card.cardActionAccessInfo.canBlock" ng-click="blockStateChange(card)" type="button">

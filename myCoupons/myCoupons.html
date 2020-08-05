@@ -27,10 +27,12 @@
                                 </div>
                             </div>
                             <div class="lmx-coupon-dates">
-                                {{'coupons.date' | translate}}: {{:: coupon.recievedDate | shortDateTime}}
+                                {{'coupons.date' | translate}}: {{:: coupon.recievedDate |
+                                shortDateTime}}
                             </div>
                             <div ng-if="coupon.expireDate" class="lmx-rating-container">
-                                {{'coupons.expirationDate' | translate}}: {{:: coupon.expireDate | shortDateTime}}
+                                {{'coupons.expirationDate' | translate}}: {{:: coupon.expireDate |
+                                shortDateTime}}
                             </div>
                         </div>
                         <div class="lmx-coupon-actions">

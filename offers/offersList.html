@@ -6,19 +6,31 @@
         <div class="lmx-content">
             <div class="lmx-reward-thumbnail" ng-if=":: offer.rewardThumbnail" ng-switch="rewardThumbnailTypes[offer.rewardThumbnail.$type]">
                 <div class="lmx-two-line-text" ng-switch-when="twoLineText">
-                    <div title="{{::offer.rewardThumbnail.firstLine}}" class="lmx-first-line">{{::offer.rewardThumbnail.firstLine}}</div>
-                    <div title="{{::offer.rewardThumbnail.secondLine}}" class="lmx-second-line">{{::offer.rewardThumbnail.secondLine}}</div>
+                    <div title="{{::offer.rewardThumbnail.firstLine}}" class="lmx-first-line">
+                        {{::offer.rewardThumbnail.firstLine}}
+                    </div>
+                    <div title="{{::offer.rewardThumbnail.secondLine}}" class="lmx-second-line">
+                        {{::offer.rewardThumbnail.secondLine}}
+                    </div>
                 </div>
                 <div class="lmx-image-with-text" ng-switch-when="imageWithText">
-                    <div title="{{::offer.rewardThumbnail.header}}">{{::offer.rewardThumbnail.header}}</div>
+                    <div title="{{::offer.rewardThumbnail.header}}">
+                        {{::offer.rewardThumbnail.header}}
+                    </div>
                     <div class="lmx-reward-image">
                         <img ng-src="{{::offer.rewardThumbnail.imgUrl}}" fallback-image="" fallback-title="{{'imageNotFound' | translate}}" alt="">
                     </div>
-                    <div title="{{::offer.rewardThumbnail.footer}}">{{::offer.rewardThumbnail.footer}}</div>
+                    <div title="{{::offer.rewardThumbnail.footer}}">
+                        {{::offer.rewardThumbnail.footer}}
+                    </div>
                 </div>
                 <div class="lmx-old-new-price" ng-switch-when="oldNewPrice">
-                    <div title="{{::offer.rewardThumbnail.oldPrice}}" class="lmx-old-price">{{::offer.rewardThumbnail.oldPrice}}</div>
-                    <div title="{{::offer.rewardThumbnail.newPrice}}" class="lmx-new-price">{{::offer.rewardThumbnail.newPrice}}</div>
+                    <div title="{{::offer.rewardThumbnail.oldPrice}}" class="lmx-old-price">
+                        {{::offer.rewardThumbnail.oldPrice}}
+                    </div>
+                    <div title="{{::offer.rewardThumbnail.newPrice}}" class="lmx-new-price">
+                        {{::offer.rewardThumbnail.newPrice}}
+                    </div>
                 </div>
             </div>
             <div class="lmx-card-content">
@@ -27,5 +39,8 @@
             </div>
         </div>
     </div>
-    <div ng-if="!offers.length">{{'offers.' + (offerState === states.active ? 'noActiveOffers' : 'noFutureOffers') | translate}}</div>
+    <div ng-if="!offers.length">
+        {{'offers.' + (offerState === states.active ? 'noActiveOffers' : 'noFutureOffers') |
+        translate}}
+    </div>
 </div>

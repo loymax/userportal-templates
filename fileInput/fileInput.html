@@ -3,7 +3,7 @@
         <inline-loader>loader</inline-loader>
         <input type="file" ng-model="attachment.fileInfo" id="lmx-file-input" ng-attr-name="{{inputName}}" base-sixty-four-input="" maxsize="5120" do-not-parse-if-oversize="" onloadstart="onFileLoadStart" onerror="onFileLoadError" onload="onFileLoadSuccess">
         <label for="lmx-file-input" ng-switch="loadError.value" ng-hide="loader" ng-click="clearAttachment(); loadError.value = false;">
-            <button type="button">{{'buttons.attachFile' | translate}}</button>
+            <a>{{'buttons.attachFile' | translate}}</a>
             <span class="lmx-file-input-span"></span>
             <span ng-switch-when="false" ng-if="attachment.fileInfo" class="lmx-attachment">
                 <span class="lmx-attachment-name" ng-attr-title="{{attachment.fileInfo.filename}}">{{attachment.fileInfo.filename}}</span>

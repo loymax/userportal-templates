@@ -9,7 +9,8 @@
     <div class="lmx-card-reveal">
         <span class="lmx-card-title"><span class="glyphicon glyphicon-remove"></span>{{coupon.name}}</span>
         <p>
-            <span><b>{{'coupons.description' | translate}}:</b>{{:: couponInfo.description || ('coupons.noDescription' | translate)}}</span>
+            <span><b>{{'coupons.description' | translate}}:</b>{{:: couponInfo.description ||
+                ('coupons.noDescription' | translate)}}</span>
         </p>
         <button ng-if=":: loggedIn" type="button" ng-click="openBuyCouponModal(coupon)">
             <div>

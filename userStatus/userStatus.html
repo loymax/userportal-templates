@@ -23,16 +23,15 @@
                 <dl class="lmx-user-status">
                     <dt>
                         {{'status.currentLevelNextMonth' | translate}}
-                        "{{:: currentLevelNextMonth.name}}"
+                        "{{::currentLevelNextMonth.name}}"
                         {{'status.necessaryForNextLevel.nextLevel' | translate | lowercase}}
                     </dt>
                 </dl>
                 <dl ng-if=":: status.amountToThisLevel === 0 && userStatus.statuses[$index + 1].amountToThisLevel > 0 && $index !== userStatus.statuses.length - 1" ng-init="nextStatus = {amountToNextLevel: userStatus.statuses[$index + 1].amountToThisLevel, nextLevelName: userStatus.statuses[$index + 1].name}" class="lmx-user-status">
                     <dt>
-                        {{'status.necessaryForNextLevel.necessary' | translate}}
-                        {{:: nextStatus.amountToNextLevel}}
-                        {{'status.necessaryForNextLevel.meetcoinFor' | translate | lowercase}}
-                        "{{:: nextStatus.nextLevelName}}"
+                        {{'status.necessaryForNextLevel.necessary' | translate}} {{::
+                        nextStatus.amountToNextLevel}} {{'status.necessaryForNextLevel.meetcoinFor'
+                        | translate | lowercase}} "{{:: nextStatus.nextLevelName}}"
                         {{'status.necessaryForNextLevel.nextLevel' | translate | lowercase}}
                     </dt>
                 </dl>
