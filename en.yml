@@ -61,6 +61,7 @@ dateRange:
  to: "to"
  toTime: "to"
  since: "since"
+ untilNow: "date"
 reCaptcha:
  error: "Error in interaction with the validation server, please contact technical support"
 file:
@@ -246,6 +247,13 @@ feedback:
  operator: "Operator"
  file: "File"
  typeText: "Type a text..."
+balanceChanges:
+ purchaseAmount: "Purchase amount"
+ discounts: "The amount of direct discounts"
+ rewards: "The amount of bonuses accrued"
+ withdraws: "The amount of deductions"
+ percent: "Current bonus points accrual percentage"
+ notFound: "No data for the selected period"
 history:
  title: &history "Transaction history"
  fromDate: "From date"
@@ -260,6 +268,10 @@ history:
  showMore: "Show more"
  goToFullHistory: "Go to the full transaction history"
  notFound: "Nothing was found by your request, try changing the filter parameters"
+ operations: "Operations"
+ balanceChanges: "Balance changes"
+ showBalanceChange: "Show balance changes"
+ showOperations: "Show the operations"
  gift:
   purchase: "Purchase"
   withdraw: "Payment"

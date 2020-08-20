@@ -61,6 +61,7 @@ dateRange:
  to: "по"
  toTime: "до"
  since: "с"
+ untilNow: "н.в."
 reCaptcha:
  error: "Ошибка взаимодействия с сервером валидации, обратитесь в службу технической поддержки"
 file:
@@ -246,6 +247,13 @@ feedback:
  operator: "Оператор"
  file: "Файл"
  typeText: "Введите текст..."
+balanceChanges:
+ purchaseAmount: "Сумма покупок"
+ discounts: "Сумма прямых скидок"
+ rewards: "Сумма начислений"
+ withdraws: "Сумма списаний"
+ percent: "Текущий % начисления бонусов"
+ notFound: "Нет данных за выбранный период"
 history:
  title: &history "История операций"
  fromDate: "В период с"
@@ -260,6 +268,10 @@ history:
  showMore: "Показать ещё"
  goToFullHistory: "Перейти к полной истории операций"
  notFound: "По Вашему запросу ничего не найдено, попробуйте поменять параметры фильтров"
+ operations: "Операции"
+ balanceChanges: "Изменение баланса"
+ showBalanceChange: "Показать изменение баланса"
+ showOperations: "Показать операции"
  gift:
   purchase: "Покупка"
   withdraw: "Оплата"
