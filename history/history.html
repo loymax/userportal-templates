@@ -1,8 +1,9 @@
 <div class="lmx-container lmx-history">
     <section>
         <h2 ng-if=":: !isPreview">{{'history.title' | translate}}</h2>
-        <div loader="history === undefined">
-            <div ng-show=":: history">
+        <div class='status-history-block'>
+        <div loader="history === undefined" class="history-block">
+            <div ng-show=":: history" class="history-block-table">
                 <div ng-show=":: !isPreview" class="lmx-history-filters lmx-clearfix lmx-margin-bottom">
                     <div class="date-filters">
                         <div class="date-filter lmx-since-date-filter">
@@ -38,15 +39,17 @@
                                     <th>{{'history.date' | translate}}</th>
                                     <th>{{'history.cardNumber' | translate}}</th>
                                     <th>{{'history.description' | translate}}</th>
-                                    <th>{{'history.operation' | translate}}</th>
                                     <th>{{'history.amount' | translate}}</th>
+                                    <th>{{'history.operation' | translate}}</th>
                                     <th></th>
                                 </tr>
                                 </thead>
                                 <tbody ng-repeat="item in history.rows track by item.id" class-toggle-click="cheque-opened" ng-class="::{'lmx-empty-cheque': !item.data.chequeItems.length}">
                                 <tr class="lmx-operation-info">
                                     <td class="date-time" ng-attr-title="{{:: item.dateTime | toUTC | shortDateTime}}">
-                                        {{:: item.dateTime | toUTC | shortDateTime}}
+                                        <!-- {{:: item.dateTime | toUTC | shortDateTime}} -->
+                                        {{:: item.dateTime | date: 'd MMMM yyyy H:mm' }}
+                                        <span>{{:: item.dateTime | date: 'EEEE' }}</span>
                                     </td>
                                     <td class="lmx-identity" ng-attr-title="{{:: item.identity ? ('**** ' + (item.identity | lastCount: 4)) : undefined}}">
                                         <span ng-if="::item.identity">**** <b>{{:: item.identity | lastCount: 4 }}</b></span>
@@ -55,21 +58,8 @@
                                         <img ng-if=":: item.logoSquareUrl" ng-src="{{:: item.logoSquareUrl}}" class="lmx-logo-square" fallback-image="" fallback-title="{{'imageNotFound' | translate}}" alt="">
                                         <span class="lmx-description-text">{{:: item.description}}</span>
                                     </td>
-                                    <td class="lmx-withdraws lmx-text">
-                                        <div ng-if=":: item.data.withdraws.length" ng-repeat="wdrw in item.data.withdraws" ng-attr-title="{{'history.gift' + (item.data.isRefund ? 'Refund' : '' ) + '.withdraw' | translate}}" class="lmx-text-overflow-ellipsis">
-                                            {{'history.gift' + (item.data.isRefund ? 'Refund' : '' ) + '.withdraw' | translate}}
-                                        </div>
-                                        <div ng-if=":: item.data.rewards.length" ng-repeat="(type, values) in item.rewardsResult">
-                                            <div ng-repeat="(currency, value) in values" ng-attr-title="{{'history.gift' + (item.data.isRefund ? 'Refund.' : '.') + (type | lowerCamelCase) | translate}}" class="lmx-text-overflow-ellipsis">
-                                                {{'history.gift' + (item.data.isRefund ? 'Refund.' : '.') + (type | lowerCamelCase) | translate}}
-                                            </div>
-                                        </div>
-                                        <div ng-if=":: item.type == 'RewardData' || item.type == 'WithdrawData'" ng-attr-title="{{'history.gift' + (item.data.isRefund ? 'Refund.' : '.') + (item.type | lowerCamelCase) | translate}}" class="lmx-text-overflow-ellipsis">
-                                            {{'history.gift' + (item.data.isRefund ? 'Refund.' : '.') + (item.type | lowerCamelCase) | translate}}
-                                        </div>
-                                    </td>
                                     <td class="lmx-withdraws lmx-amount">
-                                        <div ng-if=":: item.data.withdraws.length" ng-repeat="wdrw in item.data.withdraws" ng-attr-title="{{:: (item.data.isRefund ? wdrw.amount.amount * -1 : wdrw.amount.amount) | number: 2}} {{:: wdrw.amount.currency }}" class="lmx-text-overflow-ellipsis">
+                                        <!-- <div ng-if=":: item.data.withdraws.length" ng-repeat="wdrw in item.data.withdraws" ng-attr-title="{{:: (item.data.isRefund ? wdrw.amount.amount * -1 : wdrw.amount.amount) | number: 2}} {{:: wdrw.amount.currency }}" class="lmx-text-overflow-ellipsis">
                                             {{:: (item.data.isRefund ? wdrw.amount.amount * -1 : wdrw.amount.amount) | number: 2}}
                                             {{:: wdrw.amount.currency }}
                                         </div>
@@ -82,8 +72,33 @@
                                         <div ng-if=":: item.type == 'RewardData' || item.type == 'WithdrawData'" ng-attr-title="{{:: (item.data.isRefund ? item.data.amount.amount * -1 : item.data.amount.amount) | number: 2}} {{:: item.data.amount.currency }}" class="lmx-text-overflow-ellipsis">
                                             {{:: (item.data.isRefund ? item.data.amount.amount * -1 : item.data.amount.amount) | number: 2}}
                                             {{:: item.data.amount.currency }}
+                                        </div> -->
+                                        <div ng-if="item.data.chequeItems.length">
+                                            {{::item.data.amount.amount | number: 2}} {{:: item.data.amount.currency }}
                                         </div>
                                     </td>
+                                    <td class="lmx-withdraws lmx-text">
+                                        <!-- <div ng-if=":: item.data.withdraws.length" ng-repeat="wdrw in item.data.withdraws" ng-attr-title="{{'history.gift' + (item.data.isRefund ? 'Refund' : '' ) + '.withdraw' | translate}}" class="lmx-text-overflow-ellipsis">
+                                            {{'history.gift' + (item.data.isRefund ? 'Refund' : '' ) + '.withdraw' | translate}}
+                                            {{:: (item.data.isRefund ? wdrw.amount.amount * -1 : wdrw.amount.amount) | number: 2}}
+                                            {{:: wdrw.amount.currency }}
+                                        </div> -->
+                                        <!-- <div ng-if=":: item.data.rewards.length" ng-repeat="(type, values) in item.rewardsResult"> -->
+                                        <div ng-if=":: item.data.rewards.length" ng-repeat="discount in item.data.rewards">
+                                            <!-- <div ng-repeat="(currency, value) in values" ng-attr-title="{{'history.gift' + (item.data.isRefund ? 'Refund.' : '.') + (type | lowerCamelCase) | translate}}" class="lmx-text-overflow-ellipsis"> -->
+                                                <!-- {{'history.gift' + (item.data.isRefund ? 'Refund.' : '.') + (type | lowerCamelCase) | translate}} -->
+                                                <!-- {{:: (item.data.isRefund ? value * -1 : value) | number: 2}} -->
+                                                <!-- {{:: currency }} -->
+                                                <span ng-if="discount.rewardType == 'Discount'">{{::discount.amount.amount }} {{::discount.amount.currency}}</span>
+                                            <!-- </div> -->
+                                        </div>
+                                        <!-- <div ng-if=":: item.type == 'RewardData' || item.type == 'WithdrawData'" ng-attr-title="{{'history.gift' + (item.data.isRefund ? 'Refund.' : '.') + (item.type | lowerCamelCase) | translate}}" class="lmx-text-overflow-ellipsis">
+                                            {{'history.gift' + (item.data.isRefund ? 'Refund.' : '.') + (item.type | lowerCamelCase) | translate}}
+                                            {{:: (item.data.isRefund ? item.data.amount.amount * -1 : item.data.amount.amount) | number: 2}}
+                                            {{:: item.data.amount.currency }}
+                                        </div> -->
+                                    </td>
+                                    
                                     <td class="lmx-cheque-expander"></td>
                                 </tr>
                                 <tr class="lmx-cheque-info" ng-if="item.data.chequeItems.length">
@@ -91,10 +106,23 @@
                                         <div class="lmx-cheque-content">
                                             <div class="lmx-cheque-line" ng-repeat="chequeItem in item.data.chequeItems">
                                                 <span class="lmx-cheque-item">{{::chequeItem.description | nbspSpaces}}</span>
-                                                <span class="lmx-cheque-count">{{::chequeItem.count}} <span ng-if=":: chequeItem.unit" class="lmx-cheque-unit">{{:: chequeItem.unit}}</span></span>
+                                                <span class="lmx-cheque-count">{{::chequeItem.count}} </span>
+                                                <span ng-if=":: chequeItem.amount" class="lmx-cheque-amount">{{:: chequeItem.amount}} {{:: item.data.amount.currency }}</span>
                                             </div>
-                                            <div class="lmx-cheque-total">
-                                                {{::item.data.amount.amount | number: 2}} {{:: item.data.amount.currency }}
+                                            <div class="lmx-cheque-total total" ng-init='discountSum = { value: 0 } '>
+                                                <div ng-repeat="discount in item.data.rewards">
+                                                    <span ng-if="discount.rewardType == 'Discount'" ng-init='discountSum.value = discountSum.value + discount.amount.amount'></span>
+                                                </div>
+                                                <div class='lmx-cheque-total-text'>
+                                                    <span class='lmx-cheque-total text'>Сумма</span>
+                                                    <span class='lmx-cheque-total text'>Ваша скидка</span>
+                                                    <span class='lmx-cheque-total text'>ИТОГО</span>
+                                                </div>
+                                                <div class="lmx-cheque-total-count">
+                                                    <span class='lmx-cheque-total-amount amount'>{{ currency(item.data.amount.amount).add(discountSum.value) }} {{:: item.data.amount.currency }}</span>
+                                                    <span class='lmx-cheque-total-amount amount'>{{ discountSum.value }} {{:: item.data.amount.currency }}</span>
+                                                    <span class="lmx-cheque-total-amount amount">{{::item.data.amount.amount | number: 2}} {{:: item.data.amount.currency }}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </td>
@@ -116,6 +144,42 @@
                     {{'history.notFound' | translate}}
                 </div>
             </div>
+        </div>
+        <div class="status-block" ng-if='userStatus[0].statuses.length'>
+            <div class='month'>
+                <span class='lmx-definition'>{{userStatus[0].currentValue | number: 2 }} р.</span>
+                <span>Сумма покупок за месяц</span>
+            </div>
+            <div class='lmx-user-status__next-status' ng-if='userStatus[0].statuses.length'>
+                <div ng-if=":: userStatus[0].currentValue > userStatus[0].statuses[userStatus[0].statuses.length - 2].threshold" class="lmx-user-status lmx-user-status__value"
+                    ng-init="status.maxLevel = userStatus[0].statuses[userStatus[0].statuses.length - 1].name">
+                    <span class='lmx-text-nextlevel'>
+                        {{ 'status.currentLevelNextMonth' | translate}}
+                        {{ status.maxLevel }}
+                        {{ 'status.necessaryForNextLevel.nextLevel' | translate | lowercase}}
+                    </span>
+                </div>
+
+                <div ng-if=":: userStatus[0].currentValue <= userStatus[0].statuses[userStatus[0].statuses.length - 2].threshold"
+                    class="lmx-user-status lmx-user-status__value">
+                        <div ng-repeat="availableStatus in userStatus[0].statuses track by $index">
+                            <div ng-if="(userStatus[0].currentValue <= userStatus[0].statuses[$index].threshold) && ($index === 0 || userStatus[0].currentValue > userStatus[0].statuses[$index - 1].threshold)"
+                                ng-init="nextStatus = {amountToNextLevel: userStatus[0].statuses[$index].threshold - userStatus[0].currentValue + 0.01, nextLevelName: userStatus[0].statuses[$index + 1].name}">
+                                <div class='lmx-text-nextlevel'>
+                                    {{ nextStatus.amountToNextLevel | number: 2 }}
+                                </div>
+                                <span>
+                                    До {{ nextStatus.nextLevelName }}-статуса
+                                </span>
+                            </div>
+                        </div>               
+                </div>
+            </div>
+            <div class='economy'>
+                <p></p>
+                <span>Удалось сэкономить</span>
+            </div>
+        </div>
         </div>
     </section>
 </div>
