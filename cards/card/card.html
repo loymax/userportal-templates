@@ -1,17 +1,53 @@
 <div>
     <div class="lmx-card-item__image" ng-class="{'lmx-blocked': card.block}">
         <img ng-src="{{ card.imageUrl}}" fallback-image="" fallback-title="{{'imageNotFound' | translate}}" alt="">
+        <span class="lmx-pseudolink">{{:: card.number | charsDivide: 4}}</span>
     </div>
     <div class="lmx-card-item__info" ng-switch=":: !!cardNumberGraphicalCodes.length && !card.isInGroup">
         <div ng-switch-when="true">
             <!-- Пробел после :: в {{::cardNumberGraphicalCodes.join(' ')}} сводит префиксер с ума -->
-            <div class="lmx-card-number lmx-card-code lmx-{{::cardNumberGraphicalCodes.join(' lmx-')}}" ng-click="displayCodes(card)">
+            <!-- <div class="lmx-card-number lmx-card-code lmx-{{::cardNumberGraphicalCodes.join(' lmx-')}}" ng-click="displayCodes(card)"> -->
+            <div class="lmx-card-number lmx-card-code lmx-{{::cardNumberGraphicalCodes.join(' lmx-')}}">
                 <a class="lmx-pseudolink">{{:: card.number | charsDivide: 4}}</a>
             </div>
         </div>
         <div ng-switch-when="false" class="lmx-card-number">{{:: card.number | charsDivide: 4}}</div>
 
-        <div class="lmx-card-category" ng-hide="::card.cardCategory.title.toLowerCase() === 'стандартная'">{{:: card.cardCategory.title}}</div>
+        <div class="lmx-card-status" ng-if='userStatus[0].statuses.length'>
+            <span class='lmx-status-level'>{{'status.currentLevel' | translate}}:</span>
+            <span class='lmx-definition'>{{userStatus[0].currentStatus.name}}</span><br>
+            <div class='lmx-user-status__next-status' ng-if='userStatus[0].statuses.length'>
+                <div ng-if=":: userStatus[0].currentValue > userStatus[0].statuses[userStatus[0].statuses.length - 2].threshold" class="lmx-user-status lmx-user-status__value"
+                    ng-init="status.maxLevel = userStatus[0].statuses[userStatus[0].statuses.length - 1].name">
+                    <span class='lmx-text-nextlevel'>
+                        {{ 'status.currentLevelNextMonth' | translate}}
+                        {{ status.maxLevel }}
+                        {{ 'status.necessaryForNextLevel.nextLevel' | translate | lowercase}}
+                    </span>
+                </div>
+
+                <div ng-if=":: userStatus[0].currentValue <= userStatus[0].statuses[userStatus[0].statuses.length - 2].threshold"
+                    class="lmx-user-status lmx-user-status__value">
+                        <div ng-repeat="availableStatus in userStatus[0].statuses track by $index">
+                            <div ng-if="(userStatus[0].currentValue <= userStatus[0].statuses[$index].threshold) && ($index === 0 || userStatus[0].currentValue > userStatus[0].statuses[$index - 1].threshold)"
+                                ng-init="nextStatus = {amountToNextLevel: userStatus[0].statuses[$index].threshold - userStatus[0].currentValue + 0.01, nextLevelName: userStatus[0].statuses[$index + 1].name}">
+                                <div class='lmx-text-nextlevel'>
+                                    {{ 'status.necessaryForNextLevel.necessary' | translate }}
+                                    <span class='status-name'>{{ nextStatus.nextLevelName }}</span>
+                                    {{ 'status.necessaryForNextLevel.nextMonthLevel' | translate | lowercase }}
+                                    {{ nextStatus.amountToNextLevel | number: 2 }}₽
+                                </span>
+                            </div>
+                        </div>               
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="lmx-card-status" ng-if='!userStatus[0].statuses.length'>
+            <span class='lmx-status-level'>Текущий статус карты: <b>СТАНДАРТ</b></span>
+        </div>
+
+        <!-- <div class="lmx-card-category" ng-hide="::card.cardCategory.title.toLowerCase() === 'стандартная'">{{:: card.cardCategory.title}}</div>
         <div class="lmx-card-blocked-state-info" ng-if="::card.block">{{'cards.info.blocked' | translate}}</div>
 
         <dl class="lmx-card-owner" ng-if="::card.cardOwnerInfo.firstName || card.cardOwnerInfo.lastName || card.patronymicName">
@@ -21,7 +57,7 @@
         <dl class="lmx-card-paid">
             <dt>{{'cards.info.paid' | translate}}: </dt>
             <dd>{{:: card.paid.amount | number: 2}} {{:: card.paid.currencyInfo.nameCases.abbreviation}}</dd>
-        </dl>
+        </dl> -->
         <div ng-if=":: !card.isInGroup" class="lmx-card-actions">
             <button ng-class="card.block ? 'lmx-card-action__unblock' : 'lmx-card-action__block'" class="lmx-block-btn" ng-if="card.cardActionAccessInfo.canBlock" ng-click="blockStateChange(card)" type="button">
                 {{card.block ? 'cards.actions.unblock' : 'cards.actions.block' | translate}}
@@ -31,5 +67,5 @@
             </button>
             <a ng-if="card.walletUrl && !card.block && platfotm.currentPlatform" ng-href="{{::card.walletUrl}}" target="_blank" class="lmx-wallet-btn lmx-{{::platfotm.currentPlatform}}-wallet-btn"></a>
         </div>
-    </div>
+    
 </div>

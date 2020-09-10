@@ -1,6 +1,7 @@
 <div>
     <div class="modal-header">
         <div class="lmx-modal-closer" ng-click="close()"></div>
+        <div class='head'>{{ 'announcement.title' | translate }}</div>
         <h2>{{:: announcement.attributes.OfferTitle.value}}</h2>
     </div>
 
@@ -8,6 +9,10 @@
         <div class="modal-body">
             <div class="lmx-image">
                 <img ng-src="{{:: getAnnouncementImagePath(announcement.attributes.OfferImage.value)}}" fallback-image="" fallback-title="{{'imageNotFound' | translate}}" alt="">
+            </div>
+            <div class="lmx-announcement-date">
+                <span class='lmx-day'>{{:: announcement.beginDate | date: 'd' }}</span>
+                <span class='lmx-month'>{{:: announcement.beginDate | date: 'MMMM' }}</span>
             </div>
             <div class="lmx-description">{{:: announcement.attributes.OfferDescription.value}}</div>
         </div>

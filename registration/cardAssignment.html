@@ -13,7 +13,7 @@
         </div>
         <div class="lmx-btn-container">
             <div ng-hide="stepInProgress">
-                <button type="button" ng-click="cancel()">
+                <button type="button" class='lmx-btn-cancel' ng-click="cancel()">
                     {{'buttons.cancel' | translate}}
                 </button>
                 <button ng-if="isVirtualCardEmissionAllowed" type="button" ng-click="emitVirtualCard()" id="lmx-registration-assignCard__doNotHave">

@@ -1,0 +1,44 @@
+<div class="lmx-container lmx-history-discount">
+    <section>         
+        <div class='status-history-block'>
+        <div loader="history === undefined" class="history-block">
+            <div ng-show=":: history" class="status-block" ng-if='userStatus[0].statuses.length'>
+                <div class='lmx-month-buy'>
+                    <span class='lmx-definition'>{{userStatus[0].currentValue | number: 2 }} ₽</span>
+                    <span>Сумма покупок за месяц</span>
+                </div>
+                <div class='lmx-user-status__next-status' ng-if='userStatus[0].statuses.length'>
+                    <div ng-if=":: userStatus[0].currentValue > userStatus[0].statuses[userStatus[0].statuses.length - 2].threshold" class="lmx-user-status lmx-user-status__value"
+                        ng-init="status.maxLevel = userStatus[0].statuses[userStatus[0].statuses.length - 1].name">
+                        <span class='lmx-text-nextlevel'>
+                            {{ 'status.currentLevelNextMonth' | translate}}
+                            {{ status.maxLevel }}
+                            {{ 'status.necessaryForNextLevel.nextLevel' | translate | lowercase}}
+                        </span>
+                    </div>
+    
+                    <div ng-if=":: userStatus[0].currentValue <= userStatus[0].statuses[userStatus[0].statuses.length - 2].threshold"
+                        class="lmx-user-status lmx-user-status__value">
+                            <div ng-repeat="availableStatus in userStatus[0].statuses track by $index">
+                                <div ng-if="(userStatus[0].currentValue <= userStatus[0].statuses[$index].threshold) && ($index === 0 || userStatus[0].currentValue > userStatus[0].statuses[$index - 1].threshold)"
+                                    ng-init="nextStatus = {amountToNextLevel: userStatus[0].statuses[$index].threshold - userStatus[0].currentValue + 0.01, nextLevelName: userStatus[0].statuses[$index + 1].name}">
+                                    <div class='lmx-text-nextlevel'>
+                                        {{ nextStatus.amountToNextLevel | number: 2 }} ₽
+                                    </div>
+                                    <span>
+                                        До {{ nextStatus.nextLevelName | lowercase }}-статуса
+                                    </span>
+                                </div>
+                            </div>               
+                    </div>
+                </div>
+                <div class='lmx-economy'>
+                    <span class='lmx-total-discount'>{{totalDiscount}} ₽</span>
+                    <span>Удалось сэкономить</span>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+    </section>
+</div>

@@ -2,6 +2,8 @@
     <section>
         <h2>{{'announcement.title' | translate}}</h2>
         <div loader="isProgress" class="lmx-announcements-list">
+            <div ng-if="!announcements.length">Новости отсутствуют</div>
+            <div class="lmx-announcements-list">
             <article ng-repeat="announcement in announcements track by announcement.id" ng-click="openAnnouncementModal(announcement)" class="lmx-announcement lmx-card">
                 <div class="lmx-card-image">
                     <img ng-src="{{:: getAnnouncementImagePath(announcement.attributes.OfferImage.value)}}" fallback-image="" fallback-title="{{'imageNotFound' | translate}}" alt="">
@@ -11,6 +13,8 @@
                     <div class="lmx-card-description">{{:: announcement.attributes.OfferDescription.value}}</div>
                 </div>
             </article>
+            
+            </div>
         </div>
     </section>
 </div>

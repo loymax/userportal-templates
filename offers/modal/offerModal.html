@@ -3,6 +3,7 @@
     <div loader="inProgress">
         <div ng-if="!inProgress">
             <div class="modal-header">
+                <div class='head'>{{ 'offers.title' | translate }}</div>
                 <h2>{{:: offer.title}}</h2>
             </div>
 
@@ -29,7 +30,7 @@
                     </div>
                 </div>
                 <div class="lmx-details">
-                    <div>
+                    <div class='lmx-date'>
                         <div class="lmx-offer-title">{{'offers.date' | translate}}:</div>
                         <div>{{:: (offer.begin | toUTC) | dateRange: (offer.end | toUTC)}}</div>
                     </div>

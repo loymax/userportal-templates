@@ -6,7 +6,7 @@
                 <lmx-tabs ng-if="isAttachCardAvailable" list="tabs" ng-model="selectedTab.value" view-field="name">
                 </lmx-tabs>
                 <div ng-show="selectedTab.value === tabs.personalCards" ng-class="::{'lmx-no-add-card-button': !maxCountOfMainCardsForUserNotReached}" class="lmx-personal-cards">
-                    <p ng-bind-html="'cards.replaceHint' | translate"></p>
+                    <!-- <p ng-bind-html="'cards.replaceHint' | translate"></p> -->
 
                     <div class="lmx-card-item-wrap" ng-repeat="card in cards.personal track by card.id">
                         <card card="card" class="lmx-card-item"></card>

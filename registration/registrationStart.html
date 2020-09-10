@@ -1,6 +1,7 @@
 <div class="lmx-registration-start">
     <h2>{{'registration.title' | translate}}</h2>
-    <notifications area="registration"></notifications>
+    <a class='login' href='/#/login'>Авторизация</a>
+    
     <p ng-if="tokenForSocialRegistration" class="lmx-info-social-registration">
         Начат процесс регистрации через социальную сеть. Чтобы отменить регистрацию,
         <a class="lmx-pseudo-link" ng-click="cancel()" href="">нажмите&nbsp;здесь</a>
@@ -8,15 +9,16 @@
     <div loader="acceptTenderOfferByCheck && (isOfferAndAgreementLoaded === undefined)">
         <identifiers ng-if=":: identifiers.arr !== undefined" identifiers="identifiers.arr" ng-model="model.identifier" ng-change="resetFormModels(registrationForm)"></identifiers>
         <form novalidate="" name="registrationForm" ng-submit="registrationForm.$valid && registration(registrationForm)" id="lmx-registrationForm" ng-hide="acceptTenderOfferByCheck && (isOfferAndAgreementLoaded === undefined)">
+            <form-group ng-if="!tokenForSocialRegistration && model.identifier === IDENTIFIERS.card" label-text="{{'identifiers.' + model.identifier | translate}}" ng-class="::{'lmx-required': referralRegistration}">
+                <input type="text" ng-model="registrationData.login" id="lmx-login_{{model.identifier}}" name="login" ng-disabled="inProgress || authInProgress || actionsInProgress" placeholder="0000 0000 0000 0000 000" ng-value='63632881' mask="9999 9999 9999 9999 999" clean="true" validate="false" restrict="reject" required="">
+            </form-group>
             <form-group ng-if="!tokenForSocialRegistration && model.identifier === IDENTIFIERS.phone" label-text="{{'identifiers.' + model.identifier | translate}}" ng-class="::{'lmx-required': referralRegistration}">
                 <phone-input ng-model="registrationData.login" id="lmx-login_{{model.identifier}}" name="login" ng-disabled="inProgress || authInProgress || actionsInProgress" required="" autofocus=""></phone-input>
             </form-group>
             <div class="lmx-hint lmx-input-hint" ng-if="!tokenForSocialRegistration && model.identifier === IDENTIFIERS.phone">
                 <p ng-bind-html="'registration.phoneHint' | translate"></p>
             </div>
-            <form-group ng-if="!tokenForSocialRegistration && model.identifier === IDENTIFIERS.card" label-text="{{'identifiers.' + model.identifier | translate}}" ng-class="::{'lmx-required': referralRegistration}">
-                <input type="text" ng-model="registrationData.login" id="lmx-login_{{model.identifier}}" name="login" ng-disabled="inProgress || authInProgress || actionsInProgress" placeholder="0000 0000 0000 0000" mask="9999 9999 9999 9999" clean="true" validate="false" restrict="reject" required="">
-            </form-group>
+            
 
             <div ng-if="passwordRequired">
                 <form-group label-text="{{'registration.password' | translate}}">
@@ -46,6 +48,8 @@
                     <a target="_blank" href="{{apiHost}}api/Files/{{::opdAgreementFileId}}">{{'registration.opd' | translate}}</a>
                 </label>
             </form-group>
+
+            <notifications area="registration"></notifications>
             <div class="lmx-btn-container">
                 <button type="submit" ng-hide="authInProgress || actionsInProgress" ng-disabled="acceptTenderOfferByCheck && !isOfferAndAgreementLoaded" id="lmx-registration-phone__submit">
                     {{'registration.register' | translate}}

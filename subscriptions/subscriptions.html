@@ -9,7 +9,8 @@
                         <div ng-repeat="notificationType in notificationTypes">
                             <input type="checkbox" ng-attr-id="{{:: notificationType}}" ng-attr-name="{{:: notificationType}}" ng-model="subscription[notificationType].selected" ng-disabled="subscription[notificationType].readOnly" ng-click="submitSubscriptions()">
                             <label ng-attr-for="{{:: notificationType}}">
-                                {{:: 'subscriptions.notificationTypes.' + notificationType | translate}}
+                                {{:: 'subscriptions.notificationTypes.' + notificationType |
+                                translate}}
                             </label>
                         </div>
                     </form-group>
