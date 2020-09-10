@@ -25,16 +25,22 @@
                 <input type="password" ng-model="model.loginData.password" id="lmx-password" name="password" ng-disabled="authInProgress" required="">
             </form-group>
             <div ng-if="!cvcRequired" class="lmx-auth-links lmx-row" ng-class="{'lmx-invisible': authInProgress}">
-                <div><a ng-click="resetPassword()" href="">{{'authentication.forgotPassword' | translate}}</a></div>
-                <div><a href="#registration">{{'authentication.register' | translate}}</a></div>
+                <div>
+                    <a ng-click="resetPassword()" href="">{{'authentication.forgotPassword' | translate}}</a>
+                </div>
+                <div>
+                    <a href="{{:: registrationUrl}}">{{'authentication.register' | translate}}</a>
+                </div>
             </div>
         </div>
-        <notifications area="login"></notifications>
+        <lmx-notifications area="login"></lmx-notifications>
         <div class="lmx-btn-container">
             <button type="reset" ng-hide="authInProgress" ng-if="cvcRequired" ng-click="cancelCvcConfirmation()">
                 {{'buttons.cancel' | translate}}
             </button>
-            <button type="submit" ng-hide="authInProgress">{{'authentication.login' | translate}}</button>
+            <button type="submit" ng-hide="authInProgress">
+                {{'authentication.login' | translate}}
+            </button>
 
             <inline-loader line="">authInProgress</inline-loader>
         </div>

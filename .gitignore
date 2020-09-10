@@ -3,6 +3,7 @@
 
 #but userportal html or license.txt
 !*.html
+!*.yml
 !license.txt
 
 #even if they in subdirectories

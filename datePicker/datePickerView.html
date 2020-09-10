@@ -1,5 +1,7 @@
 <span class="date-picker-wrap" outside-click="toggleCalendar($event, false)">
-    <div class="toggler" ng-click="toggleCalendar($event)"><span class="glyphicon glyphicon-calendar"></span></div>
+    <div class="toggler" ng-click="toggleCalendar($event)">
+        <span class="glyphicon glyphicon-calendar"></span>
+    </div>
 
     <input type="text" ng-class="'lmx-'+inputClass" datetime-picker="{{dateFormat}}" ng-model="model" ng-keyup="validateModel($event)" ng-model-options="modelOptions" datepicker-options="options" button-bar="{show:false}" is-open="isOpen" enable-time="false">
 </span>

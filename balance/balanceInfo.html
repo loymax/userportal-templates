@@ -3,8 +3,7 @@
     <div class="lmx-account-description">{{selectedAccount.currency.description}}</div>
     <div class="lmx-account-details">
         <div>
-            <b>{{'balance.amount' | translate}}</b>:
-            {{selectedAccount.amount | number: 2}}
+            <b>{{'balance.amount' | translate}}</b>: {{selectedAccount.amount | number: 2}}
             {{selectedAccount.currency.nameCases[getCurrencyNameCase(selectedAccount.amount)]}}
         </div>
         <div>
@@ -19,12 +18,18 @@
             <th>{{'balance.date' | translate}}</th>
         </tr>
         <tr ng-repeat="lifeTime in selectedAccount.lifeTimesByTime track by $index">
-            <td>
-                {{lifeTime.amount | number: 2}}&nbsp;{{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.amount)]}}
+            <td class="lmx-for-desktop">
+                {{lifeTime.amount | number:
+                2}}&nbsp;{{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.amount)]}}
+            </td>
+            <td class="lmx-for-mobile">
+                {{lifeTime.amount | number: 2}}
+                <span class="lmx-amount-name">{{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.amount)]}}</span>
             </td>
             <td>{{lifeTime.date | toUTC | shortDateTime}}</td>
         </tr>
     </table>
+
     <table ng-if="selectedAccount.lifeTimesByPeriod.length">
         <tr>
             <th>{{'balance.period' | translate}}</th>
@@ -32,12 +37,24 @@
             <th>{{'balance.expirationAmount' | translate}}</th>
         </tr>
         <tr ng-repeat="lifeTime in selectedAccount.lifeTimesByPeriod track by $index">
-            <td>{{('balance.lifeTimePeriod.' + (lifeTime.period | lowerCamelCase)) | translate}}</td>
             <td>
-                {{lifeTime.activationAmount | number: 2}}&nbsp;{{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.activationAmount)]}}
+                {{('balance.lifeTimePeriod.' + (lifeTime.period | lowerCamelCase)) | translate}}
             </td>
-            <td>
-                {{lifeTime.expirationAmount | number: 2}}&nbsp;{{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.expirationAmount)]}}
+            <td class="lmx-for-desktop">
+                {{lifeTime.activationAmount | number:
+                2}}&nbsp;{{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.activationAmount)]}}
+            </td>
+            <td class="lmx-for-mobile">
+                {{lifeTime.activationAmount | number: 2}}
+                <span class="lmx-amount-name">{{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.activationAmount)]}}</span>
+            </td>
+            <td class="lmx-for-desktop">
+                {{lifeTime.expirationAmount | number:
+                2}}&nbsp;{{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.expirationAmount)]}}
+            </td>
+            <td class="lmx-for-mobile">
+                {{lifeTime.expirationAmount | number: 2}}
+                <span class="lmx-amount-name">{{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.expirationAmount)]}}</span>
             </td>
         </tr>
     </table>

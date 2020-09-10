@@ -25,7 +25,8 @@
                     <p class="lmx-social-logo fa fa-{{ classes[key = platform] }}" alt="{{:: client.name }} " ng-click="authHandler(client)"></p>
 
                     <div class="lmx-social-action">
-                        <a ng-click="toggleBind(client)" class="lmx-pseudolink" href="">{{'accounts.socials.' + (isBinded(client) ? 'unbind' : 'bind') | translate}}</a>
+                        <a ng-click="toggleBind(client)" class="lmx-pseudolink" href="">{{'accounts.socials.' + (isBinded(client) ? 'unbind' : 'bind') |
+                            translate}}</a>
                     </div>
                 </li>
             </ul>

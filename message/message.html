@@ -6,7 +6,9 @@
             <article ng-repeat="message in messages">
                 <div class="date">{{:: message.creationDate | shortDate }}</div>
 
-                <div class="lmx-remove" ng-click="remove(message);">{{'buttons.delete' | translate | lowercase}}</div>
+                <div class="lmx-remove" ng-click="remove(message);">
+                    {{'buttons.delete' | translate | lowercase}}
+                </div>
 
                 <h4 class="lmx-title" ng-class="{'lmx-notRead': !message.isReaded}">
                     <span ng-click="toggleView(message);">{{:: message.title }}</span>

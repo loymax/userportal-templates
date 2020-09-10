@@ -9,8 +9,12 @@
                     <img ng-src="{{:: getAnnouncementImagePath(announcement.attributes.OfferImage.value)}}" fallback-image="" fallback-title="{{'imageNotFound' | translate}}" alt="">
                 </div>
                 <div class="lmx-card-content">
-                    <div class="lmx-card-title" title="{{:: announcement.attributes.OfferTitle.value}}">{{:: announcement.attributes.OfferTitle.value}}</div>
-                    <div class="lmx-card-description">{{:: announcement.attributes.OfferDescription.value}}</div>
+                    <div class="lmx-card-title" title="{{:: announcement.attributes.OfferTitle.value}}">
+                        {{:: announcement.attributes.OfferTitle.value}}
+                    </div>
+                    <div class="lmx-card-description">
+                        {{:: announcement.attributes.OfferDescription.value}}
+                    </div>
                 </div>
             </article>
             

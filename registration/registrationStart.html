@@ -38,7 +38,8 @@
             <form-group ng-if="acceptTenderOfferByCheck">
                 <input type="checkbox" id="lmx-userAgreesWithOfferByCheck" name="userAgreesWithOfferByCheck" ng-model="offer" ng-disabled="!isOfferAndAgreementLoaded || authInProgress || actionsInProgress" required="">
                 <label for="lmx-userAgreesWithOfferByCheck">
-                    {{'registration.offerAccept' | translate}} <a target="_blank" href="{{apiHost}}api/Files/{{::offerPdfFileId}}">{{'registration.tenderOffer' | translate}}</a>
+                    {{'registration.offerAccept' | translate}}
+                    <a target="_blank" href="{{apiHost}}api/Files/{{::offerPdfFileId}}">{{'registration.tenderOffer' | translate}}</a>
                 </label>
             </form-group>
             <form-group ng-if="acceptTenderOfferByCheck">
@@ -49,7 +50,7 @@
                 </label>
             </form-group>
 
-            <notifications area="registration"></notifications>
+            <lmx-notifications area="registration"></lmx-notifications>
             <div class="lmx-btn-container">
                 <button type="submit" ng-hide="authInProgress || actionsInProgress" ng-disabled="acceptTenderOfferByCheck && !isOfferAndAgreementLoaded" id="lmx-registration-phone__submit">
                     {{'registration.register' | translate}}

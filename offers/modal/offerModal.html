@@ -13,19 +13,31 @@
 
                     <div class="lmx-reward-thumbnail" ng-if=":: offer.rewardThumbnail" ng-switch="rewardThumbnailTypes[offer.rewardThumbnail.$type]">
                         <div class="lmx-thumbnail lmx-two-line-text" ng-switch-when="twoLineText">
-                            <div title="{{::offer.rewardThumbnail.firstLine}}" class="lmx-first-line">{{::offer.rewardThumbnail.firstLine}}</div>
-                            <div title="{{::offer.rewardThumbnail.secondLine}}" class="lmx-second-line">{{::offer.rewardThumbnail.secondLine}}</div>
+                            <div title="{{::offer.rewardThumbnail.firstLine}}" class="lmx-first-line">
+                                {{::offer.rewardThumbnail.firstLine}}
+                            </div>
+                            <div title="{{::offer.rewardThumbnail.secondLine}}" class="lmx-second-line">
+                                {{::offer.rewardThumbnail.secondLine}}
+                            </div>
                         </div>
                         <div class="lmx-thumbnail lmx-image-with-text" ng-switch-when="imageWithText">
-                            <div title="{{::offer.rewardThumbnail.header}}">{{::offer.rewardThumbnail.header}}</div>
+                            <div title="{{::offer.rewardThumbnail.header}}">
+                                {{::offer.rewardThumbnail.header}}
+                            </div>
                             <div class="lmx-reward-image">
                                 <img ng-src="{{::offer.rewardThumbnail.imgUrl || 'undefined'}}" fallback-image="" fallback-title="{{'imageNotFound' | translate}}" alt="">
                             </div>
-                            <div title="{{::offer.rewardThumbnail.footer}}">{{::offer.rewardThumbnail.footer}}</div>
+                            <div title="{{::offer.rewardThumbnail.footer}}">
+                                {{::offer.rewardThumbnail.footer}}
+                            </div>
                         </div>
                         <div class="lmx-thumbnail lmx-old-new-price" ng-switch-when="oldNewPrice">
-                            <div title="{{::offer.rewardThumbnail.oldPrice}}" class="lmx-old-price">{{::offer.rewardThumbnail.oldPrice}}</div>
-                            <div title="{{::offer.rewardThumbnail.newPrice}}" class="lmx-new-price">{{::offer.rewardThumbnail.newPrice}}</div>
+                            <div title="{{::offer.rewardThumbnail.oldPrice}}" class="lmx-old-price">
+                                {{::offer.rewardThumbnail.oldPrice}}
+                            </div>
+                            <div title="{{::offer.rewardThumbnail.newPrice}}" class="lmx-new-price">
+                                {{::offer.rewardThumbnail.newPrice}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -43,7 +55,9 @@
                     <section ng-if=":: offer.instructions.length">
                         <div class="lmx-offer-title">{{'offers.instructions' | translate}}:</div>
                         <ol>
-                            <li ng-repeat="item in offer.instructions track by $index">{{::item }}</li>
+                            <li ng-repeat="item in offer.instructions track by $index">
+                                {{::item }}
+                            </li>
                         </ol>
                     </section>
 
@@ -51,11 +65,13 @@
                         <div class="lmx-offer-title">{{'offers.merchants' | translate}}:</div>
                         <ul>
                             <li ng-repeat="merchant in offer.merchants | limitTo: merchantsLimit track by merchant.id">
-                                {{:: merchant.title}}{{:: merchant.location ? (', ' + merchant.location.description) : ''}}
+                                {{:: merchant.title}}{{:: merchant.location ? (', ' +
+                                merchant.location.description) : ''}}
                             </li>
                         </ul>
                         <a class="lmx-pseudolink" ng-if="merchantsLimit !== offer.merchants.length && offer.merchants.length > 4" ng-click="$parent.merchantsLimit = offer.merchants.length" href="">
-                            <span ng-if="merchantsCountText">{{'offers.showAllMerchants' | translate}} <span ng-bind-html="merchantsCountText"></span></span>
+                            <span ng-if="merchantsCountText">{{'offers.showAllMerchants' | translate}}
+                                <span ng-bind-html="merchantsCountText"></span></span>
                         </a>
                         <a class="lmx-pseudolink" ng-if="merchantsLimit === offer.merchants.length && offer.merchants.length > 4" ng-click="$parent.merchantsLimit = 3" href="">
                             {{'offers.hideMerchants' | translate}}

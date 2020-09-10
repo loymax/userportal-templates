@@ -10,8 +10,8 @@
             <questionnaire-group ng-repeat="questionnaireItem in questionnaire | filter: {type: questionnaireItemTypes.questionGroup} : true | orderBy: 'order' track by questionnaireItem.id" group="questionnaireItem" class="lmx-questionnaire-column"></questionnaire-group>
         </div>
 
-        <notifications ng-if=":: registration" area="registration"></notifications>
-        <notifications area="questionnaire"></notifications>
+        <lmx-notifications ng-if=":: registration" area="registration"></lmx-notifications>
+        <lmx-notifications area="questionnaire"></lmx-notifications>
         <div ng-if="!loader.templatesInProgress">
             <div class="lmx-btn-container">
                 <div ng-hide="loader.saveInProgress">

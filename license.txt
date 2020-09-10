@@ -1,8 +1,8 @@
-﻿Loymax v2.1.62944 (http://loymax.ru)
+Loymax v2.2.64939 (http://loymax.ru)
 Copyright 2011-2020 Loymax, Inc.
 License: MIT
 
-The MIT License (MIT)
+LoymaxApp is released under the MIT license.
 
 Copyright (c) 2019 Loymax, Inc.
 

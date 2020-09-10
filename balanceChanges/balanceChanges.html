@@ -1,0 +1,62 @@
+<div class="lmx-container lmx-balance-changes">
+    <div class="lmx-balance-changes-table">
+        <div class="lmx-balance-changes-operations-list lmx-margin-bottom" loader="inProgress">
+            <div>
+                <table>
+                    <tbody>
+                        <tr class="lmx-purchase-amount-row">
+                            <td class="lmx-identity">
+                                {{'balanceChanges.purchaseAmount' | translate}}:
+                            </td>
+                            <td class="lmx-amount" ng-switch="model.aggregateWithdrawRewardPurchase.purchaseAmount.length" colspan="2">
+                                <p class="lmx-amount-text" ng-switch-when="0">0</p>
+                                <p ng-repeat="item in model.aggregateWithdrawRewardPurchase.purchaseAmount" class="lmx-amount-text" ng-switch-default="">
+                                    {{:: item.amount.amount}} {{:: item.amount.currency}}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr class="lmx-rewards-row">
+                            <td class="lmx-identity">{{'balanceChanges.rewards' | translate}}:</td>
+                            <td class="lmx-amount" ng-switch="model.aggregateWithdrawRewardPurchase.rewards.length" colspan="2">
+                                <p class="lmx-amount-text" ng-switch-when="0">0</p>
+                                <p ng-switch-default="" ng-repeat="reward in model.aggregateWithdrawRewardPurchase.rewards" class="lmx-amount-text">
+                                    {{:: reward.amount.amount}} {{:: reward.amount.currency}}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr class="lmx-withdraws-row">
+                            <td class="lmx-identity">{{'balanceChanges.withdraws' | translate}}:</td>
+                            <td class="lmx-amount" colspan="2" ng-switch="model.aggregateWithdrawRewardPurchase.withdraws.length">
+                                <p class="lmx-amount-text" ng-switch-when="0">0</p>
+                                <p ng-repeat="withdraw in model.aggregateWithdrawRewardPurchase.withdraws" class="lmx-amount-text" ng-switch-default="">
+                                    {{:: withdraw.amount.amount}} {{:: withdraw.amount.currency}}
+                                </p>
+                            </td>
+                        </tr>
+                        <tr ng-if="model.percentageOfBonuses.length" class="lmx-operation-info" class-toggle-click="percent-opened" ng-click="changeLimit()" ng-class="::{'lmx-only-one-element': model.percentageOfBonuses.length === 1}">
+                            <td class="lmx-identity">{{'balanceChanges.percent' | translate}}:</td>
+                            <td class="date-range">
+                                <p class="lmx-amount-text lmx-percent-info" ng-repeat="item in model.percentageOfBonuses | limitTo: limit">
+                                    <span class="lmx-operation-info-date">
+                                        {{item.createDateTime | toUTC | dateRange:
+                                        (item.changeDateTime | toUTC):true | capitalize}}
+                                    </span>
+                                    <span class="lmx-operation-info-value">
+                                        {{item.attributeValue}}
+                                    </span>
+                                </p>
+                            </td>
+                            <td class="lmx-percent-info-expander"></td>
+                        </tr>
+                        <tr ng-if="!model.percentageOfBonuses.length" class="lmx-not-found-row">
+                            <td class="lmx-identity">{{'balanceChanges.percent' | translate}}:</td>
+                            <td class="lmx-amount" colspan="2">
+                                {{'balanceChanges.notFound' | translate}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

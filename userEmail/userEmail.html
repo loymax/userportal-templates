@@ -3,12 +3,12 @@
         <h2>
             {{'registration.emailStep.' + (step === 1 ? 'emailTitle' : 'codeTitle') | translate}}
         </h2>
-        <notifications area="registration"></notifications>
+        <lmx-notifications area="registration"></lmx-notifications>
     </div>
     <div loader="isChangeProcessStarted === undefined">
         <div ng-if="isChangeProcessStarted === false" class="lmx-settings-line">
             <h3>Email</h3>
-            <notifications area="userEmail"></notifications>
+            <lmx-notifications area="userEmail"></lmx-notifications>
             <div class="lmx-current-value-container">
                 <div class="lmx-current-value">{{:: currentEmail}}</div>
                 <div>
@@ -19,10 +19,9 @@
         <div ng-if="isChangeProcessStarted" class="lmx-user-email-changing">
             <div ng-if=":: !registration">
                 <h3>Email</h3>
-                <notifications area="userEmail"></notifications>
+                <lmx-notifications area="userEmail"></lmx-notifications>
             </div>
             <form novalidate="" name="form" ng-submit="form.$valid && next(form)">
-
                 <div ng-if="step === 1">
                     <div ng-if=":: !registration" class="lmx-hint">
                         <p ng-bind-html="'contacts.userEmail.emailHint' | translate"></p>
@@ -39,7 +38,9 @@
 
                 <div ng-if="step === 2">
                     <div class="lmx-hint" ng-switch=":: !!registration">
-                        <p ng-switch-when="true">{{'registration.emailStep.codeHint' | translate}}</p>
+                        <p ng-switch-when="true">
+                            {{'registration.emailStep.codeHint' | translate}}
+                        </p>
                         <p ng-switch-when="false" ng-bind-html="('contacts.userEmail.codeHint' | translate) + ' <strong>' + newEmail + '</strong>'"></p>
                     </div>
 
@@ -53,10 +54,11 @@
 
                     <div class="lmx-margin-bottom" ng-hide="loader.inProgress">
                         <a ng-click="reSendCode()" id="lmx-changeEmail-resend" href="">
-                            {{(registration ? 'registration.emailStep' : 'contacts.userEmail') + '.sendConfirmCode' | translate}}
-                        </a><br>
+                            {{(registration ? 'registration.emailStep' : 'contacts.userEmail') +
+                            '.sendConfirmCode' | translate}} </a><br>
                         <a ng-click="reEnterEmail(form)" id="lmx-changeEmail-reenter" href="">
-                            {{(registration ? 'registration.emailStep' : 'contacts.userEmail') + '.resetEmail' | translate}}
+                            {{(registration ? 'registration.emailStep' : 'contacts.userEmail') +
+                            '.resetEmail' | translate}}
                         </a>
                     </div>
                 </div>

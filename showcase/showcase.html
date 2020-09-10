@@ -27,7 +27,8 @@
                 <div class="lmx-category-wrapper" ng-if="!selectedCategory || logicalName == selectedCategory">
                     <div>
                         <h5>
-                            <a ng-click="showCategory(logicalName)" href="">{{:: categoryObject.name }} ({{:: categoryObject.coupons.length }})</a>
+                            <a ng-click="showCategory(logicalName)" href="">{{:: categoryObject.name }} ({{:: categoryObject.coupons.length
+                                }})</a>
                         </h5>
                     </div>
                     <coupon ng-repeat="coupon in categoryObject.coupons | limitTo: selectedCategory? null : 2"></coupon>
