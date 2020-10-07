@@ -3,10 +3,10 @@
         <h2>{{'personal.title' | translate}}</h2>
     </div>
     <div class="lmx-questionnaire" loader="loader.templatesInProgress" ng-class="::{'lmx-questionnaire-edit': !registration}">
-        <div ng-hide="loader.templatesInProgress">
-            <div class="lmx-questionnaire-column">
+        <div ng-hide="loader.templatesInProgress" class='questionnaire-grid'>
+            <!-- <div class="lmx-questionnaire-column"> -->
                 <questionnaire-item ng-repeat="questionnaireItem in questionnaire | filter: {type: questionnaireItemTypes.question} : true | orderBy: 'order' track by questionnaireItem.id" question="questionnaireItem"></questionnaire-item>
-            </div>
+            <!-- </div> -->
             <questionnaire-group ng-repeat="questionnaireItem in questionnaire | filter: {type: questionnaireItemTypes.questionGroup} : true | orderBy: 'order' track by questionnaireItem.id" group="questionnaireItem" class="lmx-questionnaire-column"></questionnaire-group>
         </div>
 

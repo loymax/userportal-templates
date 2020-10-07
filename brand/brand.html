@@ -1,22 +1,36 @@
 <div class="lmx-container lmx-brand">
     <section>
-        <h2>{{::brand.name}}</h2>
-        <p>{{::brand.description}}</p>
+        
         <div class="lmx-content">
             <div class="lmx-image">
                 <img ng-src="{{:: brand.imgUrl}}" fallback-image="" fallback-title="{{'imageNotFound' | translate}}" alt="">
+                <h2>{{::brand.name}}</h2>
+                <p>{{::brand.description}}</p>
             </div>
-            <a ng-href="{{::brand.url}}">{{'brands.site' | translate}}</a>
+            <div class="lmx-brand-description">
+                <span class="lmx-card-title">{{::brand.description}}</span>
+            </div>      
+            <a ng-href="{{::brand.url}}" ng-if="brand.url.length">{{'brands.site' | translate}}</a>
             <div ng-if="merchants.length">
-                <p>{{'brands.locations' | translate}}:</p>
-                <div ng-repeat="merchant in merchants track by merchant.id">
-                    <span>{{::merchant.location.description}}</span>
-                </div>
-                <lmx-map class="lmx-map" data="merchants" options="{
+                <h3>{{'brands.locations' | translate}}:</h3>
+                <div class="lmx-columns">
+                    <div class="lmx-merchant-list scroller-wrapper">
+                        <ul>
+                            <li ng-repeat="merchant in merchants track by merchant.id">
+                                <p>{{::merchant.location.description}}</p>
+                            </li>
+                        </ul>
+                    <div class="scroller-track">
+                        <div class="scroller-bar"></div>
+                    </div>
+                    </div>
+                    <lmx-map class="lmx-map" data="merchants" options="{
                                     markerImg: brand.markerUrl,
                                     markerSize: [29, 32]
                                    }">
-                </lmx-map>
+                    </lmx-map>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

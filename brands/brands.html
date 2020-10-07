@@ -1,18 +1,32 @@
 <div>
     <div class="lmx-container lmx-brands" ng-if="!appLocationParts[1]">
+    <!-- <div class="lmx-container lmx-brands" > -->
         <section>
             <h2>{{'brands.title' | translate}}</h2>
             <div loader="inProgress">
                 <!-- TODO width: 400px; height: 400px; -->
-                <div class="lmx-card" style="width: 400px; height: 400px;" ng-repeat="brand in brands track by brand.id" ng-click="changeLocation('brands/' + brand.id)">
-                    <div>
-                        <img ng-src="{{:: brand.imgUrl}}" fallback-image="" fallback-title="{{'imageNotFound' | translate}}" alt="" style="height: 250px; padding: 10px">
+                <!-- <div class="lmx-card" style="width: 400px; height: 400px;" ng-repeat="brand in brands track by brand.id" ng-click="changeLocation('brands/' + brand.id)"> -->
+                    <div ng-if="merchants.length">
+                    <!-- <div> -->
+                        <div ng-repeat="merchant in merchants track by merchant.id">
+                            <span>{{::merchant.location.description}}</span>
+                        </div>
+                        <lmx-map class="lmx-map" data="merchants" options="{
+                                    markerImg: brand.markerUrl,
+                                    markerSize: [29, 32]
+                                   }" ng-if="!loaders.brands">
+                        </lmx-map>
                     </div>
-                    <div class="lmx-card-content">
-                        <span class="lmx-card-title">{{:: brand.name}}</span>
-                        <div class="lmx-description">{{::brand.description}}</div>
-                    </div>
-                </div>
+                    <div class="lmx-card" ng-repeat="brand in brands | limitTo: 10">
+                        <div class="lmx-card-content">
+                            <img ng-src="{{:: brand.imgUrl}}" fallback-image="" fallback-title="{{'imageNotFound' | translate}}" alt="" ng-click="changeLocation('brands/' + brand.id)">
+                            <span class="lmx-card-title" ng-click="changeLocation('brands/' + brand.id)">{{:: brand.name }}</span>
+                            <div class="lmx-description">{{::brand.description}}</div>
+                        </div>
+                        <div class="lmx-brand-description">
+                            <span class="lmx-card-title">{{::brand.description}}</span>
+                        </div>           
+                    </div> 
             </div>
         </section>
     </div>

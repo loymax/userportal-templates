@@ -4,6 +4,7 @@
         <div loader="history === undefined">
             <div ng-show=":: history">
                 <div ng-show=":: !isPreview" class="lmx-history-filters lmx-clearfix lmx-margin-bottom">
+                    <h6>Фильтр</h6>
                     <div class="date-filters">
                         <div class="date-filter lmx-since-date-filter">
                             <span class="lmx-pretext">{{'history.fromDate' | translate}}</span>
@@ -19,6 +20,7 @@
                     <div class="lmx-card-filter">
                         <inline-loader>cardsInProgress</inline-loader>
                         <div ng-hide="cardsInProgress">
+                            <span class="lmx-pretext">{{'history.chooseCard' | translate}}</span>
                             <select ng-model="selectedCard" ng-change="reloadHistory()" id="lmx-cardFilter" name="cardFilter">
                                 <option ng-value="0">{{'history.allCards' | translate}}</option>
                                 <option ng-repeat="card in cards" ng-value="card.id">{{:: card.number | charsDivide: 4}}</option>
@@ -36,24 +38,46 @@
                                 <thead>
                                 <tr>
                                     <th>{{'history.date' | translate}}</th>
-                                    <th>{{'history.cardNumber' | translate}}</th>
                                     <th>{{'history.description' | translate}}</th>
+                                    <th>{{'history.cardNumber' | translate}}</th>
                                     <th>{{'history.operation' | translate}}</th>
                                     <th>{{'history.amount' | translate}}</th>
-                                    <th></th>
+                                    <th>{{'history.action' | translate}}</th>
                                 </tr>
                                 </thead>
                                 <tbody ng-repeat="item in history.rows track by item.id" class-toggle-click="cheque-opened" ng-class="::{'lmx-empty-cheque': !item.data.chequeItems.length}">
+                                <script type="text/javascript">
+                                    $(document).ready(function() {
+                                    
+                                    $(".lmx-history .lmx-history-table tbody:not(.lmx-empty-cheque)").each(function() {
+                                        var onloadHeight = $(this).children(".lmx-operation-info").css('height');
+                                        $(this).css('height', onloadHeight);
+                                    });
+
+                                    $(".lmx-history .lmx-history-table tbody:not(.lmx-empty-cheque)").toggle(function() {
+                                        $(this).addClass('show');
+                                        let rowHeight = $(this).children(".lmx-cheque-info").css('height');
+                                        let firstHeight = $(this).children(".lmx-operation-info").css('height');
+                                        let sum = parseInt(rowHeight) + parseInt(firstHeight);
+                                        $(this).css('height', sum);
+                                    }, function() {
+                                        $(this).removeClass('show');
+                                        let rowHeight = $(this).children(".lmx-cheque-info").css('height');
+                                        let firstHeight = $(this).children(".lmx-operation-info").css('height');
+                                        $(this).css('height', firstHeight);
+                                    });
+                                });
+                                </script>
                                 <tr class="lmx-operation-info">
                                     <td class="date-time" ng-attr-title="{{:: item.dateTime | toUTC | shortDateTime}}">
                                         {{:: item.dateTime | toUTC | shortDateTime}}
                                     </td>
-                                    <td class="lmx-identity" ng-attr-title="{{:: item.identity ? ('**** ' + (item.identity | lastCount: 4)) : undefined}}">
-                                        <span ng-if="::item.identity">**** <b>{{:: item.identity | lastCount: 4 }}</b></span>
-                                    </td>
                                     <td class="lmx-description" ng-attr-title="{{:: item.description}}">
                                         <img ng-if=":: item.logoSquareUrl" ng-src="{{:: item.logoSquareUrl}}" class="lmx-logo-square" fallback-image="" fallback-title="{{'imageNotFound' | translate}}" alt="">
                                         <span class="lmx-description-text">{{:: item.description}}</span>
+                                    </td>
+                                    <td class="lmx-identity" ng-attr-title="{{:: item.identity ? item.identity : undefined}}">
+                                        <span ng-if="::item.identity">{{:: item.identity  }}</span>
                                     </td>
                                     <td class="lmx-withdraws lmx-text">
                                         <div ng-if=":: item.data.withdraws.length" ng-repeat="wdrw in item.data.withdraws" ng-attr-title="{{'history.gift' + (item.data.isRefund ? 'Refund' : '' ) + '.withdraw' | translate}}" class="lmx-text-overflow-ellipsis">
@@ -100,6 +124,7 @@
                                     </td>
                                 </tr>
                                 </tbody>
+                                
                             </table>
                         </div>
                     </div>
@@ -110,6 +135,7 @@
                             <inline-loader line="">inProgress && !isReload</inline-loader>
                         </div>
                     </div>
+
                     <a ng-if=":: isPreview" href="#history" class="lmx-pseudolink">{{'history.goToFullHistory' | translate}}</a>
                 </div>
                 <div class="lmx-history-not-found" ng-if="!history.allCount && !inProgress">

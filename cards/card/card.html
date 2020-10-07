@@ -5,8 +5,9 @@
     <div class="lmx-card-item__info" ng-switch=":: !!cardNumberGraphicalCodes.length && !card.isInGroup">
         <div ng-switch-when="true">
             <!-- Пробел после :: в {{::cardNumberGraphicalCodes.join(' ')}} сводит префиксер с ума -->
-            <div class="lmx-card-number lmx-card-code lmx-{{::cardNumberGraphicalCodes.join(' lmx-')}}" ng-click="displayCodes(card)">
-                <a class="lmx-pseudolink">{{:: card.number | charsDivide: 4}}</a>
+            <!-- <div class="lmx-card-number lmx-card-code lmx-{{::cardNumberGraphicalCodes.join(' lmx-')}}" ng-click="displayCodes(card)"> -->
+            <div class="lmx-card-number lmx-card-code lmx-{{::cardNumberGraphicalCodes.join(' lmx-')}}">
+                <span>{{:: card.number | charsDivide: 4}}</span>
             </div>
         </div>
         <div ng-switch-when="false" class="lmx-card-number">{{:: card.number | charsDivide: 4}}</div>
