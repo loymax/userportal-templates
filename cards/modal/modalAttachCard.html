@@ -1,9 +1,10 @@
 <div class="lmx-attach-card-modal">
     <div class="modal-header">
+        <div class="lmx-modal-closer" ng-click="cancel()"></div>
         <h2>{{'cards.attachCardModal.title' | translate}}</h2>
     </div>
 
-    <lmx-notifications area="cardModal"></lmx-notifications>
+    <notifications area="cardModal"></notifications>
     <div loader="confirmForm === undefined">
         <div ng-hide="confirmForm === undefined" class="lmx-hint lmx-modal-description lmx-row">
             <div>{{'cards.attachCardModal.separationImpossible' | translate}}</div>

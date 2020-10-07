@@ -1,17 +1,18 @@
 <div>
     <div ng-if=":: registration">
         <h2>{{'personal.title' | translate}}</h2>
+        <substypes></substypes>
     </div>
     <div class="lmx-questionnaire" loader="loader.templatesInProgress" ng-class="::{'lmx-questionnaire-edit': !registration}">
-        <div ng-hide="loader.templatesInProgress">
-            <div class="lmx-questionnaire-column">
-                <questionnaire-item ng-repeat="questionnaireItem in questionnaire | filter: {type: questionnaireItemTypes.question} : true | orderBy: 'order' track by questionnaireItem.id" question="questionnaireItem"></questionnaire-item>
-            </div>
+        <div class='lmx-questionnaire-block' ng-hide="loader.templatesInProgress">
+            <!-- <div class="lmx-questionnaire-column"> -->
+                <questionnaire-item ng-repeat="questionnaireItem in questionnaire | filter: {type: questionnaireItemTypes.question} : true | orderBy: 'order' track by questionnaireItem.id" question="questionnaireItem" class="lmx-questionnaire-column"></questionnaire-item>
+            <!-- </div> -->
             <questionnaire-group ng-repeat="questionnaireItem in questionnaire | filter: {type: questionnaireItemTypes.questionGroup} : true | orderBy: 'order' track by questionnaireItem.id" group="questionnaireItem" class="lmx-questionnaire-column"></questionnaire-group>
         </div>
 
-        <lmx-notifications ng-if=":: registration" area="registration"></lmx-notifications>
-        <lmx-notifications area="questionnaire"></lmx-notifications>
+        <notifications ng-if=":: registration" area="registration"></notifications>
+        <notifications area="questionnaire"></notifications>
         <div ng-if="!loader.templatesInProgress">
             <div class="lmx-btn-container">
                 <div ng-hide="loader.saveInProgress">

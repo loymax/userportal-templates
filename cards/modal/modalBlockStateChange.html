@@ -1,10 +1,9 @@
 <div class="lmx-block-state-change-modal">
     <div class="modal-header">
-        <h2>
-            {{'cards.blockCardModal.' + (isBlocked ? 'unblockTitle' : 'blockTitle') | translate}}
-        </h2>
+        <div class="lmx-modal-closer" ng-click="cancel()"></div>
+        <h2>{{'cards.blockCardModal.' + (isBlocked ? 'unblockTitle' : 'blockTitle') | translate}}</h2>
     </div>
-    <lmx-notifications area="cardModal"></lmx-notifications>
+    <notifications area="cardModal"></notifications>
     <form novalidate="" name="blockCardForm" ng-submit="blockCardForm.$valid && blockStateChange()">
         <div class="modal-content-wrapper">
             <div class="modal-body">

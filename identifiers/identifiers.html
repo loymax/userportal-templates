@@ -3,6 +3,8 @@
         <div class="lmx-identifier-type-radio" ng-repeat="identifier in identifiers track by $index">
             <input type="radio" ng-model="model.currentIdentifier" value="{{identifier}}" id="lmx-{{identifier}}" ng-disabled="authInProgress" name="{{identifier}}">
             <label for="lmx-{{identifier}}">{{'identifiers.' + identifier | translate}}</label>
+            
         </div>
+        
     </div>
 </div>

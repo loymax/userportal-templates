@@ -6,7 +6,7 @@
         <div loader="inProgress && messages === undefined">
             <div ng-show="!inProgress || messages !== undefined">
                 <div class="lmx-hint">
-                    <p>{{'feedback.askQuestion' | translate}}:</p>
+                    <p ng-bind-html="'feedback.askQuestion' | translate"></p>
                 </div>
 
                 <form novalidate="" name="feedbackForm" ng-submit="feedbackForm.$valid && send(feedbackForm)">

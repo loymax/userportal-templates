@@ -3,15 +3,12 @@
         <h2 ng-show=":: isChangeProcessStarted">
             {{'registration.phoneStep.' + (step === 1 ? 'numberTitle' : 'codeTitle') | translate}}
         </h2>
-        <lmx-notifications area="registration"></lmx-notifications>
+        <notifications area="registration"></notifications>
     </div>
     <div loader="isChangeProcessStarted === undefined">
         <div ng-if="isChangeProcessStarted === false" class="lmx-settings-line">
-            <h3>
-                {{(registration ? 'registration.phoneStep' : 'contacts.userPhone') +
-                '.phone'|translate}}
-            </h3>
-            <lmx-notifications area="userPhone"></lmx-notifications>
+            <h3>{{(registration ? 'registration.phoneStep' : 'contacts.userPhone') + '.phone'|translate}}</h3>
+            <notifications area="userPhone"></notifications>
             <div class="lmx-current-value-container">
                 <div class="lmx-current-value">{{currentPhoneNumber}}</div>
                 <div>
@@ -22,7 +19,7 @@
         <div ng-if="isChangeProcessStarted" class="lmx-user-phone-changing">
             <div ng-if=":: !registration">
                 <h3>{{'contacts.userPhone.title' | translate}}</h3>
-                <lmx-notifications area="userPhone"></lmx-notifications>
+                <notifications area="userPhone"></notifications>
             </div>
             <form novalidate="" name="form" ng-submit="form.$valid && next(form)">
                 <div ng-if="step === 1">
@@ -44,14 +41,12 @@
                     <div class="lmx-margin-bottom" ng-hide="loader.inProgress">
                         <div>
                             <a ng-click="reSendCode()" id="lmx-changePhone-resendCode" href="">
-                                {{(registration ? 'registration.phoneStep' : 'contacts.userPhone') +
-                                '.sendConfirmCode' | translate}}
+                                {{(registration ? 'registration.phoneStep' : 'contacts.userPhone') + '.sendConfirmCode' | translate}}
                             </a>
                         </div>
                         <div>
                             <a ng-click="reEnterPhone(form)" id="lmx-changePhone-reenterPhone" href="">
-                                {{(registration ? 'registration.phoneStep' : 'contacts.userPhone') +
-                                '.resetPhone' | translate}}
+                                {{(registration ? 'registration.phoneStep' : 'contacts.userPhone') + '.resetPhone' | translate}}
                             </a>
                         </div>
                     </div>
@@ -60,12 +55,8 @@
                 <div class="lmx-btn-container">
                     <inline-loader line="">loader.inProgress</inline-loader>
                     <div ng-hide="loader.inProgress">
-                        <button type="button" ng-click="closeForm()" class="lmx-btn-cancel" id="lmx-changePhone-cancel">
-                            {{'buttons.cancel' | translate}}
-                        </button>
-                        <button type="submit" id="lmx-changePhone-submit">
-                            {{'buttons.approve' | translate}}
-                        </button>
+                        <button type="button" ng-click="closeForm()" class="lmx-btn-cancel" id="lmx-changePhone-cancel">{{'buttons.cancel' | translate}}</button>
+                        <button type="submit" id="lmx-changePhone-submit">{{'buttons.approve' | translate}}</button>
                     </div>
                 </div>
             </form>

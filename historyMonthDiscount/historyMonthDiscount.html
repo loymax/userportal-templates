@@ -10,10 +10,10 @@
                 <div class='lmx-user-status__next-status' ng-if='userStatus[0].statuses.length'>
                     <div ng-if=":: userStatus[0].currentValue > userStatus[0].statuses[userStatus[0].statuses.length - 2].threshold" class="lmx-user-status lmx-user-status__value"
                         ng-init="status.maxLevel = userStatus[0].statuses[userStatus[0].statuses.length - 1].name">
-                        <span class='lmx-text-nextlevel'>
+                        <span class='lmx-text-nextlevel' style="font-family: 'Futura';">
                             {{ 'status.currentLevelNextMonth' | translate}}
                             {{ status.maxLevel }}
-                            {{ 'status.necessaryForNextLevel.nextLevel' | translate | lowercase}}
+                            <!-- {{ 'status.necessaryForNextLevel.nextLevel' | translate | lowercase}} -->
                         </span>
                     </div>
     
@@ -26,15 +26,16 @@
                                         {{ nextStatus.amountToNextLevel | number: 2 }} ₽
                                     </div>
                                     <span>
-                                        До {{ nextStatus.nextLevelName | lowercase }}-статуса
+                                        {{ 'status.necessaryForNextLevel.left' | translate }}
                                     </span>
+                                    <span style="font-family: 'FuturaBold'; text-transform: uppercase; color: #00A650;">{{ nextStatus.nextLevelName | lowercase }}</span>
                                 </div>
                             </div>               
                     </div>
                 </div>
                 <div class='lmx-economy'>
                     <span class='lmx-total-discount'>{{totalDiscount}} ₽</span>
-                    <span>Удалось сэкономить</span>
+                    <span>Уже сэкономлено</span>
                 </div>
             </div>
         

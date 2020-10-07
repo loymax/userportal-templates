@@ -6,10 +6,17 @@
             <div ng-repeat="subscription in subscriptions track by subscription.externalId">
                 <form novalidate="" name="subscriptionsForm">
                     <form-group>
-                        <div ng-repeat="notificationType in notificationTypes">
+                        <div ng-repeat="notificationType in notificationTypes" ng-if="authInProgress">
                             <input type="checkbox" ng-attr-id="{{:: notificationType}}" ng-attr-name="{{:: notificationType}}" ng-model="subscription[notificationType].selected" ng-disabled="subscription[notificationType].readOnly" ng-click="submitSubscriptions()">
                             <label ng-attr-for="{{:: notificationType}}">
                                 {{:: 'subscriptions.notificationTypes.' + notificationType |
+                                translate}}
+                            </label>
+                        </div>
+                        <div ng-repeat="notificationType in notificationTypes" ng-if="!authInProgress">
+                            <input type="checkbox" ng-attr-id="{{:: notificationType}}" ng-attr-name="{{:: notificationType}}" ng-model="subscription[notificationType].selected" ng-disabled="subscription[notificationType].readOnly" ng-click="submitSubscriptions()">
+                            <label ng-attr-for="{{:: notificationType}}">
+                                {{:: 'subscriptions.notificationTypes.' + notificationType + 'Authed' |
                                 translate}}
                             </label>
                         </div>

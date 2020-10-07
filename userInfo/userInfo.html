@@ -18,12 +18,12 @@
             </dt>
             <div class="lmx-card-status" ng-if='userStatus[0].statuses.length'>
                 <span class='lmx-status-level'>{{'status.currentLevelUser' | translate}}:</span>
-                <span class='lmx-definition'>{{userStatus[0].currentStatus.name}}</span><br>
+                <span class='lmx-definition'>«{{userStatus[0].currentStatus.name}}»</span><br>
                 <!-- <span class='lmx-status-points'>{{'status.countPoints' | translate}}:</span> -->
                 <!-- <span class='lmx-definition'>{{userStatus[0].currentValue | number: 2 }} р.</span> -->
             </div>
             <div class="lmx-card-status" ng-if='!userStatus[0].statuses.length'>
-                <span class='lmx-status-level'>{{'status.currentLevelUser' | translate}}: стандарт</span>
+                <span class='lmx-status-level'>{{'status.currentLevelUser' | translate}}: «Стандарт»</span>
                 <!-- <span class='lmx-status-points'>{{'status.countPoints' | translate}}:</span> -->
                 <!-- <span class='lmx-definition'>{{userStatus[0].currentValue | number: 2 }} р.</span> -->
             </div>

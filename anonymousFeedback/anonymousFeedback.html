@@ -5,11 +5,22 @@
             <p ng-bind-html="'anonymousFeedback.hint' | translate"></p>
         </div>
         <form novalidate="" name="anonFeedbackForm" ng-submit="anonFeedbackForm.$valid && sendMail(anonFeedbackForm)">
-            <form-group label-text="{{'anonymousFeedback.theme' | translate}}">
-                <input type="text" id="lmx-subject" ng-model="messageModel.subject" name="subject" required="">
+            <!-- <form-group label-text="{{'anonymousFeedback.theme' | translate}}"> -->
+            <form-group>
+                <!-- <input type="text" id="lmx-subject" ng-model="messageModel.subject" name="subject" required=""> -->
+                <select type="text" id="lmx-subject" ng-model="messageModel.subject" name="subject" required="">
+    				<option value="" disabled selected hidden>Тема сообщения</option>
+                    <option value="Качество обслуживания">Качество обслуживания</option>
+    				<option value="Качество товара">Качество товара</option>
+    				<option value="Наличие товара">Наличие товара</option>
+    				<option value="Стоимость товара">Стоимость товара</option>
+    				<option value="Карта PRISMA">Карта PRISMA</option>
+    				<option value="Прочее">Прочее</option>
+   				</select>
             </form-group>
-            <form-group label-text="{{'anonymousFeedback.message' | translate}}">
-                <textarea id="lmx-msg-textarea" ng-model="messageModel.message" name="msg-textarea" required="">
+            <!-- <form-group label-text="{{'anonymousFeedback.message' | translate}}"> -->
+            <form-group>
+                <textarea placeholder="Kiitos, PRISMA!" id="lmx-msg-textarea" ng-model="messageModel.message" name="msg-textarea" required="">
                 </textarea>
             </form-group>
             <div class="lmx-btn-container">
