@@ -29,6 +29,93 @@
                         <a ng-click="resetFilters()" class="lmx-pseudolink" href="">{{'history.resetFilters' | translate}}</a>
                     </div>
                 </div>
+                <lmx-tabs ng-if="balanceChangeHistory" list="tabs" ng-model="selectedTab.value" view-field="name">
+                </lmx-tabs>
+                <div ng-show="!balanceChangeHistory || selectedTab.value === tabs.operations">
+                    <div ng-class="{'lmx-loading': inProgress}" ng-hide="inProgress && isReload">
+                        <table ng-if="history.rows.length">
+                            <thead>
+                                <tr>
+                                    <th>{{'history.date' | translate}}</th>
+                                    <th>{{'history.cardNumber' | translate}}</th>
+                                    <th>{{'history.description' | translate}}</th>
+                                    <th>{{'history.operation' | translate}}</th>
+                                    <th>{{'history.amount' | translate}}</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="item in history.rows track by item.id" class-toggle-click="cheque-opened" ng-class="::{'lmx-empty-cheque': !item.data.chequeItems.length}">
+                                <tr class="lmx-operation-info">
+                                    <td class="date-time" ng-attr-title="{{:: item.dateTime | toUTC | shortDateTime}}">
+                                        {{:: item.dateTime | toUTC | shortDateTime}}
+                                    </td>
+                                    <td class="lmx-identity" ng-attr-title="{{:: item.identity ? ('**** ' + (item.identity | lastCount: 4)) : undefined}}">
+                                        <span ng-if="::item.identity">****
+                                            <b>{{:: item.identity | lastCount: 4 }}</b></span>
+                                    </td>
+                                    <td class="lmx-description" ng-attr-title="{{:: item.description}}">
+                                        <img ng-if=":: item.logoSquareUrl" ng-src="{{:: item.logoSquareUrl}}" class="lmx-logo-square" fallback-image="" fallback-title="{{'imageNotFound' | translate}}" alt="">
+                                        <span class="lmx-description-text">{{:: item.description}}</span>
+                                    </td>
+                                    <td class="lmx-withdraws lmx-text">
+                                        <div ng-if=":: item.data.withdraws.length" ng-repeat="wdrw in item.data.withdraws" ng-attr-title="{{'history.gift' + (item.data.isRefund ? 'Refund' : '' ) + '.withdraw' | translate}}" class="lmx-text-overflow-ellipsis">
+                                            {{'history.gift' + (item.data.isRefund ?
+                                            'Refund' : '' ) + '.withdraw' | translate}}
+                                        </div>
+                                        <div ng-if=":: item.data.rewards.length" ng-repeat="(type, values) in item.rewardsResult">
+                                            <div ng-repeat="(currency, value) in values" ng-attr-title="{{'history.gift' + (item.data.isRefund ? 'Refund.' : '.') + (type | lowerCamelCase) | translate}}" class="lmx-text-overflow-ellipsis">
+                                                {{'history.gift' + (item.data.isRefund ?
+                                                'Refund.' : '.') + (type | lowerCamelCase) |
+                                                translate}}
+                                            </div>
+                                        </div>
+                                        <div ng-if=":: item.type == 'RewardData' || item.type == 'WithdrawData'" ng-attr-title="{{'history.gift' + (item.data.isRefund ? 'Refund.' : '.') + (item.type | lowerCamelCase) | translate}}" class="lmx-text-overflow-ellipsis">
+                                            {{'history.gift' + (item.data.isRefund ?
+                                            'Refund.' : '.') + (item.type | lowerCamelCase)
+                                            | translate}}
+                                        </div>
+                                    </td>
+                                    <td class="lmx-withdraws lmx-amount">
+                                        <div ng-if=":: item.data.withdraws.length" ng-repeat="wdrw in item.data.withdraws" ng-attr-title="{{:: (item.data.isRefund ? wdrw.amount.amount * -1 : wdrw.amount.amount) | number: 2}} {{:: wdrw.amount.currency }}" class="lmx-text-overflow-ellipsis">
+                                            {{:: (item.data.isRefund ? wdrw.amount.amount *
+                                            -1 : wdrw.amount.amount) | number: 2}} {{::
+                                            wdrw.amount.currency }}
+                                        </div>
+                                        <div ng-if=":: item.data.rewards.length" ng-repeat="(type, values) in item.rewardsResult">
+                                            <div ng-repeat="(currency, value) in values" ng-attr-title="{{:: (item.data.isRefund ? value * -1 : value) | number: 2}} {{:: currency }}" class="lmx-text-overflow-ellipsis">
+                                                {{:: (item.data.isRefund ? value * -1 :
+                                                value) | number: 2}} {{:: currency }}
+                                            </div>
+                                        </div>
+                                        <div ng-if=":: item.type == 'RewardData' || item.type == 'WithdrawData'" ng-attr-title="{{:: (item.data.isRefund ? item.data.amount.amount * -1 : item.data.amount.amount) | number: 2}} {{:: item.data.amount.currency }}" class="lmx-text-overflow-ellipsis">
+                                            {{:: (item.data.isRefund ?
+                                            item.data.amount.amount * -1 :
+                                            item.data.amount.amount) | number: 2}} {{::
+                                            item.data.amount.currency }}
+                                        </div>
+                                    </td>
+                                    <td class="lmx-cheque-expander"></td>
+                                </tr>
+                                <tr class="lmx-cheque-info" ng-if="item.data.chequeItems.length">
+                                    <td colspan="6">
+                                        <div class="lmx-cheque-content">
+                                            <div class="lmx-cheque-line" ng-repeat="chequeItem in item.data.chequeItems">
+                                                <span class="lmx-cheque-item">{{::chequeItem.description |
+                                                    nbspSpaces}}</span>
+                                                <span class="lmx-cheque-count">{{::chequeItem.count}}
+                                                    <span ng-if=":: chequeItem.unit" class="lmx-cheque-unit">{{:: chequeItem.unit}}</span></span>
+                                            </div>
+                                            <div class="lmx-cheque-total">
+                                                {{::item.data.amount.amount | number: 2}}
+                                                {{:: item.data.amount.currency }}
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
                 <div class="lmx-history-table" ng-show="history.allCount || inProgress">
                     <div class="lmx-operations-list lmx-margin-bottom" loader="inProgress && (isPaginated || isReload)">
                         <div ng-class="{'lmx-loading': inProgress}" ng-hide="inProgress && isReload">
@@ -111,7 +198,12 @@
                             <inline-loader line="">inProgress && !isReload</inline-loader>
                         </div>
                     </div>
+                    <a ng-if="balanceChangeHistory && !history.allCount && !inProgress && !balanceChangesIsEmpty" href="" ng-click="changeTab(tabs.balanceChanges)">{{'history.showBalanceChange' | translate}}</a>
                     <a ng-if=":: isPreview" href="#history" class="lmx-pseudolink">{{'history.goToFullHistory' | translate}}</a>
+                </div>
+                <div ng-if="balanceChangeHistory" ng-show="selectedTab.value === tabs.balanceChanges">
+                    <lmx-balance-changes from-date="fromDate" to-date="toDate" card-id="selectedCard"></lmx-balance-changes>
+                    <a ng-if="balanceChangeHistory && history.allCount && !inProgress && balanceChangesIsEmpty" href="" ng-click="changeTab(tabs.operations)">{{'history.showOperations' | translate}}</a>
                 </div>
                 <div class="lmx-history-not-found" ng-if="!history.allCount && !inProgress">
                     {{'history.notFound' | translate}}

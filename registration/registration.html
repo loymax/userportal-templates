@@ -10,10 +10,10 @@
         <div ng-if="isRegistrationStarted && !registrationCompleted" class="lmx-registration-steps" ng-switch="currentStep" loader="currentStep == undefined || inProgress">
             <div ng-hide="inProgress">
                 <tender-offer ng-switch-when="AcceptTenderOffer"></tender-offer>
-                <user-phone ng-switch-when="ChangePhone" registration="true"></user-phone>
-                <user-email ng-switch-when="ChangeEmail" registration="true" email-skippable="emailSkippable"></user-email>
-                <user-password ng-switch-when="PasswordRequired" registration="true"></user-password>
-                <questionnaire ng-switch-when="Questions" registration="true" only-required=""></questionnaire>
+                <lmx-user-phone ng-switch-when="ChangePhone" registration="true"></lmx-user-phone>
+                <lmx-user-email ng-switch-when="ChangeEmail" registration="true" email-skippable="emailSkippable"></lmx-user-email>
+                <lmx-user-password ng-switch-when="PasswordRequired" registration="true"></lmx-user-password>
+                <lmx-questionnaire ng-switch-when="Questions" registration="true" only-required=""></lmx-questionnaire>
                 <card-assignment ng-switch-when="AssignCard"></card-assignment>
             </div>
         </div>

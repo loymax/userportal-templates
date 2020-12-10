@@ -1,7 +1,7 @@
 <div class="lmx-container lmx-auth">
     <div class="lmx-auth-form">
     <h2>{{'authentication.title' | translate}}</h2>
-    <notifications area="login"></notifications>
+    <lmx-notifications area="login"></lmx-notifications>
 
     <identifiers ng-if=":: identifiers.arr !== undefined" ng-hide="cvcRequired" identifiers="identifiers.arr" ng-model="model.identifier" ng-change="resetFormModels()"></identifiers>
 
@@ -31,7 +31,9 @@
             </form-group>
             <div ng-if="!cvcRequired" class="lmx-auth-links lmx-row" ng-class="{'lmx-invisible': authInProgress}">
                 <div><a ng-click="resetPassword()" href="">{{'authentication.forgotPassword' | translate}}</a></div>
-                <!-- <div><a href="#registration">{{'authentication.register' | translate}}</a></div> -->
+                <!-- <div>
+                    <a href="{{:: registrationUrl}}">{{'authentication.register' | translate}}</a>
+                </div> -->
             </div>
         </div>
         
