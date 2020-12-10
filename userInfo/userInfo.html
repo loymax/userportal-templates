@@ -1,8 +1,22 @@
 <div class="lmx-user-info lmx-row" loader="!isInfoLoaded">
     <div ng-if=":: isInfoLoaded">
+        <script type="text/javascript">
+            $(".header-menu-sidebar #balance-link").click(function() {
+                $('body').addClass("hiding-header-menu-sidebar");
+                $('body').removeClass("is-menu-sidebar");
+                var toggleButtons = $(".menu-mobile-toggle, .menu-mobile-toggle .hamburger");
+                toggleButtons.removeClass("is-active"); 
+            });
+            $(".header-menu-sidebar #personal-link").click(function() {
+                $('body').addClass("hiding-header-menu-sidebar");
+                $('body').removeClass("is-menu-sidebar");
+                var toggleButtons = $(".menu-mobile-toggle, .menu-mobile-toggle .hamburger");
+                toggleButtons.removeClass("is-active"); 
+            });
+        </script>
         <dl class="lmx-clearfix">
             <dt class="lmx-user-info__name">
-                <a ng-href="{{baseUrl}}#personal">
+                <a id='personal-link' ng-href="/#/personal">
                     <span>{{userInfo.lastName}}</span>
                     <span>{{userInfo.firstName}}</span>
                     <span>{{userInfo.patronymicName}}</span>
@@ -12,24 +26,28 @@
         </dl>
 
         <dl class="lmx-user-balance lmx-clearfix" ng-class="{'lmx-no-balance': userInfo.baseBalanceAccount === undefined}">
-            <dt class="lmx-user-info__balance lmx-user-info__key">{{'userInfo.balance' | translate}}:&nbsp;</dt>
-            <dd class="lmx-user-info__balance lmx-user-info__value">
-                <span ng-bind="userInfo.baseBalanceAccount.balance | number: 2"></span>&nbsp;{{userInfo.baseBalanceAccount.currency.nameCases.abbreviation}}
-                (<a ng-href="{{baseUrl}}#balance">{{'userInfo.accounts' | translate}}: {{userInfo.balanceAccounts.length}}</a>)
-                <span class="lmx-no-balance-message lmx-hidden">0</span>
-            </dd>
-
+            <div class='string'>
+                <dt class="lmx-user-info__balance lmx-user-info__key">{{'userInfo.balance' | translate}}:&nbsp;</dt>
+                <dd class="lmx-user-info__balance lmx-user-info__value">
+                    <span ng-bind="userInfo.baseBalanceAccount.balance | number: 2"></span>&nbsp;{{userInfo.baseBalanceAccount.currency.nameCases.abbreviation}}
+                    (<a ng-href="/#/balance">{{'userInfo.accounts' | translate}}: {{userInfo.balanceAccounts.length}}</a>)
+                    <span class="lmx-no-balance-message lmx-hidden">0</span>
+                </dd>
+            </div>
+            <div class='string'>
             <dt class="lmx-user-info__not-activated lmx-user-info__key">{{'userInfo.notActivatedBonuses' | translate}}:&nbsp;</dt>
             <dd class="lmx-user-info__not-activated lmx-user-info__value">
                 <span ng-bind="userInfo.baseBalanceAccount.notActivated | number: 2"></span>&nbsp;{{userInfo.baseBalanceAccount.currency.nameCases.abbreviation}}
                 <span class="lmx-no-balance-message lmx-hidden">0</span>
             </dd>
-
+            </div>
+            <div class='string'>
             <dt class="lmx-user-info__accumulated lmx-user-info__key">{{'userInfo.accumulatedBonuses' | translate}}:&nbsp;</dt>
             <dd class="lmx-user-info__accumulated lmx-user-info__value">
                 <span ng-bind="userInfo.baseBalanceAccount.accumulated | number: 2"></span>&nbsp;{{userInfo.baseBalanceAccount.currency.nameCases.abbreviation}}
                 <span class="lmx-no-balance-message lmx-hidden">0</span>
             </dd>
+            </div>
         </dl>
 
         <dl class="lmx-clearfix">
@@ -49,7 +67,7 @@
         </dl>
 
         <div class="lmx-user-info__logout lmx-clearfix">
-            <a ng-click="logout(isPassiveLogout)" class="lmx-right" href="">{{'userInfo.logout' | translate}}</a>
+            <a ng-click="logout(isPassiveLogout)" class="lmx-right" href="/#/login">{{'userInfo.logout' | translate}}</a>
         </div>
     </div>
 </div>

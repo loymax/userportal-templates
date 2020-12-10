@@ -22,7 +22,7 @@
             <dt>{{'cards.info.paid' | translate}}: </dt>
             <dd>{{:: card.paid.amount | number: 2}} {{:: card.paid.currencyInfo.nameCases.abbreviation}}</dd>
         </dl>
-        <div ng-if=":: !card.isInGroup" class="lmx-card-actions">
+        <!-- <div ng-if=":: !card.isInGroup" class="lmx-card-actions">
             <button ng-class="card.block ? 'lmx-card-action__unblock' : 'lmx-card-action__block'" class="lmx-block-btn" ng-if="card.cardActionAccessInfo.canBlock" ng-click="blockStateChange(card)" type="button">
                 {{card.block ? 'cards.actions.unblock' : 'cards.actions.block' | translate}}
             </button>
@@ -30,6 +30,6 @@
                 {{'cards.actions.replace' | translate}}
             </button>
             <a ng-if="card.walletUrl && !card.block && platfotm.currentPlatform" ng-href="{{::card.walletUrl}}" target="_blank" class="lmx-wallet-btn lmx-{{::platfotm.currentPlatform}}-wallet-btn"></a>
-        </div>
+        </div> -->
     </div>
 </div>

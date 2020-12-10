@@ -1,8 +1,42 @@
 <div class="lmx-container lmx-cards">
     <section>
         <h2>{{'cards.title' | translate}}</h2>
+
+        <div class="lmx-card-status" ng-if='userStatus[0].statuses.length'>
+            <span class='lmx-status-level'>{{'status.currentLevel' | translate}}:</span>
+            <span class='lmx-definition'>{{userStatus[0].currentStatus.name}}</span><br>
+            <span class='lmx-status-points'>{{'status.countPoints' | translate}}:</span>
+            <span class='lmx-definition'>{{userStatus[0].currentValue}} б.</span>
+        </div>
+        <div class='lmx-user-status__next-status' ng-if='userStatus[0].statuses.length'>
+                <div ng-if=":: userStatus[0].currentValue > userStatus[0].statuses[userStatus[0].statuses.length - 2].threshold" class="lmx-user-status lmx-user-status__value"
+                    ng-init="status.maxLevel = userStatus[0].statuses[userStatus[0].statuses.length - 1].name">
+                    <span class='lmx-text-nextlevel'>
+                        {{ 'status.currentLevelNextMonth' | translate}}
+                        {{ status.maxLevel }}
+                        {{ 'status.necessaryForNextLevel.nextLevel' | translate | lowercase}}
+                    </span>
+                </div>
+
+                <div ng-if=":: userStatus[0].currentValue <= userStatus[0].statuses[userStatus[0].statuses.length - 2].threshold"
+                    class="lmx-user-status lmx-user-status__value">
+                        <div ng-repeat="availableStatus in userStatus[0].statuses track by $index">
+                            <div ng-if="(userStatus[0].currentValue <= userStatus[0].statuses[$index].threshold) && ($index === 0 || userStatus[0].currentValue > userStatus[0].statuses[$index - 1].threshold)"
+                                ng-init="nextStatus = {amountToNextLevel: userStatus[0].statuses[$index].threshold - userStatus[0].currentValue + 1, nextLevelName: userStatus[0].statuses[$index + 1].name}">
+                                <div class='lmx-text-nextlevel'>
+                                    {{ 'status.necessaryForNextLevel.necessary' | translate}}
+                                    {{ nextStatus.amountToNextLevel}}
+                                    {{ 'status.necessaryForNextLevel.meetcoinFor' | translate | lowercase}}
+                                    {{ nextStatus.nextLevelName}}
+                                </div>
+                            </div>
+                        </div>               
+                </div>
+        </div>
+
         <div loader="inProgress">
             <div ng-if="!inProgress">
+
                 <lmx-tabs ng-if="isAttachCardAvailable" list="tabs" ng-model="selectedTab.value" view-field="name">
                 </lmx-tabs>
                 <div ng-show="selectedTab.value === tabs.personalCards" ng-class="::{'lmx-no-add-card-button': !maxCountOfMainCardsForUserNotReached}" class="lmx-personal-cards">
@@ -11,11 +45,11 @@
                     <div class="lmx-card-item-wrap" ng-repeat="card in cards.personal track by card.id">
                         <card card="card" class="lmx-card-item"></card>
                     </div>
-                    <div class="lmx-add-card-buttons" ng-if="maxCountOfMainCardsForUserNotReached">
+                    <!-- <div class="lmx-add-card-buttons" ng-if="maxCountOfMainCardsForUserNotReached">
                         <button ng-click="setCard()" type="button" class="lmx-set-card-btn">
                             {{'cards.actions.set' | translate}}
                         </button>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div ng-show="selectedTab.value === tabs.accountCards" class="lmx-account-cards">

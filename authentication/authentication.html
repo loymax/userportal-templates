@@ -1,10 +1,12 @@
 <div class="lmx-container lmx-auth">
+    <div class="lmx-auth-form">
     <h2>{{'authentication.title' | translate}}</h2>
     <notifications area="login"></notifications>
 
     <identifiers ng-if=":: identifiers.arr !== undefined" ng-hide="cvcRequired" identifiers="identifiers.arr" ng-model="model.identifier" ng-change="resetFormModels()"></identifiers>
 
     <form novalidate="" method="post" name="loginForm" ng-submit="loginForm.$valid && login()" id="lmx-loginForm">
+
         <div ng-if="cvcRequired">
             <p>{{cvcMessage}}</p>
             <form-group label-text="{{'authentication.code' | translate}}">
@@ -29,9 +31,10 @@
             </form-group>
             <div ng-if="!cvcRequired" class="lmx-auth-links lmx-row" ng-class="{'lmx-invisible': authInProgress}">
                 <div><a ng-click="resetPassword()" href="">{{'authentication.forgotPassword' | translate}}</a></div>
-                <div><a href="#registration">{{'authentication.register' | translate}}</a></div>
+                <!-- <div><a href="#registration">{{'authentication.register' | translate}}</a></div> -->
             </div>
         </div>
+        
         <div class="lmx-btn-container">
             <button type="reset" ng-hide="authInProgress" ng-if="cvcRequired" ng-click="cancelCvcConfirmation()">
                 {{'buttons.cancel' | translate}}
@@ -42,4 +45,11 @@
         </div>
         <lmx-social ng-if="!cvcRequired" ng-hide="authInProgress"></lmx-social>
     </form>
+    </div>
+
+    <div class='lmx-reg-link'>
+        <h2>Активировать пластиковую карту</h2>
+        <p>Если Вы еще не активировали карту, то необходимо ее активировать, чтобы получать все преимущества при покупках.</p>
+        <div class='reg-link'><a href="#registration">Далее</a></div>
+    </div>
 </div>

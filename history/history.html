@@ -32,7 +32,8 @@
                 <div class="lmx-history-table" ng-show="history.allCount || inProgress">
                     <div class="lmx-operations-list lmx-margin-bottom" loader="inProgress && (isPaginated || isReload)">
                         <div ng-class="{'lmx-loading': inProgress}" ng-hide="inProgress && isReload">
-                            <table ng-if="history.rows.length">
+                            <!-- <table ng-if="history.rows.length"> -->
+                            <table>
                                 <thead>
                                 <tr>
                                     <th>{{'history.date' | translate}}</th>

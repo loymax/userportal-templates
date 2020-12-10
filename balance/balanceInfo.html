@@ -31,14 +31,17 @@
             <th>{{'balance.activationAmount' | translate}}</th>
             <th>{{'balance.expirationAmount' | translate}}</th>
         </tr>
-        <tr ng-repeat="lifeTime in selectedAccount.lifeTimesByPeriod track by $index">
-            <td>{{('balance.lifeTimePeriod.' + (lifeTime.period | lowerCamelCase)) | translate}}</td>
-            <td>
-                {{lifeTime.activationAmount | number: 2}}&nbsp;{{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.activationAmount)]}}
-            </td>
+        <tbody ng-repeat="lifeTime in selectedAccount.lifeTimesByPeriod track by $index">
+            <tr>
+                <td>{{('balance.lifeTimePeriod.' + (lifeTime.period | lowerCamelCase)) | translate}}</td>
+                <td>{{lifeTime.activationAmount | number: 2}}&nbsp;{{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.activationAmount)]}}</td>
             <td>
                 {{lifeTime.expirationAmount | number: 2}}&nbsp;{{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.expirationAmount)]}}
             </td>
         </tr>
+            <tr class='second'>
+                <td width="100%" colspan="3" >{{'balance.period' | translate}} {{('balance.lifeTimePeriod.' + (lifeTime.period | lowerCamelCase)) | translate}}</td>
+            </tr>   
+        </tbody>    
     </table>
 </div>
