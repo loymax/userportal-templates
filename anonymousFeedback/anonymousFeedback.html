@@ -9,7 +9,7 @@
                 <input type="text" id="lmx-subject" ng-model="messageModel.subject" name="subject" required="">
             </form-group>
             <form-group label-text="{{'anonymousFeedback.message' | translate}}">
-                <textarea id="lmx-msg-textarea" ng-model="messageModel.message" name="msg-textarea" required="">
+                <textarea id="lmx-msg-textarea" ng-model="messageModel.message" name="msg-textarea" ng-trim="false" required="">
                 </textarea>
             </form-group>
             <div class="lmx-btn-container">

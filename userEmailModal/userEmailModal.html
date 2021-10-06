@@ -1,0 +1,10 @@
+<div class="lmx-subscription-bonus" ng-if="isAuth()">
+    <div class="modal-header">
+        <div class="lmx-modal-closer" ng-click="close()"></div>
+        <h2>{{ 'subscriptions.emailSubscriptionTitle' | translate }}</h2>
+    </div>
+    <span ng-if="popupText">
+        <p ng-bind-html="popupText | markdown"></p>
+    </span>
+    <lmx-user-email alert-modal="true"></lmx-user-email>
+</div>

@@ -43,7 +43,7 @@
                 <div class="lmx-details">
                     <div>
                         <div class="lmx-offer-title">{{'offers.date' | translate}}:</div>
-                        <div>{{:: (offer.begin | toUTC) | dateRange: (offer.end | toUTC)}}</div>
+                        <div>{{:: (offer.begin | toUTC) | timeRange: (offer.end | toUTC)}}</div>
                     </div>
 
                     <section ng-if=":: offer.description">

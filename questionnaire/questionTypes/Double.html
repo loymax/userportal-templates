@@ -2,7 +2,6 @@
     <form novalidate="" name="questionnaireForm" ng-submit="questionnaireForm.$valid && save()">
         <form-group ng-init="registerForm(questionnaireForm)" ng-class="::{'lmx-required': question.isRequired}" ng-attr-title="{{:: question.name.length > 30 ? question.name : ''}}" label-text="{{::question.name}}">
             <input type="number" ng-model="question.value" name="{{::question.logicalName}}" id="lmx-{{::question.logicalName}}" ng-disabled="question.isReadOnly || disabled" ng-required="::question.isRequired" ng-pattern=":: question.regexp" ng-pattern-message="{{:: question.regexpErrorMessage}}">
-
             <question-errors></question-errors>
         </form-group>
     </form>

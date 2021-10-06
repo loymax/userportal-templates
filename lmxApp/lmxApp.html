@@ -22,6 +22,9 @@
                 <a href="#cards"><i class="material-icons">card_membership</i>{{'menu.cards' | translate}}</a>
             </li>
             <li class="lmx-show-when-authed">
+                <a href="#coupons"><i class="material-icons">card_giftcard</i>{{'menu.coupons' | translate}}</a>
+            </li>
+            <li class="lmx-show-when-authed">
                 <a href="#history"><i class="material-icons">card_membership</i>{{'menu.history' | translate}}</a>
             </li>
             <li class="lmx-show-when-authed">
@@ -78,6 +81,7 @@
     </nav>
     <div class="lmx-main-block lmx-section" ng-cloak="" ng-if="allRequestsCompleted">
         <div ng-switch="appLocationParts[0]">
+            <lmx-user-email-modal></lmx-user-email-modal>
             <lmx-authentication ng-switch-when="login"></lmx-authentication>
             <lmx-reset-password ng-switch-when="reset-password"></lmx-reset-password>
             <lmx-registration ng-switch-when="registration"></lmx-registration>
@@ -87,6 +91,7 @@
             <lmx-message ng-switch-when="message"></lmx-message>
             <lmx-user-status ng-switch-when="user-status"></lmx-user-status>
             <lmx-cards ng-switch-when="cards" card-number-graphical-code="bar,qr"></lmx-cards>
+            <lmx-coupons ng-switch-when="coupons"></lmx-coupons>
             <lmx-favorite-goods ng-switch-when="favorite-goods"></lmx-favorite-goods>
             <lmx-balance ng-switch-when="balance"></lmx-balance>
             <lmx-history ng-switch-when="history"></lmx-history>
@@ -107,13 +112,13 @@
                     <lmx-user-phone></lmx-user-phone>
                     <lmx-user-email></lmx-user-email>
                     <lmx-subscriptions subscription-types="Advertisement" notification-types="smsNotification,emailNotification"></lmx-subscriptions>
-                    <lmx-unregistration></lmx-unregistration>
                 </div>
             </div>
             <div ng-switch-when="accounts">
                 <div class="lmx-container lmx-accounts">
                     <lmx-user-password></lmx-user-password>
                     <lmx-social is-binding=""></lmx-social>
+                    <lmx-unregistration></lmx-unregistration>
                 </div>
             </div>
             <div ng-switch-when="personal">

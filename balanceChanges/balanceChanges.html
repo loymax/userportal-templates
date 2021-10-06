@@ -33,7 +33,7 @@
                                 </p>
                             </td>
                         </tr>
-                        <tr ng-if="model.percentageOfBonuses.length" class="lmx-operation-info" class-toggle-click="percent-opened" ng-click="changeLimit()" ng-class="::{'lmx-only-one-element': model.percentageOfBonuses.length === 1}">
+                        <tr ng-if="model.percentageOfBonuses.length" class="lmx-operation-info" class-toggle-click="percent-opened" ng-class="::{'lmx-only-one-element': model.percentageOfBonuses.length === 1}" ng-click="changeLimit()">
                             <td class="lmx-identity">{{'balanceChanges.percent' | translate}}:</td>
                             <td class="date-range">
                                 <p class="lmx-amount-text lmx-percent-info" ng-repeat="item in model.percentageOfBonuses | limitTo: limit">

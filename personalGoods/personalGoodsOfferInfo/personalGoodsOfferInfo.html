@@ -23,12 +23,12 @@
         </div>
         <div class="lmx-duration lmx-row">
             <b>{{'personalGoods.offerPeriod' | translate}}:</b>
-            <div>{{:: offer.begin | toUTC | dateRange: (offer.end | toUTC) | capitalize}}</div>
+            <div>{{:: offer.begin | toUTC | timeRange: (offer.end | toUTC) | capitalize}}</div>
         </div>
         <div class="lmx-edit-duration lmx-row">
             <b ng-bind-html="('personalGoods.editingNotAvailable' | translate) + ':'"></b>
             <div>
-                {{:: offer.attribute.startFillDate | toUTC | dateRange: (offer.attribute.endFillDate
+                {{:: offer.attribute.startFillDate | toUTC | timeRange: (offer.attribute.endFillDate
                 | toUTC) | capitalize}}
             </div>
         </div>

@@ -48,8 +48,9 @@
                                     </thead>
                                     <tbody ng-repeat="item in history.rows track by item.id" class-toggle-click="cheque-opened" ng-class="::{'lmx-empty-cheque': !item.data.chequeItems.length}">
                                         <tr class="lmx-operation-info">
-                                            <td class="date-time" ng-attr-title="{{:: item.dateTime | toUTC | shortDateTime}}">
-                                                {{:: item.dateTime | toUTC | shortDateTime}}
+                                            <td class="date-time" ng-attr-title="{{:: item.dateTime | toUTCTemporarySolution | shortDateTime}}">
+                                                {{:: item.dateTime | toUTCTemporarySolution |
+                                                shortDateTime}}
                                             </td>
                                             <td class="lmx-identity" ng-attr-title="{{:: item.identity ? ('**** ' + (item.identity | lastCount: 4)) : undefined}}">
                                                 <span ng-if="::item.identity">****

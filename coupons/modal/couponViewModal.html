@@ -1,0 +1,52 @@
+<div class="lmx-coupon-modal">
+    <div class="modal-header">
+        <div class="lmx-modal-closer" ng-click="cancel()"></div>
+        <h2>{{:: coupon.emissionTitle }}</h2>
+    </div>
+
+    <div class="modal-content-wrapper">
+        <div class="lmx-coupon-modal">
+            <div class="modal-body">
+                <qrcode data="{{:: coupon.code }}" href="{{ coupon.qrContent }}" size="200"></qrcode>
+
+                <div ng-if="coupon.expiryDate && offerProceed(coupon.activationDate) && !lessThanWeek(coupon.expiryDate)" class="lmx-rating-container">
+                    <span ng-if="offerStartedToday(coupon.activationDate)">
+                        {{ 'coupons.expirationDate' | translate}}: {{:: coupon.expiryDate | toUTC | shortDate }}
+                    </span>
+                    <span ng-if="!offerStartedToday(coupon.activationDate)">
+                        {{ 'coupons.offerStartFrom' | translate }} {{:: coupon.activationDate | toUTC | shortDateTime }}
+                        {{ 'dateRange.to' | translate }}
+                        {{:: coupon.expiryDate | toUTC | shortDate }}
+                    </span>
+                </div>
+
+                <div ng-if="coupon.expiryDate && lessThanWeek(coupon.expiryDate) && offerProceed(coupon.activationDate)">
+                    {{ 'coupons.offerPeriod.left' | translate }}:
+                    {{ leftDays }} {{'coupons.offerPeriod.leftDays' | translate}}
+                    {{ leftHours }} {{'coupons.offerPeriod.leftHours' | translate}}
+                    <div class="lmx-bar">
+                        <span class="lmx-left-time" ng-style="{ width: expiryTimePercent + '%'}"></span>
+                    </div>
+                </div>
+
+                <div ng-if="coupon.expiryDate && !offerProceed(coupon.activationDate)">
+                    {{ 'coupons.offerStartFrom' | translate }}
+                    {{ coupon.activationDate | toUTC | shortDate }}
+                    {{ 'dateRange.to' | translate }}
+                    {{ coupon.expiryDate | toUTC | shortDate }}
+                </div>
+
+                <div class="lmx-coupon-description">
+                    {{ coupon.description }}
+                </div>
+
+                <div class="lmx-coupon-hint">
+                    {{ 'coupons.hint' | translate }}
+                </div>
+            </div>
+            <div class="modal-footer lmx-btn-container">
+                <button type="button" ng-click="cancel()">{{'buttons.close' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

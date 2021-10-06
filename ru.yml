@@ -228,16 +228,22 @@ contacts:
    emailUpdated: "Email успешно изменён"
    codeSent: "Код подтверждения отправлен"
 coupons:
- title: "Купоны"
+ title: &coupons "Купоны"
  coupon: "Купон"
  viewOnSite: "Перейти к купону на сайте"
  date: "Дата покупки"
- expirationDate: "Истекает"
+ expirationDate: "Действует до"
  refund: "Вернуть купон"
  price: "Стоимость купона"
  description: "Описание акции"
+ offerStartFrom: "Действует с"
+ offerPeriod:
+  left: "Осталось"
+  leftDays: "д."
+  leftHours: "ч."
  noDescription: "Описание акции отсутствует"
  buy: "Купить за"
+ hint: "Для получения преференций отсканируйте QR-код"
  login: "Войти, чтобы купить"
  imageNotFound: "Изображение купона отсутствует"
 feedback:
@@ -464,6 +470,7 @@ status:
  countBonuses: "Количество бонусных рублей"
 subscriptions:
  title: "Управление подписками"
+ emailSubscriptionTitle: "Бонус за подписку!"
  error: "Должны быть указаны типы отображаемых подписок и типы оповещений"
  hint: "Получать рекламные рассылки по следующим каналам"
  notificationTypes:
@@ -501,6 +508,7 @@ menu:
  settings: "Настройки"
  balance: *balance
  cards: *cards
+ coupons: *coupons
  history: *history
  personalOffers: *personalOffers
  personalGoods: *personalGoods

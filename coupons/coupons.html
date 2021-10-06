@@ -1,0 +1,52 @@
+<div class="lmx-container lmx-coupons">
+    <h2>{{'coupons.title' | translate}}</h2>
+    <div loader="inProgress">
+        <div class="lmx-coupon lmx-card" ng-repeat="coupon in coupons track by coupon.id" ng-click="openCouponInfo(coupon)">
+            <div class="lmx-card-code">
+                <div class="lmx-image-block">
+                    <img ng-src="data:{{::coupon.imageFile.mimeType}};charset=utf-8;base64, {{::coupon.imageFile.content}}" fallback-image="" fallback-title="{{'imageNotFound' | translate}}" alt="" style="height: 100px; padding: 10px">
+                </div>
+            </div>
+            <div class="lmx-card-content">
+                <div class="lmx-coupon-details">
+                    <div class="lmx-coupon-title">
+                        <h2>{{ coupon.emissionTitle }}</h2>
+                    </div>
+                    <div class="lmx-coupon-description">{{ coupon.shortDescription}}</div>
+                    <div class="lmx-coupon-content">
+                        <div class="lmx-coupon-code">
+                            <qrcode data="{{:: coupon.code }}" size="100"></qrcode>
+                        </div>
+                        <div class="lmx-coupon-period">
+                            <span>Номер купона: {{ coupon.code }}</span>
+
+                            <div ng-if="coupon.expiryDate && offerProceed(coupon.activationDate) && !lessThanWeek(coupon.expiryDate)" class="lmx-rating-container">
+                                <span ng-if="offerStartedToday(coupon.activationDate)">
+                                    {{ 'coupons.expirationDate' | translate}}: {{:: coupon.expiryDate | toUTC | shortDate }}
+                                </span>
+                                <span ng-if="!offerStartedToday(coupon.activationDate)">
+                                    {{ 'coupons.offerStartFrom' | translate }} {{:: coupon.activationDate | toUTC | shortDateTime }}
+                                    {{ 'dateRange.to' | translate }}
+                                    {{:: coupon.expiryDate | toUTC | shortDate }}
+                                </span>
+                            </div>
+
+                            <div ng-if="coupon.expiryDate && lessThanWeek(coupon.expiryDate) && offerProceed(coupon.activationDate)">
+                                {{ 'coupons.offerPeriod.left' | translate }}:
+                                {{ leftDays }} {{'coupons.offerPeriod.leftDays' | translate }}
+                                {{ leftHours }} {{'coupons.offerPeriod.leftHours' | translate }}
+                            </div>
+
+                            <div ng-if="coupon.expiryDate && !offerProceed(coupon.activationDate)">
+                                {{ 'coupons.offerStartFrom' | translate }}
+                                {{ coupon.activationDate | toUTC | shortDate }}
+                                {{ 'dateRange.to' | translate }}
+                                {{ coupon.expiryDate | toUTC | shortDate }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

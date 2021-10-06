@@ -18,13 +18,13 @@
         </div>
         <div ng-if="isChangeProcessStarted" class="lmx-user-email-changing">
             <div ng-if=":: !registration">
-                <h3>Email</h3>
+                <h3 ng-if="!alertModal">Email</h3>
                 <lmx-notifications area="userEmail"></lmx-notifications>
             </div>
             <form novalidate="" name="form" ng-submit="form.$valid && next(form)">
                 <div ng-if="step === 1">
                     <div ng-if=":: !registration" class="lmx-hint">
-                        <p ng-bind-html="'contacts.userEmail.emailHint' | translate"></p>
+                        <p ng-bind-html="'contacts.userEmail.emailHint' | translate" ng-if="!alertModal"></p>
                     </div>
 
                     <form-group label-text="{{(registration ? 'registration.emailStep' : 'contacts.userEmail') + '.email' | translate}}">

@@ -47,6 +47,14 @@
                     <a target="_blank" href="{{apiHost}}api/Files/{{::opdAgreementFileId}}">{{'registration.opd' | translate}}</a>
                 </label>
             </form-group>
+
+            <form-group ng-hide="shouldHideSubscriptionInput">
+                <input ng-required="shouldRequireSubscriptionInput" type="checkbox" id="lmx-lmx-subscriptions" ng-model="isAgreeOnSubscribe.isAgree" name="subscriptions" ng-disabled="!isOfferAndAgreementLoaded || authInProgress || actionsInProgress">
+                <label for="lmx-lmx-subscriptions">
+                    Я даю согласие на получение маркетинговых и рекламных сообщений
+                </label>
+            </form-group>
+
             <div class="lmx-btn-container">
                 <button type="submit" ng-hide="authInProgress || actionsInProgress" ng-disabled="acceptTenderOfferByCheck && !isOfferAndAgreementLoaded" id="lmx-registration-phone__submit">
                     {{'registration.register' | translate}}

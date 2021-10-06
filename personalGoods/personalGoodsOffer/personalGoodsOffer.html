@@ -56,7 +56,7 @@
                 </button>
             </div>
             <div class="lmx-goods-list-overlayer">
-                <p ng-bind-html="('personalGoods.editingNotAvailable' | translate) + ': ' + ((offer.attribute.startFillDate | toUTC | dateRange: (offer.attribute.endFillDate | toUTC)) | nbspSpaces)"></p>
+                <p ng-bind-html="('personalGoods.editingNotAvailable' | translate) + ': ' + ((offer.attribute.startFillDate | toUTC | timeRange: (offer.attribute.endFillDate | toUTC)) | nbspSpaces)"></p>
             </div>
         </div>
     </div>

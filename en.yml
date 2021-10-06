@@ -61,7 +61,7 @@ dateRange:
  to: "to"
  toTime: "to"
  since: "since"
- untilNow: "date"
+ untilNow: "the present"
 reCaptcha:
  error: "Error in interaction with the validation server, please contact technical support"
 file:
@@ -228,16 +228,22 @@ contacts:
    emailUpdated: "The email address has been successfully changed"
    codeSent: "A verification code has been sent"
 coupons:
- title: "Coupons"
+ title: &coupons "Coupons"
  coupon: "Coupon"
  viewOnSite: "Go to the coupon on the site"
  date: "Purchase date"
- expirationDate: "Expiration date"
+ expirationDate: "Valid till"
  refund: "Return coupon"
  price: "Coupon price"
  description: "Offer description"
+ offerStartFrom: "Activates from"
+ offerPeriod:
+  left: "Left"
+  leftDays: "d."
+  leftHours: "h."
  noDescription: "No offer description"
  buy: "Buy for"
+ hint: "Please scan the QR code to get preferences"
  login: "Log in to buy"
  imageNotFound: "No coupon image"
 feedback:
@@ -249,10 +255,10 @@ feedback:
  typeText: "Type a text..."
 balanceChanges:
  purchaseAmount: "Purchase amount"
- discounts: "The amount of direct discounts"
- rewards: "The amount of bonuses accrued"
- withdraws: "The amount of deductions"
- percent: "Current bonus points accrual percentage"
+ discounts: "Direct discount amount"
+ rewards: "Amount of accrued"
+ withdraws: "Amount of deductions"
+ percent: "Current % of bonus points accruals"
  notFound: "No data for the selected period"
 history:
  title: &history "Transaction history"
@@ -269,8 +275,8 @@ history:
  goToFullHistory: "Go to the full transaction history"
  notFound: "Nothing was found by your request, try changing the filter parameters"
  operations: "Operations"
- balanceChanges: "Balance changes"
- showBalanceChange: "Show balance changes"
+ balanceChanges: "Balance change"
+ showBalanceChange: "Show balance change"
  showOperations: "Show the operations"
  gift:
   purchase: "Purchase"
@@ -464,6 +470,7 @@ status:
  countBonuses: "The amount of bonus rubles"
 subscriptions:
  title: "Subscriptions management"
+ emailSubscriptionTitle: "Subscription Bonus!"
  error: "The types of displayed subscriptions and notifications must be specified"
  hint: "Receive promotional mailings via"
  notificationTypes:
@@ -501,6 +508,7 @@ menu:
  settings: "Settings"
  balance: *balance
  cards: *cards
+ coupons: *coupons
  history: *history
  personalOffers: *personalOffers
  personalGoods: *personalGoods
