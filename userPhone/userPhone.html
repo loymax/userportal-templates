@@ -30,6 +30,7 @@
                         <p ng-bind-html="(registration ? 'registration.phoneStep' : 'contacts.userPhone') + '.numberHint' | translate"></p>
                     </div>
                     <form-group>
+                        <phone-mask></phone-mask>
                         <phone-input ng-model="model.newPhone" name="newPhone" id="lmx-newPhone" ng-disabled="loader.inProgress" required=""></phone-input>
                     </form-group>
                 </div>
@@ -43,9 +44,10 @@
                     </form-group>
                     <div class="lmx-margin-bottom" ng-hide="loader.inProgress">
                         <div>
-                            <a ng-click="reSendCode()" id="lmx-changePhone-resendCode" href="">
+                            <a ng-click="!resendTimer.time && reSendCode()" id="lmx-changePhone-resendCode" href="">
                                 {{(registration ? 'registration.phoneStep' : 'contacts.userPhone') +
                                 '.sendConfirmCode' | translate}}
+                                <span ng-if="resendTimer.time">({{resendTimer.time}})</span>
                             </a>
                         </div>
                         <div>

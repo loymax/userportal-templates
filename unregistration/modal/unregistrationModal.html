@@ -12,13 +12,21 @@
                 <form-group>
                     <textarea ng-disabled="inProgress" placeholder="{{'unregistration.reason' | translate}}" ng-model="model.reason"></textarea>
                 </form-group>
-                <form-group ng-if=":: isConfirmation" class="lmx-confirm-code-field">
-                    <div class="lmx-hint">
-                        <span>{{'unregistration.enterConfirmCode' | translate}}
-                            <p ng-if=":: currentPhone">{{::currentPhone}}</p></span>
+                <div ng-if=":: isConfirmation">
+                    <form-group class="lmx-confirm-code-field">
+                        <div class="lmx-hint">
+                            <span>{{'unregistration.enterConfirmCode' | translate}}
+                                <p ng-if=":: currentPhone">{{::currentPhone}}</p></span>
+                        </div>
+                        <input ng-model="model.confirmCode" ng-disabled="inProgress" id="lmx-confirmCode" name="confirmcode" type="text" required="">
+                    </form-group>
+                    <div ng-hide="inProgress">
+                        <a ng-click="!resendTimer.time && reSendCode()" id="lmx-confirmCode-resend" href="">
+                            {{'contacts.userPhone.resetPhone' | translate}}
+                            <span ng-if="resendTimer.time">({{resendTimer.time}})</span>
+                        </a>
                     </div>
-                    <input ng-model="model.confirmCode" ng-disabled="inProgress" id="lmx-confirmCode" name="confirmcode" type="text" required="">
-                </form-group>
+                </div>
             </div>
             <div class="modal-footer lmx-btn-container">
                 <button ng-disabled="inProgress" type="button" ng-click="cencel()">

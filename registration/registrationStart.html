@@ -9,6 +9,7 @@
         <identifiers ng-if=":: identifiers.arr !== undefined" identifiers="identifiers.arr" ng-model="model.identifier" ng-change="resetFormModels(registrationForm)"></identifiers>
         <form novalidate="" name="registrationForm" ng-submit="registrationForm.$valid && registration(registrationForm)" id="lmx-registrationForm" ng-hide="acceptTenderOfferByCheck && (isOfferAndAgreementLoaded === undefined)">
             <form-group ng-if="!tokenForSocialRegistration && model.identifier === IDENTIFIERS.phone" label-text="{{'identifiers.' + model.identifier | translate}}" ng-class="::{'lmx-required': referralRegistration}">
+                <phone-mask></phone-mask>
                 <phone-input ng-model="registrationData.login" id="lmx-login_{{model.identifier}}" name="login" ng-disabled="inProgress || authInProgress || actionsInProgress" required="" autofocus=""></phone-input>
             </form-group>
             <div class="lmx-hint lmx-input-hint" ng-if="!tokenForSocialRegistration && model.identifier === IDENTIFIERS.phone">

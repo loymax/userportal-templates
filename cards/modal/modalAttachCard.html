@@ -38,7 +38,10 @@
                         <input type="text" ng-model="model.confirmCode" ng-disabled="inProgress" id="lmx-confirmCode" name="confirmCode" required="" autofocus="">
                     </form-group>
                     <div ng-hide="inProgress">
-                        <a ng-click="sendConfirmCode()" href="">{{'cards.attachCardModal.resendConfirmCode' | translate}}</a>
+                        <a ng-click="!resendTimer.time && sendConfirmCode()" href="">
+                            {{'cards.attachCardModal.resendConfirmCode' | translate}}
+                            <span ng-if="resendTimer.time">({{resendTimer.time}})</span>
+                        </a>
                     </div>
                 </div>
                 <div class="modal-footer lmx-btn-container">

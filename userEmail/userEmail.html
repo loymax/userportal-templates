@@ -53,9 +53,10 @@
                     </div>
 
                     <div class="lmx-margin-bottom" ng-hide="loader.inProgress">
-                        <a ng-click="reSendCode()" id="lmx-changeEmail-resend" href="">
+                        <a ng-click="!resendTimer.time && reSendCode()" id="lmx-changeEmail-resend" href="">
                             {{(registration ? 'registration.emailStep' : 'contacts.userEmail') +
-                            '.sendConfirmCode' | translate}} </a><br>
+                            '.sendConfirmCode' | translate}}
+                            <span ng-if="resendTimer.time">({{resendTimer.time}})</span> </a><br>
                         <a ng-click="reEnterEmail(form)" id="lmx-changeEmail-reenter" href="">
                             {{(registration ? 'registration.emailStep' : 'contacts.userEmail') +
                             '.resetEmail' | translate}}

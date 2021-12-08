@@ -11,11 +11,15 @@
                 <input type="text" ng-model="model.cvcData.password" id="lmx-cvc" name="cvc" ng-disabled="authInProgress" required="">
             </form-group>
             <div>
-                <a id="lmx-confirm-code-repeated" ng-click="resendCode()" ng-hide="authInProgress" href="">{{'resetPassword.resendCode' | translate}}</a>
+                <a id="lmx-confirm-code-repeated" ng-click="!resendTimer.time && resendCode()" ng-hide="authInProgress" href="">
+                    {{'resetPassword.resendCode' | translate}}
+                    <span ng-if="resendTimer.time">({{resendTimer.time}})</span>
+                </a>
             </div>
         </div>
         <div ng-if="!cvcRequired">
             <form-group ng-if="model.identifier === IDENTIFIERS.phone" label-text="{{'identifiers.' + model.identifier | translate}}">
+                <phone-mask></phone-mask>
                 <phone-input ng-model="model.loginData.login" id="lmx-login_{{model.identifier}}" name="login" ng-disabled="authInProgress" required="" autofocus=""></phone-input>
             </form-group>
             <form-group ng-if="model.identifier === IDENTIFIERS.email" label-text="{{'identifiers.' + model.identifier | translate}}">

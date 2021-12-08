@@ -72,10 +72,14 @@
                                                         translate}}
                                                     </div>
                                                 </div>
-                                                <div ng-if=":: item.type == 'RewardData' || item.type == 'WithdrawData'" ng-attr-title="{{'history.gift' + (item.data.isRefund ? 'Refund.' : '.') + (item.type | lowerCamelCase) | translate}}" class="lmx-text-overflow-ellipsis">
-                                                    {{'history.gift' + (item.data.isRefund ?
-                                                    'Refund.' : '.') + (item.type | lowerCamelCase)
-                                                    | translate}}
+                                                <div ng-if=":: item.type == 'RewardData'" ng-attr-title="{{'history.rewardData.' + (item.data.rewardType | lowerCamelCase) | translate}}" class="lmx-text-overflow-ellipsis">
+                                                    {{'history.rewardData.' + (item.data.rewardType
+                                                    | lowerCamelCase) | translate}}
+                                                </div>
+                                                <div ng-if=":: item.type == 'WithdrawData'" ng-attr-title="{{'history.withdrawData.' + (item.data.withdrawType | lowerCamelCase) | translate}}" class="lmx-text-overflow-ellipsis">
+                                                    {{'history.withdrawData.' +
+                                                    (item.data.withdrawType | lowerCamelCase) |
+                                                    translate}}
                                                 </div>
                                             </td>
                                             <td class="lmx-withdraws lmx-amount">

@@ -1,0 +1,15 @@
+<div class="lmx-multipleMasksSelector" outside-click="outsideClick()" ng-if="phoneSettingsList">
+    <span class="lmx-selected-phoneSettings" ng-click="expandList.state = !expandList.state">
+        <div class="lmx-flag" ng-style="{ 'background-image': 'url(data:image/svg+xml;base64,'+ selectedType.country.image.content +')'}">
+    </div></span>
+
+
+    <ul class="lmx-phone-types-list" ng-show="expandList.state" ng-click="expandList.state = !expandList.state">
+        <li ng-repeat="phoneSettings in phoneSettingsList" ng-click="setPhoneSettings(phoneSettings)">
+            <div class="lmx-flag" ng-style="{ 'background-image': 'url(data:image/svg+xml;base64,'+ phoneSettings.country.image.content +')'}"></div>
+            <span class="lmx-country-name"> {{ phoneSettings.country.name}} </span>
+            <span>+ {{ phoneSettings.prefix}}</span>
+            <input type="radio" id="lmx-name" name="name" ng-model="selectedType" ng-value="phoneSettings">
+        </li>
+    </ul>
+</div>

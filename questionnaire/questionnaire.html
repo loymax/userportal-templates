@@ -11,6 +11,9 @@
                 <div ng-if="questionnaireBlock.type === questionnaireItemTypes.questionGroup">
                     <questionnaire-group group="questionnaireBlock" class="lmx-questionnaire-column"></questionnaire-group>
                 </div>
+                <div ng-if="questionnaireBlock.type === questionnaireItemTypes.questionMultipleGroup">
+                    <questionnaire-block block="questionnaireBlock" class="lmx-questionnaire-column"></questionnaire-block>
+                </div>
             </div>
         </div>
 

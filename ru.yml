@@ -19,6 +19,7 @@ buttons:
  viewMore: "Посмотреть подробнее"
  backToList: "Вернуться к списку"
  reload: "Обновить страницу"
+ add: "Добавить"
 plurals:
  merchant_plural:
   one: "{{ number }} магазин"
@@ -296,6 +297,13 @@ history:
   discount: "Скидка"
   gift: "Подарок"
   charging: "Начисление"
+ rewardData:
+  bonus: "Начисление"
+  activation: "Активация"
+  charging: "Начисление"
+ withdrawData:
+  bonus: "Списание"
+  expiration: "Сгорание"
 merchants:
  title: &merchants "Магазины"
  onMap: "На карте"
@@ -502,6 +510,8 @@ settings:
 questionnaire:
  title: &questionnaire "Личные данные"
  customAnswerPlaceholder: "Введите свой ответ"
+ noQuestionBlocks: "Пока нет добавленных ответов"
+ repliesAdded: "Ответов добавлено"
 menu:
  authentication: *authentication
  registration: *registration

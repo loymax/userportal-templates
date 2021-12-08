@@ -19,6 +19,7 @@ buttons:
  viewMore: "View more"
  backToList: "Go back to the list"
  reload: "Refresh the page"
+ add: "Add"
 plurals:
  merchant_plural:
   one: "{{ number }} point of sale"
@@ -296,6 +297,13 @@ history:
   discount: "Discount"
   gift: "Gift"
   charging: "Deposit"
+ rewardData:
+  bonus: "Accrual"
+  activation: "Activation"
+  charging: "Accrual"
+ withdrawData:
+  bonus: "Deduction"
+  expiration: "Expiration"
 merchants:
  title: &merchants "Points of sale"
  onMap: "On map"
@@ -502,6 +510,8 @@ settings:
 questionnaire:
  title: &questionnaire "Personal Data"
  customAnswerPlaceholder: "Enter your answer"
+ noQuestionBlocks: "No answers have been added yet"
+ repliesAdded: "Replies added"
 menu:
  authentication: *authentication
  registration: *registration
