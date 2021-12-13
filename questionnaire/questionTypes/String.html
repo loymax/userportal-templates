@@ -1,8 +1,43 @@
-<div class="lmx-question-string">
-    <form novalidate="" name="questionnaireForm" ng-submit="questionnaireForm.$valid && save()" ng-attr-autocomplete="{{::browserAutocomplete}}">
-        <form-group ng-init="registerForm(questionnaireForm)" ng-class="::{'lmx-required': question.isRequired}" ng-switch=":: browserAutocomplete" label-text="{{::question.name}}" ng-attr-title="{{:: question.name.length > 30 ? question.name : ''}}">
-            <input ng-switch-when="off" type="text" ng-model="answer.value" ng-attr-name="{{::question.logicalName}}" ng-attr-id="{{::question.logicalName}}" uib-typeahead="value for value in getAutocompleteValues($viewValue)" typeahead-on-select="commitValue()" typeahead-min-length="0" autocomplete="off" ng-disabled="question.isReadOnly || disabled" ng-required="::question.isRequired" ng-pattern=":: question.regexp" ng-pattern-message="{{:: question.regexpErrorMessage}}">
-            <input ng-switch-default="" type="text" ng-model="answer.value" ng-attr-name="{{::question.logicalName}}" ng-attr-id="{{::question.logicalName}}" ng-disabled="question.isReadOnly || disabled" ng-required="::question.isRequired" ng-pattern=":: question.regexp" ng-pattern-message="{{:: question.regexpErrorMessage}}">
+﻿<div class="question-string">
+    <form
+        novalidate
+        name="questionnaireForm"
+        ng-submit="questionnaireForm.$valid && save()"
+        ng-attr-autocomplete="{{::browserAutocomplete}}"
+    >
+        <form-group
+            ng-init="registerForm(questionnaireForm)"
+            ng-class="::{'required': question.isRequired}"
+            ng-switch=":: browserAutocomplete"
+            label-text="{{::question.name}}"
+            ng-attr-title="{{:: question.name.length > 30 ? question.name : ''}}"
+        >
+            <input
+                ng-switch-when="off"
+                type="text"
+                ng-model="answer.value"
+                ng-attr-name="{{::question.logicalName}}"
+                ng-attr-id="{{::question.logicalName}}"
+                uib-typeahead="value for value in getAutocompleteValues($viewValue)"
+                typeahead-on-select="commitValue()"
+                typeahead-min-length="0"
+                autocomplete="off"
+                ng-disabled="question.isReadOnly || disabled"
+                ng-required="::question.isRequired"
+                ng-pattern=":: question.regexp"
+                ng-pattern-message="{{:: question.regexpErrorMessage}}"
+            />
+            <input
+                ng-switch-default
+                type="text"
+                ng-model="answer.value"
+                ng-attr-name="{{::question.logicalName}}"
+                ng-attr-id="{{::question.logicalName}}"
+                ng-disabled="question.isReadOnly || disabled"
+                ng-required="::question.isRequired"
+                ng-pattern=":: question.regexp"
+                ng-pattern-message="{{:: question.regexpErrorMessage}}"
+            />
             <question-errors></question-errors>
         </form-group>
     </form>
