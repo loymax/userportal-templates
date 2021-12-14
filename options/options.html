@@ -61,20 +61,25 @@
         </table>
 
         <h2>Опции компонент</h2>
-        <div>
+        <div class="lmx-components-option">
             <table ng-repeat="(key, value) in components">
-                <th>{{optionsNames[key]}}</th>
+                <thead>
+                    <th>{{optionsNames[key]}}</th>
+                </thead>
 
-                <tr ng-repeat="(compKey, compValue) in value">
-                    <td>{{compKey}}</td>
-                    <td ng-init="inputType = getType(compValue)" ng-switch="inputType">
-                        <textarea ng-switch-when="textarea" ng-attr-id="{{compKey}}" readonly="">
-{{value[compKey] | json}}</textarea>
-                        <input ng-switch-default="" ng-attr-id="{{compKey}}" ng-attr-type="{{inputType}}" ng-class="'lmx-'+getClass(compValue)" ng-model="value[compKey]">
-                        <label ng-attr-for="{{compKey}}"></label>
-                    </td>
-                    <td>{{optionsNames[compKey]}}</td>
-                </tr>
+                <tbody>
+                    <tr ng-repeat="(compKey, compValue) in value">
+                        <td>{{compKey}}</td>
+                        <td ng-init="inputType = getType(compValue)" ng-switch="inputType" class="lmx-option-value">
+                            <textarea ng-switch-when="textarea" ng-attr-id="{{compKey}}" readonly="">
+                                {{value[compKey] | json}}
+                            </textarea>
+                            <input ng-switch-default="" ng-attr-id="{{compKey}}" ng-attr-type="{{inputType}}" ng-class="'lmx-'+getClass(compValue)" ng-model="value[compKey]">
+                            <label ng-attr-for="{{compKey}}"></label>
+                        </td>
+                        <td class="lmx-option-description">{{optionsNames[compKey]}}</td>
+                    </tr>
+                </tbody>
             </table>
 
             <button type="button" ng-click="saveComponentsOptions()">
@@ -83,18 +88,21 @@
         </div>
 
         <h2>Общие опции</h2>
-        <div>
+        <div class="lmx-components-option">
             <table>
-                <tr ng-repeat="(key, value) in common">
-                    <td>{{key}}</td>
-                    <td ng-init="inputType = getType(value)" ng-switch="inputType">
-                        <textarea ng-switch-when="textarea" ng-attr-id="{{key}}" readonly="">
-{{common[key] | json}}</textarea>
-                        <input ng-switch-default="" ng-attr-id="{{key}}" ng-attr-type="{{inputType}}" ng-class="'lmx-'+getClass(value)" ng-model="common[key]">
-                        <label ng-attr-for="{{key}}"></label>
-                    </td>
-                    <td>{{optionsNames[key]}}</td>
-                </tr>
+                <tbody>
+                    <tr ng-repeat="(key, value) in common">
+                        <td>{{key}}</td>
+                        <td ng-init="inputType = getType(value)" ng-switch="inputType" class="lmx-option-value">
+                            <textarea ng-switch-when="textarea" ng-attr-id="{{key}}" readonly="">
+                                {{common[key] | json}}
+                            </textarea>
+                            <input ng-switch-default="" ng-attr-id="{{key}}" ng-attr-type="{{inputType}}" ng-class="'lmx-'+getClass(value)" ng-model="common[key]">
+                            <label ng-attr-for="{{key}}"></label>
+                        </td>
+                        <td class="lmx-option-description">{{optionsNames[key]}}</td>
+                    </tr>
+                </tbody>
             </table>
 
             <button type="button" ng-click="saveCommonOptions()">

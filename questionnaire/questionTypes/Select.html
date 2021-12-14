@@ -1,99 +1,29 @@
-<div
-    ng-class=":: {
-    'question-radio': !question.isMultiSelect,
-    'question-checkbox': question.isMultiSelect,
-    'question-custom': question.hasCustomAnswer
-}"
->
-    <form novalidate name="questionnaireForm" ng-submit="questionnaireForm.$valid && save()">
-        <form-group
-            label-text="{{::question.name}}"
-            ng-init="registerForm(questionnaireForm)"
-            ng-class="::{'required': question.isRequired}"
-        >
-            <input
-                type="hidden"
-                ng-model="hiddenValue.value"
-                ng-attr-id="{{::question.logicalName}}"
-                ng-attr-name="{{::question.logicalName}}"
-                ng-required="::question.isRequired"
-            />
+<div ng-class="::{'lmx-question-radio': !question.isMultiSelect,'lmx-question-checkbox': question.isMultiSelect,'lmx-question-custom': question.hasCustomAnswer}">
+    <form novalidate="" name="questionnaireForm" ng-submit="questionnaireForm.$valid && save()">
+        <form-group label-text="{{::question.name}}" ng-init="registerForm(questionnaireForm)" ng-class="::{'lmx-required': question.isRequired}">
+            <input type="hidden" ng-model="hiddenValue.value" ng-attr-id="{{::question.logicalName}}" ng-attr-name="{{::question.logicalName}}" ng-required="::question.isRequired">
             <!-- select (if answers > 5) -->
             <div ng-if=":: question.fixedAnswers.length > 5 && !question.isMultiSelect">
-                <div
-                    ng-init="lmxCustomSelectValue = getFixedAnswerByProperty('isSelected', true).id"
-                    lmx-custom-select
-                    ng-model="lmxCustomSelectValue"
-                    repeat="answer.fixedAnswers"
-                    ng-change="updateAnswerObject(lmxCustomSelectValue)"
-                    options="q.id as q.name for q in answer.fixedAnswers"
-                ></div>
-                <input
-                    ng-show="hiddenValue.value.isCustom"
-                    type="text"
-                    ng-attr-name="{{::question.logicalName+'_custom'}}"
-                    ng-model="answer.value"
-                    placeholder="{{'questionnaire.customAnswerPlaceholder' | translate}}"
-                    ng-required="hiddenValue.value.isCustom"
-                    ng-pattern="question.regexp"
-                    class="question-custom__text"
-                />
+                <div ng-init="lmxCustomSelectValue = getFixedAnswerByProperty('isSelected', true).id" lmx-custom-select="" ng-model="lmxCustomSelectValue" repeat="answer.fixedAnswers" ng-change="updateAnswerObject(lmxCustomSelectValue)" options="q.id as q.name for q in answer.fixedAnswers"></div>
+                <input ng-show="hiddenValue.value.isCustom" type="text" ng-attr-name="{{::question.logicalName+'_custom'}}" ng-model="answer.value" placeholder="{{'questionnaire.customAnswerPlaceholder' | translate}}" ng-required="hiddenValue.value.isCustom" ng-pattern="question.regexp" class="lmx-question-custom__text">
             </div>
-            <div
-                ng-repeat="item in answer.fixedAnswers"
-                ng-init="elementId = question.logicalName+'_'+item.id+'_'+answer.number"
-                ng-class=":: {'question-radio-item': !question.isMultiSelect, 'question-checkbox-item': question.isMultiSelect}"
-            >
+            <div ng-repeat="item in answer.fixedAnswers" ng-init="elementId = question.logicalName+'_'+item.id+'_'+answer.number" ng-class="::{'lmx-question-radio-item': !question.isMultiSelect,'lmx-question-checkbox-item': question.isMultiSelect}">
                 <!-- radio (if answers < 6) -->
                 <div ng-if="!question.isMultiSelect && question.fixedAnswers.length <= 5">
-                    <input
-                        type="radio"
-                        ng-model="hiddenValue.value"
-                        ng-value="item"
-                        ng-change="updateRadioValues(item)"
-                        ng-disabled="item.isReadOnly || disabled"
-                        ng-attr-id="{{::elementId}}"
-                    />
-                    <label class="radio-item-label" ng-attr-for="{{::elementId}}">
+                    <input type="radio" ng-model="hiddenValue.value" ng-value="item" ng-change="updateRadioValues(item)" ng-disabled="item.isReadOnly || disabled" ng-attr-id="{{::elementId}}">
+                    <label class="lmx-radio-item-label" ng-attr-for="{{::elementId}}">
                         {{::item.name}}
                     </label>
-                    <input
-                        ng-if="item.isCustom"
-                        type="text"
-                        placeholder="{{'questionnaire.customAnswerPlaceholder' | translate}}"
-                        ng-attr-name="{{::question.logicalName+'_custom'}}"
-                        ng-model="answer.value"
-                        ng-click="hiddenValue.value = item"
-                        ng-required="hiddenValue.value === item"
-                        ng-disabled="disabled || hiddenValue.value !== item"
-                        ng-pattern="hiddenValue.value === item ? question.regexp : undefined"
-                        class="question-custom__text"
-                    />
+                    <input ng-if="item.isCustom" type="text" placeholder="{{'questionnaire.customAnswerPlaceholder' | translate}}" ng-attr-name="{{::question.logicalName+'_custom'}}" ng-model="answer.value" ng-click="hiddenValue.value = item" ng-required="hiddenValue.value === item" ng-disabled="disabled || hiddenValue.value !== item" ng-pattern="hiddenValue.value === item ? question.regexp : undefined" class="lmx-question-custom__text">
                 </div>
 
                 <!-- checkBox -->
                 <div ng-if=":: question.isMultiSelect">
-                    <input
-                        type="checkbox"
-                        ng-attr-id="{{::elementId}}"
-                        ng-model="item.isSelected"
-                        ng-change="updateCheckBoxValues(true)"
-                        ng-disabled="item.isReadOnly || disabled"
-                    />
-                    <label ng-attr-for="{{::elementId}}" class="checkbox-item-label">
+                    <input type="checkbox" ng-attr-id="{{::elementId}}" ng-model="item.isSelected" ng-change="updateCheckBoxValues(true)" ng-disabled="item.isReadOnly || disabled">
+                    <label ng-attr-for="{{::elementId}}" class="lmx-checkbox-item-label">
                         {{::item.name}}
                     </label>
-                    <input
-                        ng-if="item.isCustom"
-                        type="text"
-                        name="{{::question.logicalName+'_custom'}}"
-                        ng-model="answer.value"
-                        ng-click="item.isSelected = true"
-                        ng-required="item.isSelected"
-                        ng-disabled="disabled || !item.isSelected"
-                        ng-pattern="item.isSelected ? question.regexp : undefined"
-                        class="question-custom__text"
-                    />
+                    <input ng-if="item.isCustom" type="text" name="{{::question.logicalName+'_custom'}}" ng-model="answer.value" ng-click="item.isSelected = true" ng-required="item.isSelected" ng-disabled="disabled || !item.isSelected" ng-pattern="item.isSelected ? question.regexp : undefined" class="lmx-question-custom__text">
                 </div>
             </div>
             <question-errors></question-errors>

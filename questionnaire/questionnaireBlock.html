@@ -1,32 +1,23 @@
 <div>
     <h3>{{::block.name}}</h3>
-    <div class="add-block-button">
+    <div class="lmx-add-block-button">
         <button ng-click="addBlock()" ng-disabled="block.answers.length === block.maxAnswersCount">
             {{:: 'buttons.add' | translate }}
         </button>
     </div>
 
     <div>
-        <span ng-if="block.answers.length === 0"
-            >{{:: 'questionnaire.noQuestionBlocks' | translate }}</span
-        >
-        <span ng-if="block.answers.length > 0"
-            >{{:: 'questionnaire.repliesAdded' | translate }}</span
-        >
+        <span ng-if="block.answers.length === 0">{{:: 'questionnaire.noQuestionBlocks' | translate }}</span>
+        <span ng-if="block.answers.length > 0">{{:: 'questionnaire.repliesAdded' | translate }}</span>
         ({{ block.answers.length }}/{{ block.maxAnswersCount }})
     </div>
 
-    <div ng-repeat="row in block.answers track by row.number" class="questions-row">
-        <div class="remove-block-button">
+    <div ng-repeat="row in block.answers track by row.number" class="lmx-questions-row">
+        <div class="lmx-remove-block-button">
             <button ng-click="removeBlock(row)">{{:: 'buttons.delete' | translate }}</button>
         </div>
         <div ng-repeat="question in block.questions | orderBy: 'order' track by question.id">
-            <questionnaire-item
-                question="question"
-                question-block="block"
-                question-id="block.id"
-                answer="row.answers.getObjectByField('questionId', question.id)"
-            ></questionnaire-item>
+            <questionnaire-item question="question" question-block="block" question-id="block.id" answer="row.answers.getObjectByField('questionId', question.id)"></questionnaire-item>
         </div>
     </div>
 </div>

@@ -1,30 +1,18 @@
-﻿<div>
+<div>
     <div ng-if=":: registration">
         <h2>{{'personal.title' | translate}}</h2>
     </div>
-    <div
-        class="questionnaire"
-        loader="loader.templatesInProgress"
-        ng-class="::{'questionnaire-edit' : !registration}"
-    >
+    <div class="lmx-questionnaire" loader="loader.templatesInProgress" ng-class="::{'lmx-questionnaire-edit': !registration}">
         <div ng-hide="loader.templatesInProgress">
             <div ng-repeat="questionnaireBlock in questionnaire track by $index">
                 <div ng-if="questionnaireBlock.type === questionnaireItemTypes.question">
                     <questionnaire-item question="questionnaireBlock"></questionnaire-item>
                 </div>
                 <div ng-if="questionnaireBlock.type === questionnaireItemTypes.questionGroup">
-                    <questionnaire-group
-                        group="questionnaireBlock"
-                        class="questionnaire-column"
-                    ></questionnaire-group>
+                    <questionnaire-group group="questionnaireBlock" class="lmx-questionnaire-column"></questionnaire-group>
                 </div>
-                <div
-                    ng-if="questionnaireBlock.type === questionnaireItemTypes.questionMultipleGroup"
-                >
-                    <questionnaire-block
-                        block="questionnaireBlock"
-                        class="questionnaire-column"
-                    ></questionnaire-block>
+                <div ng-if="questionnaireBlock.type === questionnaireItemTypes.questionMultipleGroup">
+                    <questionnaire-block block="questionnaireBlock" class="lmx-questionnaire-column"></questionnaire-block>
                 </div>
             </div>
         </div>
@@ -32,23 +20,12 @@
         <lmx-notifications ng-if=":: registration" area="registration"></lmx-notifications>
         <lmx-notifications area="questionnaire"></lmx-notifications>
         <div ng-if="!loader.templatesInProgress">
-            <div class="btn-container">
+            <div class="lmx-btn-container">
                 <div ng-hide="loader.saveInProgress">
-                    <button
-                        type="button"
-                        ng-if=":: registration"
-                        class="btn-cancel"
-                        ng-click="cancelForm()"
-                        id="registration-questionnaire__cancel"
-                    >
+                    <button type="button" ng-if=":: registration" class="lmx-btn-cancel" ng-click="cancelForm()" id="lmx-registration-questionnaire__cancel">
                         {{'buttons.cancel' | translate}}
                     </button>
-                    <button
-                        type="button"
-                        ng-click="saveQuestionnaire()"
-                        id="registration-questionnaire__submit"
-                        ng-class=":: {'right': !registration}"
-                    >
+                    <button type="button" ng-click="saveQuestionnaire()" id="lmx-registration-questionnaire__submit" ng-class="::{'lmx-right': !registration}">
                         {{(registration ? 'buttons.next' : 'buttons.save') |translate}}
                     </button>
                 </div>
