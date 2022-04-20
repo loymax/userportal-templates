@@ -46,7 +46,7 @@
                                             <th></th>
                                         </tr>
                                     </thead>
-                                    <tbody ng-repeat="item in history.rows track by item.id" class-toggle-click="cheque-opened" ng-class="::{'lmx-empty-cheque': !item.data.chequeItems.length}">
+                                    <tbody ng-repeat="item in history.rows track by item.id" class-toggle-click="cheque-opened" ng-class="::{'lmx-empty-cheque': !item.data.chequeItems.length && !item.data.chequeAdditionalAttributes.length}">
                                         <tr class="lmx-operation-info">
                                             <td class="date-time" ng-attr-title="{{:: item.dateTime | toUTCTemporarySolution | shortDateTime}}">
                                                 {{:: item.dateTime | toUTCTemporarySolution |
@@ -116,6 +116,16 @@
                                                         {{::item.data.amount.amount | number: 2}}
                                                         {{:: item.data.amount.currency }}
                                                     </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="lmx-cheque-info" ng-if="item.data.chequeAdditionalAttributes && item.data.chequeAdditionalAttributes.length">
+                                            <td colspan="6" class="lmx-cheque-content">
+                                                <h4>{{ 'history.eCheque' | translate }}:</h4>
+                                                <div ng-repeat="attribute in item.data.chequeAdditionalAttributes">
+                                                    <a ng-href="{{ attribute.value }}" target="_blank">
+                                                        {{ attribute.stringValue}}
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>

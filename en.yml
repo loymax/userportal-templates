@@ -141,8 +141,8 @@ balance:
  lastWeekChanges: "Last week changes"
  infoNotFound: "No active accounts"
  lifeTimePeriod:
-  fromWeekToMonth: "Between a week and a month"
-  fromMonthToYear: "Between a month and a year"
+  fromWeekToMonth: "Balance change between a week and a month"
+  fromMonthToYear: "Balance change between a month and a year"
   fromYear: "In a year or later"
 brands:
  title: &brands "Brands"
@@ -248,7 +248,7 @@ coupons:
  login: "Log in to buy"
  imageNotFound: "No coupon image"
 feedback:
- title: &feedback "Chat"
+ title: &feedback "Feedback"
  askQuestion: "Ask your question to the operator"
  you: "You"
  operator: "Operator"
@@ -261,6 +261,7 @@ balanceChanges:
  withdraws: "Amount of deductions"
  percent: "Current % of bonus points accruals"
  notFound: "No data for the selected period"
+ amount: "Amount"
 history:
  title: &history "Transaction history"
  fromDate: "From date"
@@ -279,6 +280,7 @@ history:
  balanceChanges: "Balance change"
  showBalanceChange: "Show balance change"
  showOperations: "Show the operations"
+ eCheque: "Links to e-check"
  gift:
   purchase: "Purchase"
   withdraw: "Payment"

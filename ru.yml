@@ -141,8 +141,8 @@ balance:
  lastWeekChanges: "Изменение баланса в течение недели"
  infoNotFound: "Нет действующих счетов"
  lifeTimePeriod:
-  fromWeekToMonth: "От недели до месяца"
-  fromMonthToYear: "От месяца до года"
+  fromWeekToMonth: "Изменение баланса от недели до месяца"
+  fromMonthToYear: "Изменение баланса от месяца до года"
   fromYear: "Через год и более"
 brands:
  title: &brands "Бренды"
@@ -248,7 +248,7 @@ coupons:
  login: "Войти, чтобы купить"
  imageNotFound: "Изображение купона отсутствует"
 feedback:
- title: &feedback "Чат"
+ title: &feedback "Обратная связь"
  askQuestion: "Задайте свой вопрос оператору"
  you: "Вы"
  operator: "Оператор"
@@ -261,6 +261,7 @@ balanceChanges:
  withdraws: "Сумма списаний"
  percent: "Текущий % начисления бонусов"
  notFound: "Нет данных за выбранный период"
+ amount: "Сумма"
 history:
  title: &history "История операций"
  fromDate: "В период с"
@@ -279,6 +280,7 @@ history:
  balanceChanges: "Изменение баланса"
  showBalanceChange: "Показать изменение баланса"
  showOperations: "Показать операции"
+ eCheque: "Ссылки на электронный чек"
  gift:
   purchase: "Покупка"
   withdraw: "Оплата"

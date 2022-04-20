@@ -6,16 +6,16 @@
                 <div ng-switch-when="true" class="lmx-balance-block">
                     <lmx-tabs list="balanceAccounts" ng-model="selectedAccount" view-field="title">
                     </lmx-tabs>
-                    <balance-info></balance-info>
+                    <balance-info ng-if="selectedAccount.currency"></balance-info>
                     <div class="lmx-balance-accordion-wrap">
                         <uib-accordion class="lmx-balance-accordion">
-                            <uib-accordion-group ng-repeat="selectedAccount in balanceAccounts" class="lmx-balance-accordion-group">
+                            <uib-accordion-group ng-repeat="selectedAccount in balanceAccounts" class="lmx-balance-accordion-group" ng-click="selectAccordion(selectedAccount)">
                                 <uib-accordion-heading class="lmx-balance-header">
                                     <span>{{::selectedAccount.title}}</span>
                                     <span class="glyphicon glyphicon-chevron-down"></span>
                                     <span class="glyphicon glyphicon-chevron-up"></span>
                                 </uib-accordion-heading>
-                                <balance-info></balance-info>
+                                <balance-info ng-if="selectedAccount.currency.id === selectedCurrency.id"></balance-info>
                             </uib-accordion-group>
                         </uib-accordion>
                     </div>

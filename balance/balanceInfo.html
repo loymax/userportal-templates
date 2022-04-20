@@ -11,51 +11,90 @@
             {{selectedAccount.notActivatedAmount | number: 2}}
             {{selectedAccount.currency.nameCases[getCurrencyNameCase(selectedAccount.notActivatedAmount)]}}
         </div>
-    </div>
-    <table ng-if="selectedAccount.lifeTimesByTime.length">
-        <tr>
-            <th>{{'balance.lastWeekChanges' | translate}}</th>
-            <th>{{'balance.date' | translate}}</th>
-        </tr>
-        <tr ng-repeat="lifeTime in selectedAccount.lifeTimesByTime track by $index">
-            <td class="lmx-for-desktop">
-                {{lifeTime.amount | number:
-                2}}&nbsp;{{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.amount)]}}
-            </td>
-            <td class="lmx-for-mobile">
-                {{lifeTime.amount | number: 2}}
-                <span class="lmx-amount-name">{{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.amount)]}}</span>
-            </td>
-            <td>{{lifeTime.date | toUTC | shortDateTime}}</td>
-        </tr>
-    </table>
 
-    <table ng-if="selectedAccount.lifeTimesByPeriod.length">
-        <tr>
-            <th>{{'balance.period' | translate}}</th>
-            <th>{{'balance.activationAmount' | translate}}</th>
-            <th>{{'balance.expirationAmount' | translate}}</th>
-        </tr>
-        <tr ng-repeat="lifeTime in selectedAccount.lifeTimesByPeriod track by $index">
-            <td>
-                {{('balance.lifeTimePeriod.' + (lifeTime.period | lowerCamelCase)) | translate}}
-            </td>
-            <td class="lmx-for-desktop">
-                {{lifeTime.activationAmount | number:
-                2}}&nbsp;{{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.activationAmount)]}}
-            </td>
-            <td class="lmx-for-mobile">
-                {{lifeTime.activationAmount | number: 2}}
-                <span class="lmx-amount-name">{{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.activationAmount)]}}</span>
-            </td>
-            <td class="lmx-for-desktop">
-                {{lifeTime.expirationAmount | number:
-                2}}&nbsp;{{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.expirationAmount)]}}
-            </td>
-            <td class="lmx-for-mobile">
-                {{lifeTime.expirationAmount | number: 2}}
-                <span class="lmx-amount-name">{{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.expirationAmount)]}}</span>
-            </td>
-        </tr>
-    </table>
+        <div ng-if="selectedAccount.lifeTimesByTime.length">
+            <b>
+                {{'balance.lastWeekChanges' | translate}}:
+            </b>
+            <div class="lmx-lifeTime-amount">
+                {{ 'history.gift.rewardData' | translate }}&nbsp;-&nbsp;{{ weekRewardAmount |
+                number:2 }}
+                {{selectedAccount.currency.nameCases[getCurrencyNameCase(weekRewardAmount)]}}
+                <br>
+                {{ 'history.gift.withdrawData' | translate }}&nbsp;-&nbsp;{{ (weekWithdrawAmount *
+                -1) | number:2 }}
+                {{selectedAccount.currency.nameCases[getCurrencyNameCase(weekWithdrawAmount)]}}
+            </div>
+        </div>
+
+        <div ng-if="selectedAccount.lifeTimesByPeriod.length">
+            <div ng-repeat="lifeTime in selectedAccount.lifeTimesByPeriod track by $index">
+                <b>
+                    {{ ('balance.lifeTimePeriod.' + (lifeTime.period | lowerCamelCase)) |
+                    translate}}:
+                </b>
+                <div class="lmx-lifeTime-amount">
+                    {{ 'history.gift.rewardData' | translate }}&nbsp;-&nbsp;{{
+                    lifeTime.activationAmount | number: 2}}
+                    {{selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.activationAmount)]}}
+                    <br>
+                    {{ 'history.gift.withdrawData' | translate }}&nbsp;-&nbsp;{{
+                    (lifeTime.expirationAmount * -1) | number: 2 }} {{
+                    selectedAccount.currency.nameCases[getCurrencyNameCase(lifeTime.expirationAmount)]
+                    }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="lmx-currency-info" loader="inProgress">
+        <h3>{{ 'history.balanceChanges' | translate }}</h3>
+        <div class="date-filters">
+            <div class="date-filter lmx-since-date-filter">
+                <span class="lmx-pretext">{{'history.fromDate' | translate}}</span>
+                <date-picker ng-model="fromDate" ng-change="getCurrencyInfo()"> </date-picker>
+            </div>
+            &nbsp;
+            <div class="date-filter lmx-to-date-filter">
+                <span class="lmx-pretext">{{'history.toDate' | translate}}</span>
+                <date-picker ng-model="toDate" ng-change="getCurrencyInfo()"> </date-picker>
+            </div>
+        </div>
+        <input type="checkbox" id="lmx-activation" name="activation" ng-model="activation" ng-click="getCurrencyInfo()">
+        <label for="lmx-activation">
+            {{:: 'history.gift.rewardData' | translate }}
+        </label>
+
+        <input type="checkbox" id="lmx-expiration" name="expiration" ng-model="expiration" ng-click="getCurrencyInfo()">
+        <label for="lmx-expiration">
+            {{:: 'history.gift.withdrawData' | translate }}
+        </label>
+
+        <uib-pagination ng-show="operations[selectedAccount.currency.id].$allCount > onPage" total-items="operations[selectedAccount.currency.id].$allCount" ng-model="currentPage" max-size="4" items-per-page="{{:: onPage}}" class="lmx-pagination" boundary-links="true" boundary-link-numbers="true" direction-links="false" force-ellipses="true" first-text="<<" last-text=">>" ng-change="getCurrencyInfo()"></uib-pagination>
+
+        <div class="lmx-history-not-found" ng-if="!operations[selectedAccount.currency.id].$allCount && !inProgress">
+            {{ 'history.notFound' | translate}}
+        </div>
+
+        <table ng-if="operations[selectedAccount.currency.id].$allCount && !inProgress">
+            <tr>
+                <th>{{ 'history.operations' | translate}}</th>
+                <th>{{ 'balanceChanges.amount' | translate }}</th>
+                <th>{{ 'balance.date' | translate }}</th>
+            </tr>
+            <tr ng-repeat="operation in operations[selectedAccount.currency.id] track by $index">
+                <td>
+                    {{ (operation.amount < 0 ? 'history.gift.withdrawData' :
+                    'history.gift.rewardData' ) | translate }}
+                </td>
+                <td ng-class="{'lmx-activation': operation.amount > 0,'lmx-expiration': operation.amount < 0}">
+                    {{ operation.amount }}&nbsp;{{
+                    selectedAccount.currency.nameCases[getCurrencyNameCase(operation.amount)]}}
+                </td>
+                <td>
+                    {{ operation.date | toUTC | shortDateTime }}
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>

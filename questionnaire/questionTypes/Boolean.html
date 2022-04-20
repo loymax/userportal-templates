@@ -1,8 +1,8 @@
 <div class="lmx-question-boolean">
     <form novalidate="" name="questionnaireForm" ng-submit="questionnaireForm.$valid && save()">
         <form-group ng-init="registerForm(questionnaireForm)" ng-class="::{'lmx-required': question.isRequired}">
-            <input type="checkbox" ng-attr-id="{{::question.logicalName}}_{{answer.number}}" name="{{::question.logicalName}}" ng-model="answer.value" ng-disabled="question.isReadOnly || disabled">
-            <label ng-attr-for="{{::question.logicalName}}_{{answer.number}}" class="lmx-checkbox-item-label">
+            <input type="checkbox" ng-attr-id="{{::question.logicalName + answer.number}}" name="{{::question.logicalName}}" ng-model="answer.value" ng-disabled="question.isReadOnly || disabled">
+            <label ng-attr-for="{{::question.logicalName + answer.number}}" class="lmx-checkbox-item-label">
                 {{::question.name}}
             </label>
 
