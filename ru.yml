@@ -394,6 +394,7 @@ registration:
  tenderOffer: "условия оферты"
  opdAgree: "Я подтверждаю своё согласие на"
  opd: "обработку персональных данных"
+ ereceipts: "получение электронных чеков"
  register: "Зарегистрироваться"
  referrerCodeMessage: "Вы&nbsp;уже установили код друга.<br>Повторный ввод для продолжения регистрации не&nbsp;требуется"
  tenderOfferStep:
@@ -514,6 +515,8 @@ questionnaire:
  customAnswerPlaceholder: "Введите свой ответ"
  noQuestionBlocks: "Пока нет добавленных ответов"
  repliesAdded: "Ответов добавлено"
+ echequeAdress: "Электронные чеки будут приходить на указанную электронную почту"
+ echequeAgreement: "Если вы согласны получать электронные чеки, укажите email для их отправки"
 menu:
  authentication: *authentication
  registration: *registration

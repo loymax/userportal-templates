@@ -49,6 +49,14 @@
                 </label>
             </form-group>
 
+            <form-group ng-if="hasEchequeAgreementQuestion">
+                <input type="checkbox" id="lmx-userAgreesGetEcheque" name="userAgreesGetEcheque" ng-model="agreementEcheque.value" ng-disabled="authInProgress || actionsInProgress">
+                <label for="lmx-userAgreesGetEcheque">
+                    {{'registration.opdAgree' | translate }}&nbsp;{{ 'registration.ereceipts' |
+                    translate}}
+                </label>
+            </form-group>
+
             <form-group ng-hide="shouldHideSubscriptionInput">
                 <input ng-required="shouldRequireSubscriptionInput" type="checkbox" id="lmx-lmx-subscriptions" ng-model="isAgreeOnSubscribe.isAgree" name="subscriptions" ng-disabled="!isOfferAndAgreementLoaded || authInProgress || actionsInProgress">
                 <label for="lmx-lmx-subscriptions">

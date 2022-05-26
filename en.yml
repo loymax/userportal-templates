@@ -394,6 +394,7 @@ registration:
  tenderOffer: "Terms of the formal offer"
  opdAgree: "I agree to"
  opd: "personal data processing"
+ ereceipts: "receive e-receipts"
  register: "Register"
  referrerCodeMessage: "You&nbsp; have already set a friend code.<br>Retype to continue registration &nbsp;is not required"
  tenderOfferStep:
@@ -514,6 +515,8 @@ questionnaire:
  customAnswerPlaceholder: "Enter your answer"
  noQuestionBlocks: "No answers have been added yet"
  repliesAdded: "Replies added"
+ echequeAdress: "E-receipts will be sent to the added email"
+ echequeAgreement: "Confirm your consent to receive e-receipts by adding your email address"
 menu:
  authentication: *authentication
  registration: *registration

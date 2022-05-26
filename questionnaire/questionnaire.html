@@ -6,10 +6,10 @@
         <div ng-hide="loader.templatesInProgress">
             <div ng-repeat="questionnaireBlock in questionnaire track by $index">
                 <div ng-if="questionnaireBlock.type === questionnaireItemTypes.question">
-                    <questionnaire-item question="questionnaireBlock"></questionnaire-item>
+                    <questionnaire-item question="questionnaireBlock" registration="registration"></questionnaire-item>
                 </div>
                 <div ng-if="questionnaireBlock.type === questionnaireItemTypes.questionGroup">
-                    <questionnaire-group group="questionnaireBlock" class="lmx-questionnaire-column"></questionnaire-group>
+                    <questionnaire-group group="questionnaireBlock" class="lmx-questionnaire-column" registration="registration"></questionnaire-group>
                 </div>
                 <div ng-if="questionnaireBlock.type === questionnaireItemTypes.questionMultipleGroup">
                     <questionnaire-block block="questionnaireBlock" class="lmx-questionnaire-column"></questionnaire-block>
@@ -25,7 +25,7 @@
                     <button type="button" ng-if=":: registration" class="lmx-btn-cancel" ng-click="cancelForm()" id="lmx-registration-questionnaire__cancel">
                         {{'buttons.cancel' | translate}}
                     </button>
-                    <button type="button" ng-click="saveQuestionnaire()" id="lmx-registration-questionnaire__submit" ng-class="::{'lmx-right': !registration}">
+                    <button type="button" ng-click="saveQuestionnaire()" ng-disabled="saveButtonDisabled" id="lmx-registration-questionnaire__submit" ng-class="::{'lmx-right': !registration}">
                         {{(registration ? 'buttons.next' : 'buttons.save') |translate}}
                     </button>
                 </div>

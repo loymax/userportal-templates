@@ -1,5 +1,5 @@
-Loymax v2.2.20211213 (http://loymax.ru)
-Copyright 2011-2021 Loymax, Inc.
+Loymax v2.2.20220526 (http://loymax.ru)
+Copyright 2011-2022 Loymax, Inc.
 License: MIT
 
 LoymaxApp is released under the MIT license.
