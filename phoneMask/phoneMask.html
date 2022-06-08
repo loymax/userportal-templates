@@ -9,7 +9,7 @@
             <div class="lmx-flag" ng-style="{ 'background-image': 'url(data:image/svg+xml;base64,'+ phoneSettings.country.image.content +')'}"></div>
             <span class="lmx-country-name"> {{ phoneSettings.country.name}} </span>
             <span>+ {{ phoneSettings.prefix}}</span>
-            <input type="radio" id="lmx-name" name="name" ng-model="selectedType" ng-value="phoneSettings">
+            <input type="radio" ng-model="selectedType" ng-value="phoneSettings">
         </li>
     </ul>
 </div>

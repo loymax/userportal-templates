@@ -54,7 +54,7 @@ validationMessages:
  integer: "Must be an integer"
  notEmptyGuid: "Cannot use null foreign key value"
  isGuid: "The value does not match the Guid type"
- isPhone: "The number must start with 7 and contain 11 digits"
+ isPhone: "The number must start with {{prefix}} and contain {{number}} digits"
  isEmail: "Please enter a valid email address"
  isEqualPasswords: "The passwords are different"
 dateRange:
@@ -314,6 +314,7 @@ merchants:
  noRegionInfo: "No region information"
  showAll: "Show all"
  hide: "Hide points of sale"
+ schedule: "Working hours"
  notFound: "No points of sale information found"
  filteredNotFound: "Nothing was found by your request, try changing the filter parameters"
  offers: "Offers in a point of sale"

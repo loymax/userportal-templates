@@ -1,4 +1,4 @@
-Loymax v2.2.20220526 (http://loymax.ru)
+Loymax v2.2.20220608 (http://loymax.ru)
 Copyright 2011-2022 Loymax, Inc.
 License: MIT
 
