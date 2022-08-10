@@ -28,7 +28,7 @@
             <form-group ng-if="model.identifier === IDENTIFIERS.card" label-text="{{'identifiers.' + model.identifier | translate}}">
                 <input type="text" ng-model="model.loginData.login" id="lmx-login_{{model.identifier}}" name="login" ng-disabled="authInProgress" placeholder="0000 0000 0000 0000" mask="9999 9999 9999 9999" clean="true" validate="false" restrict="reject" required="">
             </form-group>
-            <form-group label-text="{{'authentication.password' | translate}}">
+            <form-group label-text="{{'authentication.password' | translate}}" ng-if="authWithPassword">
                 <input type="password" ng-model="model.loginData.password" id="lmx-password" name="password" ng-disabled="authInProgress" required="">
             </form-group>
             <div ng-if="!cvcRequired" class="lmx-auth-links lmx-row" ng-class="{'lmx-invisible': authInProgress}">

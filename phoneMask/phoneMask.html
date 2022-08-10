@@ -1,8 +1,7 @@
 <div class="lmx-multipleMasksSelector" outside-click="outsideClick()" ng-if="phoneSettingsList">
     <span class="lmx-selected-phoneSettings" ng-click="expandList.state = !expandList.state">
-        <div class="lmx-flag" ng-style="{ 'background-image': 'url(data:image/svg+xml;base64,'+ selectedType.country.image.content +')'}">
-    </div></span>
-
+        <div class="lmx-flag" ng-style="{ 'background-image': 'url(data:image/svg+xml;base64,'+ selectedType.country.image.content +')'}"></div>
+    </span>
 
     <ul class="lmx-phone-types-list" ng-show="expandList.state" ng-click="expandList.state = !expandList.state">
         <li ng-repeat="phoneSettings in phoneSettingsList" ng-click="setPhoneSettings(phoneSettings)">
